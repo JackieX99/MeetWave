@@ -5,7 +5,24 @@
   "projects": {
     "WardrobeThreads": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -29,8 +46,8 @@
               "src/styles.css"
             ],
             "scripts": [
-                "node_modules/jquery/dist/jquery.min.js",
-                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -100,8 +117,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "WardrobeThreads:build:production",
+            "firebaseProject": "wardrobethreads-265c9",
+            "firebaseHostingSite": "wardrobethreads-265c9"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
