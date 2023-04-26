@@ -46,8 +46,8 @@
               "src/styles.css"
             ],
             "scripts": [
-                "node_modules/jquery/dist/jquery.min.js",
-                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -117,8 +117,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "WardrobeThreads:build:production",
+            "firebaseProject": "wardrobethreads-265c9",
+            "firebaseHostingSite": "wardrobethreads-265c9"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
