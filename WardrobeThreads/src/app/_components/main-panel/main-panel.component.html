@@ -1,1 +1,12 @@
 <p>main-panel works!</p>
+
+<div class="container" *ngIf="this.currentUser">
+    <h3>Üdvözlünk újra, {{this.currentUser.displayName}}! ({{this.currentUser.email}}) </h3>
+
+    <h4>Utolsó bejelentkezés: {{lastLogin}}.</h4>
+    <h4>Regisztráció ideje: {{regTime}}.</h4>
+    <h5 *ngIf="isAdmin">Te admin vagy.</h5>
+
+    <button class="btn btn-secondary" (click)="setAdmin(true)">admin on</button>
+    <button class="btn btn-secondary" (click)="setAdmin(false)">admin off</button>
+</div>
