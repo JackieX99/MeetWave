@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { AdminPanelComponent } from './_components/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
     ShopCartComponent,
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
-    ProductsComponent
+    ProductsComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
