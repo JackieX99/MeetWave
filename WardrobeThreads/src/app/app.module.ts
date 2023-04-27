@@ -17,6 +17,9 @@ import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { AdminPanelComponent } from './_components/admin-panel/admin-panel.component';
+import { MainPanelComponent } from './_components/main-panel/main-panel.component';
+import { ProductComponent } from './_components/product/product.component';
+import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { AdminPanelComponent } from './_components/admin-panel/admin-panel.compo
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
     ProductsComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    MainPanelComponent,
+    ProductComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
