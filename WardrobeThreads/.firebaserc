@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "wardrobethreads-265c9"
+  },
+  "targets": {
+    "wardrobethreads-265c9": {
+      "hosting": {
+        "WardrobeThreads": [
+          "wardrobethreads-265c9"
+        ]
+      }
+    }
+  }
+}
