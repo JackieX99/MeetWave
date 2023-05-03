@@ -20,6 +20,8 @@ import { AdminPanelComponent } from './_components/admin-panel/admin-panel.compo
 import { MainPanelComponent } from './_components/main-panel/main-panel.component';
 import { ProductComponent } from './_components/product/product.component';
 import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,12 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage())
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

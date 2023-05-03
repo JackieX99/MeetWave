@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class FirebaseService {
-
+  
   constructor(public database: Database, private router: Router) { }
 
   setAdmin(userId: any, admin: boolean) {
@@ -32,4 +32,5 @@ export class FirebaseService {
     user = snapshot.val();
     return user.isAdmin;
   }
+  
 }

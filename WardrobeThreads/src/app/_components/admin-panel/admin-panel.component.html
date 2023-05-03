@@ -4,3 +4,14 @@
 <button (click)="login()">login teszt</button>
 
 <h4 class="error"></h4>
+<form [formGroup]="product">
+    Product neve: <input type="text" formControlName="name" required>
+    Product ára: <input type="number" formControlName="price" required>
+    <input type="file" class="file-upload" multiple="true">
+    <button type="submit" class="btn btn-secondary" (click)="tesztUpload()" [disabled]="!product.valid">upload</button>
+</form>
+
+
+{{ product.status }}
+{{ product.valid }}
+
