@@ -26,24 +26,24 @@ export class AdminPanelComponent implements OnInit {
   products: any[] = [];
   productsKey: any;
 
-  ngOnInit(): void {
+  ngOnInit(): void { // Oldal betöltésekor hívódik meg
     let auth = getAuth();
 
-    this.firebaseService.getAllProduct().then(res => {
+    this.firebaseService.getAllProduct().then(res => { // Összes product lekérése adatbázisból
       this.products = res; 
       this.productsKey = Object.keys(res);
     })
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
+    onAuthStateChanged(auth, (user) => { // Felhasználó ellenőrzése, be van-e lépve
+      if (user) { // Ha be van, tároljuk
         this.user = user;
-      } else {
-        // this.router.navigate(['/login']);
+      } else { // Ha nincs, kidobjuk a login panelhoz
+        this.router.navigate(['/login']);
       }
     });
   }
 
-  product: FormGroup = this.fb.group({
+  product: FormGroup = this.fb.group({ // Form létrehozása, validálás
     name: ['', Validators.required],
     price: ['', Validators.required],
     images: this.fb.array([])
@@ -67,13 +67,13 @@ export class AdminPanelComponent implements OnInit {
     return this.product.get('images') as FormArray;
   }
 
-  onFileSelected(event: any): void {
-    if (event.target.files && event.target.files.length) {
-      for (let i = 0; i < event.target.files.length; i++) {
-        const file = event.target.files[i];
+  onFileSelected(event: any): void { // Ha a file inputba fájlok kerülnek, meghívódik a függvény
+    if (event.target.files && event.target.files.length) { // Ha van kiválasztott fájl
+      for (let i = 0; i < event.target.files.length; i++) { // Átfutjuk a fájlokat
+        const file = event.target.files[i]; // Egyesével readelve vannak a fájlok
         const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
+        reader.readAsDataURL(file); // Konvertálás blobba
+        reader.onload = () => { // Tárolás
           this.pictureUrls.push(reader.result as string);
           this.pictures.push(this.fb.control(reader.result));
         };
@@ -81,7 +81,7 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit() { // Form elküldésekor meghívjuk a feltöltés függvényt
     console.log(this.product.value);
     this.firebaseService.uploadProduct(this.product.value)
   }
