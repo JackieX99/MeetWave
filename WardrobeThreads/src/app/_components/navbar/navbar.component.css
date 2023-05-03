@@ -1,0 +1,41 @@
+.navbar{
+   background-color: #505A5B;
+}
+
+.SearchBarBox{
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+   width: 270px;
+   height: 40px;
+   background-color: #8F91A2;
+   color: #FFFFFF;
+   border-radius: 30px;
+   display: flex;
+   align-items: center;
+   box-sizing: border-box;
+   padding: 20px;
+   border: none;
+}
+.SearchBarBox > i{
+   font-size: 20px;
+   color: #FFFFFF;   
+   border: none;
+}
+.SearchBarBox > input{
+   flex: 1;
+   height: 40px;
+   padding: 15px;
+   background-color: #8F91A2;
+   color: #FFFFFF;
+   outline: none;
+   border: none;
+   border-radius: 30px;
+}
+.CartBox{
+   width: 50px;
+   height: 50px;
+   display: flex;
+   background-color: #FFFFFF;
+   color: #8F91A2;
+   margin-right: 50px;
+   border-radius: 30px;
+}

@@ -32,7 +32,7 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
     ProductsComponent,
-    AdminPanelComponent,
+    AdminPanelComponent,       
     MainPanelComponent,
     ProductComponent,
     PageNotFoundComponent
