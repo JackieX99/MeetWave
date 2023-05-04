@@ -31,14 +31,10 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
     ShopCartComponent,
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
-    ProductsComponent,
-    AdminPanelComponent,       
-    MainPanelComponent,
     ProductComponent,
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
