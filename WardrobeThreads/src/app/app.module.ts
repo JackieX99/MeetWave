@@ -16,6 +16,10 @@ import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { AdminPanelComponent } from './_components/admin-panel/admin-panel.component';
+import { MainPanelComponent } from './_components/main-panel/main-panel.component';
+import { ProductComponent } from './_components/product/product.component';
+import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +31,10 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
     ShopCartComponent,
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
-    ProductsComponent
+    ProductComponent,
+    PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
