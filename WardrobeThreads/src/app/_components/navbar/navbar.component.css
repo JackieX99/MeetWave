@@ -1,0 +1,68 @@
+.navbar{
+   background-color: #505A5B;
+}
+
+.SearchBarBox{
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   width: 270px;
+   height: 40px;
+   background-color: #343F3E;
+   color: #FFFFFF;
+   border-radius: 30px;
+   display: flex;
+   align-items: center;
+   box-sizing: border-box;
+   padding: 20px;
+   border: none;
+   margin-right: 50px;
+}
+.SearchBarBox > i{
+   font-size: 20px;
+   color: #FFFFFF;   
+   border: none;
+}
+.SearchBarBox > input{
+   flex: 1;
+   height: 40px;
+   padding: 15px;
+   background-color: #343F3E;
+   color: #FFFFFF;
+   outline: none;
+   border: none;
+   border-radius: 30px;
+}
+.CartBox{
+   width: 50px;
+   height: 50px;
+   display: flex;
+   background-color: #343F3E;
+   color: #FFFFFF;
+   border-radius: 30px;
+  
+}
+.CartIcon{
+   width: 85px;
+   height: 85px;
+   display: inline-block;
+   text-align: center;
+   font-size: 195%;
+}
+.PlaceHolder::placeholder{
+   color: #FFFFFF;
+}
+.Profile{
+   width: 50px;
+   height: 50px;
+   display: flex;
+   background-color: #343F3E;
+   color: #FFFFFF;
+   border-radius: 30px;
+   margin-left: 500px;
+}
+.ProfileIcon{
+   width: 85px;
+   height: 85px;
+   display: inline-block;
+   text-align: center;
+   font-size: 195%;
+}
