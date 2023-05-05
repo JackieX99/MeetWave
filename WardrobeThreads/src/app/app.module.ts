@@ -33,10 +33,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShopCartComponent,
     ProfileInformationsComponent,
     PurchaseCompletingComponent,
+    ProductsComponent,
+    AdminPanelComponent,
+    MainPanelComponent,
     ProductComponent,
     PageNotFoundComponent
   ],
   imports: [
+    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
