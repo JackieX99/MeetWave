@@ -38,7 +38,7 @@ export class AdminPanelComponent implements OnInit {
       if (user) { // Ha be van, tároljuk
         this.user = user;
       } else { // Ha nincs, kidobjuk a login panelhoz
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
       }
     });
   }
