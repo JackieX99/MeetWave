@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+html, body {
+  height: 100%;
+  background-color: var(--white);
+  color: var(--black);
+}
+
 :root {
   --white: #d9d9d9;
   --black: #181818;
