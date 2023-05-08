@@ -46,7 +46,8 @@ export class AdminPanelComponent implements OnInit {
   product: FormGroup = this.fb.group({ // Form létrehozása, validálás
     name: ['', Validators.required],
     price: ['', Validators.required],
-    images: this.fb.array([])
+    images: this.fb.array([], [Validators.required, Validators.maxLength(5)]),
+    indeximage: this.fb.array([], Validators.required)
   })
 
   pictureUrls: string[] = [];
@@ -67,6 +68,10 @@ export class AdminPanelComponent implements OnInit {
     return this.product.get('images') as FormArray;
   }
 
+  get indeximage(): FormArray {
+    return this.product.get('indeximage') as FormArray;
+  }
+
   onFileSelected(event: any): void { // Ha a file inputba fájlok kerülnek, meghívódik a függvény
     if (event.target.files && event.target.files.length) { // Ha van kiválasztott fájl
       for (let i = 0; i < event.target.files.length; i++) { // Átfutjuk a fájlokat
@@ -81,9 +86,31 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
+  onFileSelected2(event: any): void { // Ha a file inputba fájlok kerülnek, meghívódik a függvény
+    if (event.target.files && event.target.files.length) { // Ha van kiválasztott fájl
+      for (let i = 0; i < event.target.files.length; i++) { // Átfutjuk a fájlokat
+        const file = event.target.files[i]; // Egyesével readelve vannak a fájlok
+        const reader = new FileReader();
+        reader.readAsDataURL(file); // Konvertálás blobba
+        reader.onload = () => { // Tárolás
+          this.pictureUrls.push(reader.result as string);
+          this.indeximage.push(this.fb.control(reader.result));
+        };
+      }
+    }
+  }
+
   onSubmit() { // Form elküldésekor meghívjuk a feltöltés függvényt
     console.log(this.product.value);
     this.firebaseService.uploadProduct(this.product.value)
+  }
+
+  deleteImages(type: any){
+    if(type == "multiple"){
+      (this.product.controls['images'] as FormArray).clear();
+    } else if(type == "index"){
+      (this.product.controls['indeximage'] as FormArray).clear();
+    }
   }
 
 }

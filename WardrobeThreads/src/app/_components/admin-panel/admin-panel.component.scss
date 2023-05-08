@@ -1,10 +1,134 @@
-.blokk {
-    background-color: var(--white);
-    padding: 15px;
+button {
+  background-color: var(--green);
+  color: var(--white);
+  margin: 10px;
 }
 
-button{
-    background-color: var(--green);
-    color: var(--white);
-    margin: 10px;
+.center {
+  text-align: center;
+}
+
+.horizont {
+  background: rgb(24, 24, 24);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 24, 24, 1) 0%,
+    rgba(12, 55, 32, 1) 50%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  width: 40%;
+  height: 3px;
+  margin: auto;
+  border-radius: 80%;
+  margin-bottom: 2vh;
+}
+
+.product {
+  background-color: var(--green);
+  border-radius: 10px;
+  color: var(--white);
+  width: 65%;
+  height: 18vh;
+  margin: auto;
+  margin-bottom: 2vh;
+  padding: 2vh;
+}
+
+.product-images{
+    width: 100px;
+    height: 50px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.product-list {
+  overflow-y: scroll;
+  height: 65vh;
+}
+
+.product-list::-webkit-scrollbar {
+  display: none;
+}
+
+.product-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+// Form design
+
+form .txt_field{
+  position: relative;
+  border-bottom: 2px solid var(--black);
+  margin: auto;
+  width: 50%;
+  margin-top: 5vh;
+}
+.txt_field input{
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--black);
+}
+.txt_field label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: var(--black);
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: .5s;
+}
+.txt_field span::before{
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--green);
+  transition: .5s;
+}
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label{
+  top: -5px;
+  color: var(--black);
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before{
+  width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.uploadbtn{
+  display: inline-block;
+  background-color: var(--green);
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.buttons{
+  justify-content: center;
+  text-align: center;  
+}
+
+.buttons > label{
+  margin: 1vh;
+  margin-top: 2vh;
+}
+
+.deleteIco:hover{
+  cursor: pointer;
 }
