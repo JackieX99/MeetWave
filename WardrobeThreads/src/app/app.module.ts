@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

@@ -12,3 +12,4 @@ html, body {
   --black: #181818;
   --green: #0c3720;
 }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
