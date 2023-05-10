@@ -1,14 +1,26 @@
-.main {
-    height: 70vh;
-    background-color: #505A5B;
+.leaves {
+  background-image: url("../../../assets/main_page/leaves-main-page.jpg");
+  height: 83vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
 }
 
-.carousel-item {
-    max-height: 40vh;
+.leaves span{
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;   
 }
 
-.carousel {
-    width: 70vw;
-    margin: auto;
-    padding-top: 5vh;
+.empty{
+    height: 73vh;
+    content: '';
 }

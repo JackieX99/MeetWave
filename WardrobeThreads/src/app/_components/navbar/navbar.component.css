@@ -1,5 +1,6 @@
 .navbar{
-   background-color: #505A5B;
+   /* background-color: #505A5B; */
+   background-color: transparent;
 }
 
 .SearchBarBox{
@@ -35,7 +36,7 @@
    width: 50px;
    height: 50px;
    display: flex;
-   background-color: #343F3E;
+   /* background-color: #343F3E; */
    color: #FFFFFF;
    border-radius: 30px;
   
@@ -54,7 +55,7 @@
    width: 50px;
    height: 50px;
    display: flex;
-   background-color: #343F3E;
+   /* background-color: #343F3E; */
    color: #FFFFFF;
    border-radius: 30px;
    margin-left: 500px;
@@ -65,4 +66,11 @@
    display: inline-block;
    text-align: center;
    font-size: 195%;
+}
+
+.brand{
+   display: inline-block;
+   color: white;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   letter-spacing: .2rem;
 }
