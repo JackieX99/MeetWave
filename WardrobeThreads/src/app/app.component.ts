@@ -8,6 +8,8 @@ import { AuthService } from './_services/auth.service';
 })
 export class AppComponent implements OnInit {
 
+  activeRouter: any = "";
+
   constructor(private auth: AuthService) {
     
   }
@@ -19,4 +21,9 @@ export class AppComponent implements OnInit {
       //Navigate to Login Page
     }
   }
+  
+  public onRouterOutletActivate(event : any) {
+    this.activeRouter = event.constructor.name; 
+    // PageNotFoundComponent
+}
 }

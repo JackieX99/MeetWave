@@ -1,7 +1,7 @@
-<app-navbar style="z-index: 2;"></app-navbar>
+<app-navbar style="z-index: 2;" *ngIf="this.activeRouter != 'PageNotFoundComponent'"></app-navbar>
 <section>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 </section>
-<app-footer class="mt-auto"></app-footer>
+<app-footer class="mt-auto" *ngIf="this.activeRouter != 'PageNotFoundComponent'"></app-footer>
 
 

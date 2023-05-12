@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ConditionalExpr } from '@angular/compiler';
 import { Component, inject, Injectable } from '@angular/core';
 import {
@@ -36,16 +37,15 @@ export class FirebaseService {
   // Product feltöltése admin felületről
 
   uploadProduct(product: any){
-    this.generateCode().then(res => { // Kód generálás függvény meghívása, visszakapott értékkel product feltöltése adatbázisba
-      update(ref(this.database, 'products/' + res), {
+    // this.generateCode().then(res => { // Kód generálás függvény meghívása, visszakapott értékkel product feltöltése adatbázisba
+      push(ref(this.database, 'products/'), {
         name: product.name,
         price: product.price,
         images: product.images,
         category: product.phoneCategory,
         indeximage: product.indeximage
       });    
-    })
-    
+    // })
   }
 
   // ID generálása a feltöltött productnak
@@ -77,6 +77,19 @@ export class FirebaseService {
     const snapshot = await get(ref(this.database, '/products/'));
     products = snapshot.val();
     return products;
+  }
+
+  // 404-es oldal hibás url mentése
+
+  missSpelledUrl(url: any, locale: string){
+    let rn = new Date();
+    let pipe = new DatePipe(locale);
+    let ChangedFormat = pipe.transform(rn, 'YYYY/MM/dd HH:mm');
+
+    push(ref(this.database, 'urls/'), {
+      link: url,
+      date: ChangedFormat
+    }); 
   }
   
 }

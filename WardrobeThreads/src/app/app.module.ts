@@ -24,6 +24,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -55,7 +57,10 @@ import { MaterialModule } from './material/material.module';
     MaterialModule
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,
+    UserTrackingService, 
+    { provide: MAT_DATE_LOCALE, useValue: 'hu-HU' },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
