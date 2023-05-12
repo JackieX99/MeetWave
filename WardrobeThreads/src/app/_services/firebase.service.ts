@@ -40,7 +40,9 @@ export class FirebaseService {
       update(ref(this.database, 'products/' + res), {
         name: product.name,
         price: product.price,
-        images: product.images
+        images: product.images,
+        category: product.phoneCategory,
+        indeximage: product.indeximage
       });    
     })
     

@@ -64,8 +64,14 @@ Valid: {{ product.valid }}
           hidden
         />
         <label for="multipleimages" class="uploadbtn">Képek feltöltése</label>
-        <h5> 
-          {{ this.product.value.images.length }}/5 feltöltött kép <span (click)="deleteImages('multiple')" class="deleteIco" *ngIf="this.product.value.images.length > 0"><i class="bi bi-x"></i></span>
+        <h5>
+          {{ this.product.value.images.length }}/5 feltöltött kép
+          <span
+            (click)="deleteImages('multiple')"
+            class="deleteIco"
+            *ngIf="this.product.value.images.length > 0"
+            ><i class="bi bi-x"></i
+          ></span>
         </h5>
         <input
           type="file"
@@ -77,9 +83,24 @@ Valid: {{ product.valid }}
         />
         <label for="mainimage" class="uploadbtn">Indexkép feltöltése</label>
         <h5>
-          {{ this.product.value.indeximage.length }}/1 feltöltött kép <span (click)="deleteImages('index')" class="deleteIco" *ngIf="this.product.value.indeximage.length > 0"><i class="bi bi-x"></i></span>
+          {{ this.product.value.indeximage.length }}/1 feltöltött kép
+          <span
+            (click)="deleteImages('index')"
+            class="deleteIco"
+            *ngIf="this.product.value.indeximage.length > 0"
+            ><i class="bi bi-x"></i
+          ></span>
         </h5>
       </div>
+
+      <select [formControlName]="'phoneCategory'" aria-invalid="false" required ngModel="default">
+        <option value="default" disabled selected>Válassz telefon fajtát</option>
+        <option value="default2" disabled></option>
+        <option *ngFor="let case of cases" [value]="case.phone">
+          {{ case.phone }}
+        </option>
+      </select>
+
       <button
         type="submit"
         class="btn btn-secondary"
@@ -96,6 +117,10 @@ Valid: {{ product.valid }}
       <div class="product" *ngFor="let key of productsKey; index as i">
         <h4>Név: {{ this.products[key].name }}</h4>
         <h4>Ár: {{ this.products[key].price }} Forint</h4>
+        <h4>Kategória: {{this.products[key].category}}</h4>
+        <h4>Indexkép:</h4>
+        <img [src]="this.products[key].indeximage" class="product-images">
+        <h4>Összes kép:</h4>
         <ng-container *ngFor="let image of this.products[key].images">
           <img [src]="image" class="product-images" />
         </ng-container>

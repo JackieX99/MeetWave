@@ -28,17 +28,17 @@ button {
   border-radius: 10px;
   color: var(--white);
   width: 65%;
-  height: 18vh;
+  height: 40vh;
   margin: auto;
   margin-bottom: 2vh;
   padding: 2vh;
 }
 
-.product-images{
-    width: 100px;
-    height: 50px;
-    margin-right: 5px;
-    border-radius: 5px;
+.product-images {
+  width: 100px;
+  height: 50px;
+  margin-right: 5px;
+  border-radius: 5px;
 }
 
 .product-list {
@@ -57,14 +57,14 @@ button {
 
 // Form design
 
-form .txt_field{
+form .txt_field {
   position: relative;
   border-bottom: 2px solid var(--black);
   margin: auto;
   width: 50%;
   margin-top: 5vh;
 }
-.txt_field input{
+.txt_field input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
@@ -74,7 +74,7 @@ form .txt_field{
   outline: none;
   color: var(--black);
 }
-.txt_field label{
+.txt_field label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -82,33 +82,33 @@ form .txt_field{
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
-  transition: .5s;
+  transition: 0.5s;
 }
-.txt_field span::before{
-  content: '';
+.txt_field span::before {
+  content: "";
   position: absolute;
   top: 40px;
   left: 0;
   width: 0%;
   height: 2px;
   background: var(--green);
-  transition: .5s;
+  transition: 0.5s;
 }
 .txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
+.txt_field input:valid ~ label {
   top: -5px;
   color: var(--black);
 }
 .txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before{
+.txt_field input:valid ~ span::before {
   width: 100%;
 }
 
-input[type=number]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-.uploadbtn{
+.uploadbtn {
   display: inline-block;
   background-color: var(--green);
   color: white;
@@ -119,16 +119,47 @@ input[type=number]::-webkit-inner-spin-button {
   margin-top: 1rem;
 }
 
-.buttons{
+.buttons {
   justify-content: center;
-  text-align: center;  
+  text-align: center;
 }
 
-.buttons > label{
+.buttons > label {
   margin: 1vh;
   margin-top: 2vh;
 }
 
-.deleteIco:hover{
+.deleteIco:hover {
   cursor: pointer;
+}
+
+// Dropdown menü
+
+select {
+  width: 300px;
+  padding: 12px;
+  border: 0 !important;
+  background-color: var(--green);
+  color: var(--white);
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  // Lefele nyíl svg ikonja
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 0.6em;
+  background-position: calc(100% - 1.3em) center;
+  background-repeat: no-repeat;
+}
+select::-ms-expand {
+  display: none;
+}
+
+option:disabled{
+  color: white;
+  text-align: center;
 }

@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Cases } from 'src/app/_models/phone-cases';
 
 @Component({
   selector: 'app-admin-panel',
@@ -47,8 +48,11 @@ export class AdminPanelComponent implements OnInit {
     name: ['', Validators.required],
     price: ['', Validators.required],
     images: this.fb.array([], [Validators.required, Validators.maxLength(5)]),
-    indeximage: this.fb.array([], Validators.required)
+    indeximage: this.fb.array([], Validators.required),
+    phoneCategory: ['', Validators.required]
   })
+
+  cases = Cases;
 
   pictureUrls: string[] = [];
 
