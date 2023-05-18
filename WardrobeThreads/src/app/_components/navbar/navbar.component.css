@@ -1,7 +1,13 @@
 .navbar{
    background-color: #505A5B;
 }
-
+.mainTitle{
+   color: #FFFFFF;
+   margin: auto;
+   font-size: 25px;
+   width: 225px;
+   height: 40px;
+}
 .SearchBarBox{
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
    width: 270px;
