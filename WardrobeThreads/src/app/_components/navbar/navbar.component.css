@@ -1,12 +1,17 @@
+*{
+   margin: 0;
+   padding: 0;
+}
 .navbar{
    background-color: #505A5B;
+   width: 100%;
+   padding: 0;
 }
 .mainTitle{
    color: #FFFFFF;
    margin: auto;
    font-size: 25px;
-   width: 225px;
-   height: 40px;
+   text-align: left;
 }
 .SearchBarBox{
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -20,7 +25,7 @@
    box-sizing: border-box;
    padding: 20px;
    border: none;
-   margin-right: 50px;
+   
 }
 .SearchBarBox > i{
    font-size: 20px;
@@ -44,7 +49,7 @@
    background-color: #343F3E;
    color: #FFFFFF;
    border-radius: 30px;
-  
+   margin-left: 50px;
 }
 .CartIcon{
    width: 85px;
@@ -63,7 +68,8 @@
    background-color: #343F3E;
    color: #FFFFFF;
    border-radius: 30px;
-   margin-left: 500px;
+   margin-left: 50px;
+  
 }
 .ProfileIcon{
    width: 85px;
