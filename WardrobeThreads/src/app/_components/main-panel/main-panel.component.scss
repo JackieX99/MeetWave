@@ -29,7 +29,7 @@
 }
 
 .empty {
-  height: 83vh;
+  height: 73vh;
   content: '';
 }
 
@@ -37,6 +37,7 @@
   background-color: var(--green);
   color: white;
   margin-top: 3vh;
+  padding: 1.5vh 1vw;
   scale: 1;
   transition: all .3s ease-in-out;
   font-weight: 400;
@@ -78,4 +79,34 @@
 .circle i{
   margin: auto;
   color: white;
+}
+
+.featured-cases{
+  margin-top: 8vh;
+  padding-top: 8vh;
+  background-color: rgb(206, 206, 206);
+  & .feauted-paragraph{
+    margin-top: 1.5vh;
+    padding-bottom: 2vh;
+  }
+  & .featured-product-name{
+    margin-top: 1vh;
+  }
+  & .featured-product-name, .featured-product-price{
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+  }
+  & .featured-product img{
+    width: 23.5vw;
+    height: 40vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  & .products{
+    padding: 0;
+    margin: 0;
+  }
 }

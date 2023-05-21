@@ -34,29 +34,28 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.userDeviceWidth = window.innerWidth;
   }
 
-  prevScrollpos: any;
+  // prevScrollpos: any;
+  // @HostListener('window:scroll', [])
+  // onScroll() {
+  //   const scrollPosition = this.viewportScroller.getScrollPosition();
 
-  @HostListener('window:scroll', [])
-  onScroll() {
-    const scrollPosition = this.viewportScroller.getScrollPosition();
-
-    var currentScrollPos = scrollPosition[1];
-    if (this.prevScrollpos > currentScrollPos) {
-      this.renderer.setStyle(this.element, 'top', '0px');
-      if(currentScrollPos > this.mainframeHeight){
-        this.renderer.setStyle(this.element, 'background-color', 'var(--white)');
-      } else{
-        this.renderer.setStyle(this.element, 'background-color', 'transparent');
-      }
-    } else {
-      this.renderer.setStyle(this.element, 'top', '-150px');
-    }
-    this.prevScrollpos = currentScrollPos;
-  }
+  //   var currentScrollPos = scrollPosition[1];
+  //   if (this.prevScrollpos > currentScrollPos) {
+  //     this.renderer.setStyle(this.element, 'top', '0px');
+  //     if(currentScrollPos > this.mainframeHeight){
+  //       this.renderer.setStyle(this.element, 'background-color', 'var(--white)');
+  //     } else{
+  //       this.renderer.setStyle(this.element, 'background-color', 'transparent');
+  //     }
+  //   } else {
+  //     this.renderer.setStyle(this.element, 'top', '-150px');
+  //   }
+  //   this.prevScrollpos = currentScrollPos;
+  // }
 
   ngOnInit(): void {
     const scrollPosition = this.viewportScroller.getScrollPosition();
-    this.prevScrollpos = scrollPosition[1];
+    // this.prevScrollpos = scrollPosition[1];
 
     // Viewheight to px konvert user device méret alapján
     this.mainframeHeight = 75 * (this.userDeviceHeight / 100); // 75 vh = x px

@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { DatePipe } from '@angular/common';
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AnimateOnScrollModule.forRoot()
   ],
   providers: [
     ScreenTrackingService,

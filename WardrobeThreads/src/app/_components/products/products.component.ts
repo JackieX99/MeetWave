@@ -27,14 +27,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     //   console.log("new value: ", newValue)
     // });
     this.subscription = this.sbService.getArrayObservable().subscribe((updatedArray) => {
-      this.foundProducts = updatedArray; // Frissítsd a komponensben létrehozott tömböt
+      this.foundProducts = updatedArray;
       this.foundProductsKey = Object.keys(updatedArray);
     });
     
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe(); // Ne felejtsd el leiratkozni a feliratkozásról a komponens megszűnésekor
+    this.subscription.unsubscribe();
   }
 
   
