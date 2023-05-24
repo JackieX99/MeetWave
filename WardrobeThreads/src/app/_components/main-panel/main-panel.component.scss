@@ -110,3 +110,32 @@
     margin: 0;
   }
 }
+
+.buynow{
+  padding-bottom: 7vh;
+  & h1{
+    text-align: center;
+    padding-top: 10vh;
+  }
+  & .purchasebtnTen{
+    background-color: #17653c;
+    color: white;
+    margin-top: 3vh;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    padding: 1.5vh 1vw;
+    scale: 1;
+    transition: all .3s ease-in-out;
+    font-weight: 400;
+  }
+  
+  & .purchasebtnTen:hover{
+    scale: 1.05;
+    background-color: var(--white);
+    color: var(--green);
+    border: 3px solid var(--green);
+    font-weight: 500;
+  }
+}
+
