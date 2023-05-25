@@ -1,14 +1,141 @@
-.main {
-    height: 70vh;
-    background-color: #505A5B;
+.leaves {
+  background-image: url("../../../assets/main_page/leaves-main-page.jpg");
+  height: 83vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  flex-direction: column;
 }
 
-.carousel-item {
-    max-height: 40vh;
+.leaves .wrap {
+  margin: auto;
+  display: inline-block;
+  text-align: center;
 }
 
-.carousel {
-    width: 70vw;
-    margin: auto;
-    padding-top: 5vh;
+.leaves span,
+.leaves h4 {
+  color: white;
+  width: 100%;
+  display: inline-block;
 }
+
+.empty {
+  height: 73vh;
+  content: '';
+}
+
+.purchasebtn{
+  background-color: var(--green);
+  color: white;
+  margin-top: 3vh;
+  padding: 1.5vh 1vw;
+  scale: 1;
+  transition: all .3s ease-in-out;
+  font-weight: 400;
+}
+
+.purchasebtn:hover{
+  scale: 1.05;
+  background-color: var(--white);
+  color: var(--green);
+  border: 3px solid var(--green);
+  font-weight: 500;
+}
+
+.icon, .content{
+  display: inline-block;
+}
+
+.circle{
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: var(--green);
+}
+
+.icon{
+  display: inline-block;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
+
+
+.circle i{
+  margin: auto;
+  color: white;
+}
+
+.featured-cases{
+  margin-top: 8vh;
+  padding-top: 8vh;
+  background-color: rgb(206, 206, 206);
+  & .feauted-paragraph{
+    margin-top: 1.5vh;
+    padding-bottom: 2vh;
+  }
+  & .featured-product-name{
+    margin-top: 1vh;
+  }
+  & .featured-product-name, .featured-product-price{
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+  }
+  & .featured-product img{
+    width: 23.5vw;
+    height: 40vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  & .products{
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.buynow{
+  padding-bottom: 7vh;
+  & h1{
+    text-align: center;
+    padding-top: 10vh;
+  }
+  & .purchasebtnTen{
+    background-color: #17653c;
+    color: white;
+    margin-top: 3vh;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    padding: 1.5vh 1vw;
+    scale: 1;
+    transition: all .3s ease-in-out;
+    font-weight: 400;
+  }
+  
+  & .purchasebtnTen:hover{
+    scale: 1.05;
+    background-color: var(--white);
+    color: var(--green);
+    border: 3px solid var(--green);
+    font-weight: 500;
+  }
+}
+

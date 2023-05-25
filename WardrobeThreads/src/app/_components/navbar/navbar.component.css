@@ -3,15 +3,8 @@
    padding: 0;
 }
 .navbar{
-   background-color: #505A5B;
-   width: 100%;
-   padding: 0;
-}
-.mainTitle{
-   color: #FFFFFF;
-   margin: auto;
-   font-size: 25px;
-   text-align: left;
+   /* background-color: #505A5B; */
+   background-color: transparent;
 }
 .SearchBarBox{
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -46,7 +39,7 @@
    width: 50px;
    height: 50px;
    display: flex;
-   background-color: #343F3E;
+   /* background-color: #343F3E; */
    color: #FFFFFF;
    border-radius: 30px;
    margin-left: 50px;
@@ -65,7 +58,7 @@
    width: 50px;
    height: 50px;
    display: flex;
-   background-color: #343F3E;
+   /* background-color: #343F3E; */
    color: #FFFFFF;
    border-radius: 30px;
    margin-left: 50px;
@@ -77,4 +70,11 @@
    display: inline-block;
    text-align: center;
    font-size: 195%;
+}
+
+.brand{
+   display: inline-block;
+   color: white;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   letter-spacing: .2rem;
 }

@@ -1,4 +1,11 @@
-section{
-    padding-top: 3vh;
-    padding-bottom: 3vh;
+section {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.navbarka {
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  transition: top 0.3s; 
 }

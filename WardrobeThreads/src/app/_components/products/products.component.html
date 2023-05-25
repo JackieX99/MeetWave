@@ -1,1 +1,11 @@
-<p>products works!</p>
+<div class="product" *ngFor="let key of foundProductsKey; index as i">
+    <h4>Név: {{ this.foundProducts[key].name }}</h4>
+    <h4>Ár: {{ this.foundProducts[key].price }} Forint</h4>
+    <h4>Kategória: {{this.foundProducts[key].category}}</h4>
+    <h4>Indexkép:</h4>
+    <img [src]="this.foundProducts[key].indeximage" class="product-images">
+    <h4>Összes kép:</h4>
+    <ng-container *ngFor="let image of this.foundProducts[key].images">
+      <img [src]="image" class="product-images" />
+    </ng-container>
+  </div>
