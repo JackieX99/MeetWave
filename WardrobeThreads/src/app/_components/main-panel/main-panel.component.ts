@@ -12,6 +12,7 @@ export class MainPanelComponent implements OnInit {
   currentUser: any;
   regTime: any;
   isAdmin: boolean = false;
+  lastLogin: any;
 
   constructor(private readonly authService: AuthService, private readonly firebaseService: FirebaseService) {}
 
@@ -43,4 +44,4 @@ export class MainPanelComponent implements OnInit {
   setAdmin(bool: boolean){
     this.firebaseService.setAdmin(this.authService.getCurrentUserId(), bool);
   }
-
+}

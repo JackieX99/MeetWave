@@ -17,7 +17,8 @@ export class AdminPanelComponent implements OnInit {
   constructor(
     private readonly firebaseService: FirebaseService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ){}
 
   user: any;
