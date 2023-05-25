@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class AdminPanelComponent implements OnInit {
 
   constructor(
-    private readonly authService: AuthService,
     private readonly firebaseService: FirebaseService,
     private fb: FormBuilder,
     private router: Router
@@ -86,4 +85,3 @@ export class AdminPanelComponent implements OnInit {
     this.firebaseService.uploadProduct(this.product.value)
   }
 
-}

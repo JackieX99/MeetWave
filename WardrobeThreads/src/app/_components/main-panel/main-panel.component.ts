@@ -10,7 +10,6 @@ import { FirebaseService } from 'src/app/_services/firebase.service';
 export class MainPanelComponent implements OnInit {
 
   currentUser: any;
-  lastLogin: any;
   regTime: any;
   isAdmin: boolean = false;
 
@@ -45,4 +44,3 @@ export class MainPanelComponent implements OnInit {
     this.firebaseService.setAdmin(this.authService.getCurrentUserId(), bool);
   }
 
-}
