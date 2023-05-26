@@ -1,9 +1,43 @@
+<nav class="navbar">
+  <a class="navbar-brand">
+    <img
+      src="../../../assets/logo/glamcase-logo2.png"
+      class="d-inline-block"
+    />
+  </a>
+  <div class="toRight">
+    <div class="searchbar-container">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input
+        class="searchbar"
+        type="text"
+        placeholder="Keresesel valamit?"
+        name="Search"
+        (keydown.enter)="search($event)"
+      />
+    </div>
+    <div class="Profile">
+      <i class="ProfileIcon bi bi-person-circle"></i>
+      <span>FÖLDVÁRI</span>
+    </div>
+    <div class="CartBox">
+      <i class="CartIcon bi bi-cart3"></i>
+    </div>
+  </div>
+</nav>
 
+<!-- <div class="SearchBarBox">
+  <i class="fa fa-search" aria-hidden="true"></i>
+  <input
+    class="PlaceHolder"
+    type="text"
+    placeholder="Keresesel valamit?"
+    name="Search"
+    (keydown.enter)="search($event)"
+  />
+</div> -->
 
-
-
-
-<nav class="navbar navbar-light background">
+<!-- <nav class="navbar navbar-light background">
   <a class="navbar-brand" href="#">
     <img
       src="../../../assets/logo/logo.svg"
@@ -30,4 +64,4 @@
       (keydown.enter)="search($event)"
     />
   </div>
-</nav>
+</nav> -->
