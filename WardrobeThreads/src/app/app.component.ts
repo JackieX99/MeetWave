@@ -74,7 +74,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.element = this.renderer.selectRootElement('.navbarka', true);
   }
 
+
   public onRouterOutletActivate(event: any) {
     this.activeRouter = event.constructor.name; // "PageNotFoundComponent"
+    console.log(this.activeRouter)
   }
 }

@@ -7,18 +7,20 @@
   </a>
   <div class="toRight">
     <div class="searchbar-container">
-      <i class="fa fa-search" aria-hidden="true"></i>
+      <!-- <i class="bi bi-search"></i> -->
       <input
         class="searchbar"
         type="text"
-        placeholder="Keresesel valamit?"
+        placeholder="Keresés"
         name="Search"
         (keydown.enter)="search($event)"
-      />
+        [ngStyle]="{'border': (activeRoute == 'MainPanelComponent') ? '1px solid #262c2b' : '1px solid white', 'box-shadow': (activeRoute == 'MainPanelComponent') ? 'none' : '0px 1px 14px 1px #343F3E'}"
+        />
     </div>
     <div class="Profile">
       <i class="ProfileIcon bi bi-person-circle"></i>
       <span>FÖLDVÁRI</span>
+      <!-- <span *ngIf="activeRoute == 'MainPanelComponent'">helo</span> -->
     </div>
     <div class="CartBox">
       <i class="CartIcon bi bi-cart3"></i>

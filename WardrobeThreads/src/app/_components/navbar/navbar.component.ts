@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { SearchbarService } from 'src/app/_services/searchbar.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { SearchbarService } from 'src/app/_services/searchbar.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+
+  @Input() activeRoute: any = "";
 
   constructor(private sb: SearchbarService) {
     
