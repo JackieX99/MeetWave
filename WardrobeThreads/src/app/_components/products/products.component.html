@@ -9,7 +9,7 @@
       <img [src]="image" class="product-images" />
     </ng-container>
   </div> -->
-<div class="container main col-10" style="border: 1px solid red">
+<div class="container main col-10">
   <div class="container-fluid row">
     <div class="col-3">
       <div class="group">
@@ -75,7 +75,10 @@
       </div>
     </div>
     <div class="col-9" style="border-left: 1px solid rgba(52, 63, 62, 0.4)">
-      <div class="row justify-content-start product-list">
+      <div class="row justify-content-start product-list" style="padding-left: 5vw">
+
+        
+        <!-- card innen -->
         <div class="product col-4">
           <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
           <div class="productName">Békás vicces fejsatyi</div>
@@ -84,40 +87,10 @@
             <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
           </div>
         </div>
-        <div class="product col-4">
-          <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
-          <div class="productName">Békás vicces fejsatyi</div>
-          <div class="productPrice">1999 Ft</div>
-          <div class="text-center CartButton">
-            <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
-          </div>
-        </div>
-        <div class="product col-4">
-          <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
-          <div class="productName">Békás vicces fejsatyi</div>
-          <div class="productPrice">1999 Ft</div>
-          <div class="text-center CartButton">
-            <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
-          </div>
-        </div>
-        <div class="product col-4">
-          <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
-          <div class="productName">Békás vicces fejsatyixd</div>
-          <div class="productPrice">1999 Ft</div>
-          <div class="text-center CartButton">
-            <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
-          </div>
-        </div>
-        <div class="product col-4">
-          <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
-          <div class="productName">Békás vicces fejsatyi</div>
-          <div class="productPrice">1999 Ft</div>
-          <div class="text-center CartButton">
-            <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
-          </div>
-        </div>
+        <!-- idáig -->
       </div>
-      
+      {{searching}}
+      <button class="btn btn-secondary" (click)="this.resetSearch()">reset</button>
     </div>
   </div>
 

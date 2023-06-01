@@ -10,6 +10,9 @@ export class SearchbarService {
   products: any[] = [];
   productsKey: any;
 
+  searching: boolean = false;
+  searchForKeyword: any = "";
+
   foundProducts: any[] = [];
 
   constructor(private fbService: FirebaseService, private router: Router) {}
@@ -38,6 +41,22 @@ export class SearchbarService {
     this.updateArray(foundProds);
 
     this.router.navigate(["/products"]);
+
+    this.searching = true;
+    this.searchForKeyword = keyword;
+  }
+
+  getIfSearching(): boolean{
+    return this.searching;
+  }
+
+  getSearchKeyword(): String{
+    return this.searchForKeyword;
+  }
+
+  deleteSearching(){
+    this.searching = false;
+    this.searchForKeyword = "";
   }
 
   getFoundProducts(): Promise<any[]> {

@@ -46,23 +46,24 @@ input:hover {
     height: 400px;
     // margin-left: 30px;
     background-color: #FFFFFF;
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .productPicture{
-    width: 180px;
-    height: 250px;
+    width: 65%;
+    height: 70%;
     // margin-left: 35px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .productName{
     margin-top: 12px;
-    margin-left: 30px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .productPrice{
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 30px;
     font-size: 24px;
 }
 .CartSubmitButton{
