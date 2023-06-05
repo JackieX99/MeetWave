@@ -1,17 +1,6 @@
-<!-- <div class="product" *ngFor="let key of foundProductsKey; index as i">
-    <h4>Név: {{ this.foundProducts[key].name }}</h4>
-    <h4>Ár: {{ this.foundProducts[key].price }} Forint</h4>
-    <h4>Kategória: {{this.foundProducts[key].category}}</h4>
-    <h4>Indexkép:</h4>
-    <img [src]="this.foundProducts[key].indeximage" class="product-images">
-    <h4>Összes kép:</h4>
-    <ng-container *ngFor="let image of this.foundProducts[key].images">
-      <img [src]="image" class="product-images" />
-    </ng-container>
-  </div> -->
-<div class="container main col-10">
+<div class="container main col-11">
   <div class="container-fluid row">
-    <div class="col-3">
+    <div class="col-4">
       <div class="group">
         <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
           <g>
@@ -23,71 +12,39 @@
         <input placeholder="Termékek keresése.." type="search" class="input">
       </div>
       <div class="categories row">
-        <h5>Kategóriák</h5>
-        <div class="category col-8">
-          <span style="float: left">Kategória1</span>
+        <h5 class="categoryH">Kategóriák</h5>
+        <div class="category col-10" *ngFor="let case of cases">
+          <span style="float: left" class="caseName">{{case.phone}}</span>
           <span style="float: right">(1)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória2</span>
-          <span style="float: right">(4)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória3</span>
-          <span style="float: right">(10)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
-        </div>
-        <div class="category col-8">
-          <span style="float: left">Kategória4</span>
-          <span style="float: right">(6)</span>
         </div>
       </div>
     </div>
-    <div class="col-9" style="border-left: 1px solid rgba(52, 63, 62, 0.4)">
+    <div class="col-8" style="border-left: 1px solid rgba(52, 63, 62, 0.4)">
       <div class="row justify-content-start product-list" style="padding-left: 5vw">
 
         
         <!-- card innen -->
-        <div class="product col-4">
-          <img class="productPicture" src="../../../assets/main_page/iphone-colourful-technology-accessories.jpg" alt="">
-          <div class="productName">Békás vicces fejsatyi</div>
-          <div class="productPrice">1999 Ft</div>
+        <div class="product col-4" *ngFor="let key of productsKey; index as i">
+          <img class="productPicture" [src]="this.products[key].indeximage">
+          <div class="productName">{{ this.products[key].name }}</div>
+          <div class="productPrice">{{ this.products[key].price }} Ft</div>
           <div class="text-center CartButton">
             <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
           </div>
         </div>
         <!-- idáig -->
+
+        <!-- <div class="product" >
+    <h4>Név: </h4>
+    <h4>Ár:  Forint</h4>
+    <h4>Kategória: {{this.foundProducts[key].category}}</h4>
+    <h4>Indexkép:</h4>
+    <img  class="product-images">
+    <h4>Összes kép:</h4>
+    <ng-container *ngFor="let image of this.foundProducts[key].images">
+      <img [src]="image" class="product-images" />
+    </ng-container>
+  </div> -->
       </div>
       {{searching}}
       <button class="btn btn-secondary" (click)="this.resetSearch()">reset</button>

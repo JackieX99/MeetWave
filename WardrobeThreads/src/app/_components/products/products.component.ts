@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SearchbarService } from 'src/app/_services/searchbar.service';
 import { Observable, Subscription, from } from 'rxjs';
 import { FirebaseService } from 'src/app/_services/firebase.service';
+import { Cases } from 'src/app/_models/phone-cases';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   // Összes product
   products: any[] = [];
   productsKey: any[] = [];
+
+  cases = Cases;
 
   private subscription: Subscription;
 
@@ -38,6 +41,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   searchFor(array: any) {
+    console.log("ez meg lett hívva")
     this.searching = this.sbService.getIfSearching();
     this.keyword = this.sbService.getSearchKeyword();
     this.foundProducts = array;

@@ -29,6 +29,7 @@ export class SearchbarService {
     // Adott szó ellenőrzése a termékek neveiben
 
     let foundProds: any[] = [];
+    this.searchForKeyword = keyword;
 
     for (const key of Object.keys(this.products)) {
       const value = this.products[key as keyof typeof this.products];
@@ -40,10 +41,7 @@ export class SearchbarService {
 
     this.updateArray(foundProds);
 
-    this.router.navigate(["/products"]);
-
-    this.searching = true;
-    this.searchForKeyword = keyword;
+    this.router.navigate(["/products"]);    
   }
 
   getIfSearching(): boolean{

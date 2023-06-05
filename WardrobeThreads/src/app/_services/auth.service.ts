@@ -10,6 +10,7 @@ export class AuthService {
   token: any = null;
 
   currentUser: any;
+  navbarName: any;
 
   constructor(private router: Router, @Optional() private auth: Auth) { }
 
@@ -18,6 +19,7 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((response) => {
         this.currentUser = this.auth.currentUser;
+        this.navbarName = this.currentUser.displayName.split(' ')[0];
         this.router.navigate(['/main']);
         this.token = this.auth.currentUser?.getIdToken();
       })
@@ -48,6 +50,10 @@ export class AuthService {
     this.auth.signOut();
     this.token = null;
     this.router.navigate(['/main']);
+  }
+
+  getNavbarName(){
+    return this.navbarName;
   }
 
   getCurrentUser() {
