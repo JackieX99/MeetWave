@@ -59,6 +59,10 @@
   text-align: center;
 }
 
+.Profile:hover, .CartIcon:hover{
+  cursor: pointer;
+}
+
 .Profile span {
   height: max-content;
   margin: auto;

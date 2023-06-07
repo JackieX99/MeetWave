@@ -105,7 +105,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   onSubmit() { // Form elküldésekor meghívjuk a feltöltés függvényt
-    console.log(this.product.value);
     this.firebaseService.uploadProduct(this.product.value)
   }
 

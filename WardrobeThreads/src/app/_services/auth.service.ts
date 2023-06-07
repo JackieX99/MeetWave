@@ -1,6 +1,7 @@
-import { Injectable, Optional } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
+import { EventEmitter, Injectable, Optional } from '@angular/core';
+import { Auth, User, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,22 @@ export class AuthService {
 
   token: any = null;
 
+  user: any;
+
   currentUser: any;
   navbarName: any;
 
-  constructor(private router: Router, @Optional() private auth: Auth) { }
+  public changedUser: EventEmitter<any> = new EventEmitter<any>();
+  public userStillLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
+  public userChanged() {
+    this.changedUser.emit();
+  }
+  public userFound() {
+    this.userStillLoggedIn.emit();
+  }
+
+  constructor(private router: Router, @Optional() private auth: Auth) {}
 
   signInUser(email: string, password: string) {
 
@@ -22,10 +35,13 @@ export class AuthService {
         this.navbarName = this.currentUser.displayName.split(' ')[0];
         this.router.navigate(['/main']);
         this.token = this.auth.currentUser?.getIdToken();
+        this.userChanged();
       })
       .catch((error) => {
         document.querySelector('.error')!.innerHTML = error.message;
       });
+    
+    
   }
 
   signUpUser(email: string, password: string, displayname: string) {
@@ -34,6 +50,7 @@ export class AuthService {
         this.currentUser = this.auth.currentUser;
         this.router.navigate(['/main']);
         this.token = this.auth.currentUser?.getIdToken();
+        this.userChanged();
         updateProfile(this.currentUser, {displayName: displayname}).catch(
           (error: any) => {
             document.querySelector('.error')!.innerHTML = error.message;
@@ -43,6 +60,7 @@ export class AuthService {
       .catch((error: any) => {
         document.querySelector('.error')!.innerHTML = error.message;
       })
+      
   }
 
 
@@ -50,6 +68,11 @@ export class AuthService {
     this.auth.signOut();
     this.token = null;
     this.router.navigate(['/main']);
+  }
+
+  setUser(user: any){
+    this.currentUser = user;
+    this.navbarName = this.currentUser.displayName.split(' ')[0];
   }
 
   getNavbarName(){

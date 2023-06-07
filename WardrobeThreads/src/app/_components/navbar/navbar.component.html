@@ -19,7 +19,7 @@
     </div>
     <div class="Profile">
       <i class="ProfileIcon bi bi-person-circle"></i>
-      <span>{{name | uppercase}}</span>
+      <span>{{ name || '...' | uppercase }}</span>
       <!-- <span *ngIf="activeRoute == 'MainPanelComponent'">helo</span> -->
     </div>
     <div class="CartBox">

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -15,10 +15,15 @@ export class SearchbarService {
 
   foundProducts: any[] = [];
 
+  public searchingFor: EventEmitter<any> = new EventEmitter<any>();
+
+  public search(keyword: any, foundlist: any) {
+    this.searchingFor.emit({'keyword': keyword, 'list': foundlist});
+  }
+
   constructor(private fbService: FirebaseService, private router: Router) {}
 
   async searchFor(keyword: any) {
-    this.foundProducts = [];
 
     // Összes product lekérése
     await this.fbService.getAllProduct().then((res) => {
@@ -29,7 +34,6 @@ export class SearchbarService {
     // Adott szó ellenőrzése a termékek neveiben
 
     let foundProds: any[] = [];
-    this.searchForKeyword = keyword;
 
     for (const key of Object.keys(this.products)) {
       const value = this.products[key as keyof typeof this.products];
@@ -39,7 +43,7 @@ export class SearchbarService {
       }
     }
 
-    this.updateArray(foundProds);
+    this.search(keyword, foundProds);
 
     this.router.navigate(["/products"]);    
   }
@@ -61,21 +65,6 @@ export class SearchbarService {
     return new Promise<any[]>((resolve, reject) => {
       resolve(this.foundProducts);
     });
-  }
-
-  // Kereső találatok visszaadása
-
-  private myArraySubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(this.foundProducts);
-
-  // Metódus, amely módosítja a tömböt
-  updateArray(newValue: any[]) {
-    this.foundProducts = newValue;
-    this.myArraySubject.next(this.foundProducts); // Értesítés a feliratkozóknak
-  }
-
-  // Metódus a feliratkozásra
-  getArrayObservable(): Observable<any[]> {
-    return this.myArraySubject.asObservable();
   }
   
 }

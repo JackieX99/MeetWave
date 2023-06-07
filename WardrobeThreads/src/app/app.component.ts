@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AuthService } from './_services/auth.service';
 import { ViewportScroller } from '@angular/common';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 @Component({
   selector: 'app-root',
@@ -15,24 +16,25 @@ import { ViewportScroller } from '@angular/common';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   activeRouter: any = '';
+  user: any;
 
-  userDeviceHeight: number = 0;
-  userDeviceWidth: number = 0;
-  mainframeHeight: number = 0;
+  // userDeviceHeight: number = 0;
+  // userDeviceWidth: number = 0;
+  // mainframeHeight: number = 0;
 
   constructor(
     private auth: AuthService,
     private viewportScroller: ViewportScroller,
     private renderer: Renderer2
   ) {
-    this.getScreenSize();
+    // this.getScreenSize();
   }
 
-  @HostListener('window:resize', ['$event'])
-  getScreenSize(event?: any) {
-    this.userDeviceHeight = window.innerHeight;
-    this.userDeviceWidth = window.innerWidth;
-  }
+  // @HostListener('window:resize', ['$event'])
+  // getScreenSize(event?: any) {
+  //   this.userDeviceHeight = window.innerHeight;
+  //   this.userDeviceWidth = window.innerWidth;
+  // }
 
   // prevScrollpos: any;
   // @HostListener('window:scroll', [])
@@ -54,29 +56,35 @@ export class AppComponent implements OnInit, AfterViewInit {
   // }
 
   ngOnInit(): void {
-    const scrollPosition = this.viewportScroller.getScrollPosition();
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in.
+        this.user = user;
+        this.auth.setUser(user);
+        const eventData = {};
+        this.auth.userFound();
+      } else {
+        // User is not signed in.
+        // ...
+      }
+    });
+
+    // const scrollPosition = this.viewportScroller.getScrollPosition();
     // this.prevScrollpos = scrollPosition[1];
 
     // Viewheight to px konvert user device méret alapján
-    this.mainframeHeight = 75 * (this.userDeviceHeight / 100); // 75 vh = x px
-
-    // User be van-e jelentkezve check
-    if (this.auth.isAuthenticated()) {
-      //Navigate to Home Page
-    } else {
-      //Navigate to Login Page
-    }
+    // this.mainframeHeight = 75 * (this.userDeviceHeight / 100); // 75 vh = x px    
   }
 
   element: any;
 
   ngAfterViewInit() {
-    this.element = this.renderer.selectRootElement('.navbarka', true);
+    // this.element = this.renderer.selectRootElement('.navbarka', true);
   }
 
 
   public onRouterOutletActivate(event: any) {
     this.activeRouter = event.constructor.name; // "PageNotFoundComponent"
-    console.log(this.activeRouter)
   }
 }

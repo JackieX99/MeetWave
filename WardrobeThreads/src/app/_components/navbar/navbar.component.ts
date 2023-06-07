@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/_services/auth.service';
 import { SearchbarService } from 'src/app/_services/searchbar.service';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 @Component({
   selector: 'app-navbar',
@@ -11,23 +12,29 @@ export class NavbarComponent implements OnInit {
 
   @Input() activeRoute: any = "";
   name: any;
+  currentUser: any;
 
-  constructor(private sb: SearchbarService, private authS: AuthService) {
-    
-  }
+  constructor(private sb: SearchbarService, private authS: AuthService) {}
   
   ngOnInit(): void {
-    this.authS.getNavbarName().then((res: any) => {
-      if(res.length == ""){
-        this.name = "vendég"
-      } else{
-        this.name = res;
-      }
-    })
+    this.refreshName()
+    this.authS.changedUser.subscribe((data) => { 
+      this.refreshName();
+    });
+    this.authS.userStillLoggedIn.subscribe((data) => { 
+      this.refreshName();
+    });
+  }
+
+  refreshName(){
+    if(this.authS.getNavbarName() == undefined){
+      this.name = "vendég"; 
+    } else{
+      this.name = this.authS.getNavbarName();
+    }
   }
 
   search(event: any) {
-    console.log('You entered: ', event.target.value);
     this.sb.searchFor(event.target.value);
   }
 }

@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SearchbarService } from 'src/app/_services/searchbar.service';
 import { Observable, Subscription, from } from 'rxjs';
 import { FirebaseService } from 'src/app/_services/firebase.service';
-import { Cases } from 'src/app/_models/phone-cases';
+import { Case, Cases } from 'src/app/_models/phone-cases';
+import { CasesService } from 'src/app/_services/cases.service';
 
 
 @Component({
@@ -21,11 +22,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: any[] = [];
   productsKey: any[] = [];
 
-  cases = Cases;
+  // cases = Cases;
+  cases: Case[] = [];
 
   private subscription: Subscription;
 
-  constructor(private sbService: SearchbarService, private fbService: FirebaseService) { }
+  constructor(private sbService: SearchbarService, private fbService: FirebaseService, private caseService: CasesService) { }
 
   ngOnInit(): void {
     this.foundProducts = [];
@@ -35,28 +37,30 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.products = res;
       this.productsKey = Object.keys(res);
     })
-    this.subscription = this.sbService.getArrayObservable().subscribe((updatedArray) => {
-      this.searchFor(updatedArray);
+
+    this.sbService.searchingFor.subscribe((data) => { 
+      this.searching = true;
+      this.keyword = data.keyword;
+      this.foundProducts = data.list;
+      this.foundProductsKey = Object.keys(data.list);
     });
+
+    this.cases = this.caseService.getCases();
   }
 
-  searchFor(array: any) {
-    console.log("ez meg lett hívva")
-    this.searching = this.sbService.getIfSearching();
-    this.keyword = this.sbService.getSearchKeyword();
-    this.foundProducts = array;
-    this.foundProductsKey = Object.keys(array);
+  selectCategory(keyword: any){
+    this.sbService.searchFor(keyword);
   }
 
-  getIfSearching() {
-    this.searching = this.sbService.getIfSearching();
-  }
-
-  resetSearch() {
+  deleteSearch() {
+    this.keyword = "";
     this.searching = false;
-    this.sbService.deleteSearching();
     this.foundProducts = [];
     this.foundProductsKey = [];
+  }
+
+  search(event: any) {
+    this.sbService.searchFor(event.target.value);
   }
 
   ngOnDestroy() {

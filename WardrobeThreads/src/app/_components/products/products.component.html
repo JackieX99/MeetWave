@@ -9,13 +9,19 @@
             </path>
           </g>
         </svg>
-        <input placeholder="Termékek keresése.." type="search" class="input">
+        <input placeholder="Termékek keresése.." type="text" class="input" [value]="keyword" (keydown.enter)="search($event)">
       </div>
       <div class="categories row">
+        <div class="col-10 foundprods" *ngIf="searching">
+            <p>Keresés a következőre: <b>{{keyword}}</b></p>
+            <p><b>{{foundProducts.length}}</b> találat megjelenítése.</p>
+            <button class="btn btn-secondary deleteSearch" (click)="deleteSearch()">Keresési eredmények törlése</button>
+        </div>
+        
         <h5 class="categoryH">Kategóriák</h5>
         <div class="category col-10" *ngFor="let case of cases">
-          <span style="float: left" class="caseName">{{case.phone}}</span>
-          <span style="float: right">(1)</span>
+          <span style="float: left" class="caseName" (click)="this.selectCategory(case.phone)">{{case.phone}}</span>
+          <span style="float: right">({{case.piece}})</span>
         </div>
       </div>
     </div>
@@ -24,14 +30,29 @@
 
         
         <!-- card innen -->
-        <div class="product col-4" *ngFor="let key of productsKey; index as i">
-          <img class="productPicture" [src]="this.products[key].indeximage">
-          <div class="productName">{{ this.products[key].name }}</div>
-          <div class="productPrice">{{ this.products[key].price }} Ft</div>
-          <div class="text-center CartButton">
-            <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
+        <ng-container *ngIf="searching == false">
+          <div class="product col-4" *ngFor="let key of productsKey; index as i">
+            <img class="productPicture" [src]="this.products[key].indeximage">
+            <div class="productName">{{ this.products[key].name }}</div>
+            <div class="productPrice">{{ this.products[key].price }} Ft</div>
+            <div class="text-center CartButton">
+              <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
+            </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="searching == true">
+          <p class="noProdFound" *ngIf="foundProducts.length == 0">Nincs megjeleníthető termék.</p>
+          <div class="product col-4" *ngFor="let key of foundProductsKey; index as i">
+            <img class="productPicture" [src]="this.foundProducts[key].indeximage">
+            <div class="productName">{{ this.foundProducts[key].name }}</div>
+            <div class="productPrice">{{ this.foundProducts[key].price }} Ft</div>
+            <div class="text-center CartButton">
+              <button type="submit" class="text-center CartSubmitButton">KOSÁRBA</button>
+            </div>
+          </div>
+        </ng-container>
+        
+        
         <!-- idáig -->
 
         <!-- <div class="product" >
@@ -46,8 +67,6 @@
     </ng-container>
   </div> -->
       </div>
-      {{searching}}
-      <button class="btn btn-secondary" (click)="this.resetSearch()">reset</button>
     </div>
   </div>
 

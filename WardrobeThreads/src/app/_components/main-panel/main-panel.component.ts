@@ -17,11 +17,11 @@ export class MainPanelComponent implements OnInit {
   constructor(private readonly authService: AuthService, private readonly firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUser();
-    this.currentUser? this.calcTime() : "";
-    this.firebaseService.checkIfAdmin(this.authService.getCurrentUserId()).then(res =>
-      this.isAdmin = res
-    )
+    
+    // this.firebaseService.checkIfAdmin(this.authService.getCurrentUserId()).then(res =>
+    //   this.isAdmin = res
+    // )  
+
   }
 
   calcTime(){
