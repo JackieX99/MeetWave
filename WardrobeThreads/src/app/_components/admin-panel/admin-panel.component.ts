@@ -68,6 +68,10 @@ export class AdminPanelComponent implements OnInit {
     this.authService.logout();
   }
 
+  setAdmin(bool: boolean){
+    this.firebaseService.setAdmin("DZ2jUc5aFuMDc1WaWN8An2yPnkM2", bool);
+  }
+
   get pictures(): FormArray {
     return this.product.get('images') as FormArray;
   }
