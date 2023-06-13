@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "WardrobeThreads": {
+    "GlamCase": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -83,10 +83,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "WardrobeThreads:build:production"
+              "browserTarget": "GlamCase:build:production"
             },
             "development": {
-              "browserTarget": "WardrobeThreads:build:development"
+              "browserTarget": "GlamCase:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "WardrobeThreads:build"
+            "browserTarget": "GlamCase:build"
           }
         },
         "test": {
@@ -126,7 +126,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "WardrobeThreads:build:production",
+            "browserTarget": "GlamCase:build:production",
             "firebaseProject": "wardrobethreads-265c9",
             "firebaseHostingSite": "wardrobethreads-265c9"
           }
