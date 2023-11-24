@@ -1,0 +1,4 @@
+name: MeetWave-REST
+version: '${project.version}'
+main: net.meetwave.meetwaverest.MeetWave_REST
+api-version: '1.20'
