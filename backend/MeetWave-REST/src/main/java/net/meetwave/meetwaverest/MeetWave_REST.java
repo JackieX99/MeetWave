@@ -1,5 +1,8 @@
 package net.meetwave.meetwaverest;
 
+import com.google.gson.Gson;
+import net.meetwave.meetwaverest.Classes.TestClass;
+import net.meetwave.meetwaverest.Classes.TestClassRequest;
 import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
 
@@ -29,10 +32,20 @@ public final class MeetWave_REST extends JavaPlugin {
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        get("/hello/:name", (request, response) -> {
-            return "Hello: " + request.params(":name");
+        get("/test", (req, res) -> {
+            Gson gson = new Gson();
+            TestClassRequest request = gson.fromJson(req.body(), TestClassRequest.class);
+            String firstname = request.getFirstname();
+            String lastname = request.getLastname();
+            int age = request.getAge();
+
+            TestClass test = new TestClass(firstname, lastname, age);
+
+            // res.type("application/json");
+            return gson.toJson(test);
         });
     }
+
 
     @Override
     public void onDisable() {
