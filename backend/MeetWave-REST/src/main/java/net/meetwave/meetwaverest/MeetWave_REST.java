@@ -54,6 +54,21 @@ public final class MeetWave_REST extends JavaPlugin {
             // érték visszaadása
             return gson.toJson(test);
         });
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
