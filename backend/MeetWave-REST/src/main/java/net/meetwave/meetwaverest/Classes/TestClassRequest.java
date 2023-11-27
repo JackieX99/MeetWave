@@ -2,6 +2,8 @@ package net.meetwave.meetwaverest.Classes;
 
 public class TestClassRequest {
 
+
+
     private String firstname;
     private String lastname;
     private int age;

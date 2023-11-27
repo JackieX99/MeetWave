@@ -32,15 +32,21 @@ public final class MeetWave_REST extends JavaPlugin {
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        // get -> GET kérés
-        // /test -> endpoint elérése
+        // típusok -> get / post
+        // get kérés -> lekérsz valamit (pl.: user adatainak lekérése)
+        // post -> valamit küldesz (pl.: regisztráció)
         get("/test", (req, res) -> {
+            // path -> mi legyen az endpoint neve
+            // jelenleg: ipcím+port + "/test"
             Gson gson = new Gson();
             // bemenő paraméterek kikérése
             TestClassRequest request = gson.fromJson(req.body(), TestClassRequest.class);
             String firstname = request.getFirstname();
             String lastname = request.getLastname();
             int age = request.getAge();
+
+            // adatbázis művetelet
+            //
 
             // visszatérő értékek létrehozása
             TestClass test = new TestClass(firstname, lastname, age);
