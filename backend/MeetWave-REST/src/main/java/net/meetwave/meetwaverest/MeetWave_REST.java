@@ -1,6 +1,8 @@
 package net.meetwave.meetwaverest;
 
 import com.google.gson.Gson;
+import jdk.vm.ci.code.Register;
+import net.meetwave.meetwaverest.Classes.RegisterClass;
 import net.meetwave.meetwaverest.Classes.TestClass;
 import net.meetwave.meetwaverest.Classes.TestClassRequest;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,8 +37,8 @@ public final class MeetWave_REST extends JavaPlugin {
 
         // Adatbázis kapcsolat konfigurálása
         String dbUrl = "jdbc:mysql://sql.tokyohost.eu:3306/s372_meetwave";
-        String username = "u372_fFBbfDI6rq";
-        String password = "yak66HlZx@pah3A8862=2gj.";
+        String dbUsername = "u372_fFBbfDI6rq";
+        String dbPassword = "yak66HlZx@pah3A8862=2gj.";
 
         // típusok -> get / post
         // get kérés -> lekérsz valamit (pl.: user adatainak lekérése)
@@ -54,7 +56,7 @@ public final class MeetWave_REST extends JavaPlugin {
             // adatbázis művetelet
             try {
                 // Adatbázis kapcsolat létrehozása
-                Connection conn = DriverManager.getConnection(dbUrl, username, password);
+                Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
                 // Tárolt meghívása
                 // "getUsers()" helyére megy az adatbázisban létrehozott tárolt neve, és
                 // zárójelek a végére, mert  egy függvény
@@ -87,10 +89,47 @@ public final class MeetWave_REST extends JavaPlugin {
             return gson.toJson(test);
         });
 
+       //{
+       //     "username": "JackieX99",
+       //         "email": "foldvaria03@gmail.com",
+       //       "password": "Teszt123",
+       //         "phone": "06708845584"
+       // }
 
-        
+
+        post("/register", (req, res) -> {
+            // path -> mi legyen az endpoint neve
+            // jelenleg: ipcím+port + "/test"
+
+            Gson gson = new Gson();
+            // bemenő paraméterek kikérése
+
+            RegisterClass request = gson.fromJson(req.body(), RegisterClass.class);
+            String username = request.getUsername();
+            String email = request.getEmail();
+            String password = request.getPassword();
+            int phone = request.getPhone();
+
+            String json_user = req.body();
+
+            RegisterClass registerClass = gson.fromJson(json_user, RegisterClass.class);
+
+            if(registerClass== null){
+
+                res.status(400);
+
+                return ("A felhasználó nem lett létrehozva");
+
+            }
 
 
+
+            // visszatérő értékek létrehozása
+           // TestClass test = new TestClass(firstname, lastname, age);
+
+            // érték visszaadása
+            return gson.toJson(test);
+        });
 
 
 
