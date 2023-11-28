@@ -9,24 +9,24 @@ public class RegisterClass {
     // }
 
 
-    String username;
+    String fullname;
 
     String email;
 
     String password;
 
-    int phone;
+    String phone;
 
     public RegisterClass() {
 
     }
 
-    public String getUsername() {
-        return username;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -45,11 +45,11 @@ public class RegisterClass {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }

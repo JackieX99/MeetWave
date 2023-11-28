@@ -1,8 +1,8 @@
 package net.meetwave.meetwaverest;
 
 import com.google.gson.Gson;
-import jdk.vm.ci.code.Register;
 import net.meetwave.meetwaverest.Classes.RegisterClass;
+import net.meetwave.meetwaverest.Classes.RegisterResponse;
 import net.meetwave.meetwaverest.Classes.TestClass;
 import net.meetwave.meetwaverest.Classes.TestClassRequest;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -98,46 +98,64 @@ public final class MeetWave_REST extends JavaPlugin {
 
 
         post("/register", (req, res) -> {
-            // path -> mi legyen az endpoint neve
-            // jelenleg: ipcím+port + "/test"
-
             Gson gson = new Gson();
-            // bemenő paraméterek kikérése
 
             RegisterClass request = gson.fromJson(req.body(), RegisterClass.class);
-            String username = request.getUsername();
-            String email = request.getEmail();
-            String password = request.getPassword();
-            int phone = request.getPhone();
+            // bejövő adatok
+            String fullnameIN = request.getFullname();
+            String emailIN = request.getEmail();
+            String passwordIN = request.getPassword();
+            String phoneIN = request.getPhone();
 
-            String json_user = req.body();
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            RegisterClass registerClass = gson.fromJson(json_user, RegisterClass.class);
+            // Kapcsolódás az adatbázishoz
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
-            if(registerClass== null){
+            // Hívjuk meg a tárolt eljárást
+            String storedProcedureCall = "{CALL checkIfUserExists(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
 
-                res.status(400);
+            // Beállítjuk a bemeneti paramétereket
+            callableStatement.setString(1, emailIN);
 
-                return ("A felhasználó nem lett létrehozva");
+            // Regisztráljuk az "OUT" irányú paramétert
+            callableStatement.registerOutParameter(2, Types.BOOLEAN);  // Például, boolean típus
 
+            // Futtatjuk a tárolt eljárást
+            callableStatement.execute();
+
+            // Elérjük az "OUT" irányú paramétert
+            boolean userExists = callableStatement.getBoolean(2);
+
+            // már létező user
+            RegisterResponse resp = new RegisterResponse("unknownerror");;
+            if(userExists){
+                resp = new RegisterResponse("emailinuse");
+            }
+            // még nincs user, mehet a reg
+            else{
+                String storedProcedureCall2 = "{CALL registerUser(?, ?, ?, ?, ?)}";
+                CallableStatement callableStatement2 = connection.prepareCall(storedProcedureCall2);
+                callableStatement2.setString(1, fullnameIN);
+                callableStatement2.setString(2, emailIN);
+                callableStatement2.setString(3, passwordIN);
+                callableStatement2.setString(4, phoneIN);
+                callableStatement2.registerOutParameter(5, Types.INTEGER);
+                callableStatement2.execute();
+
+                int success = callableStatement2.getInt(5);
+                // ha sikeres regisztráció jött vissza, szóval adatok bementek DB-be
+                if(success == 1){
+                    resp = new RegisterResponse("success");
+                }
             }
 
-
-
-            // visszatérő értékek létrehozása
-           // TestClass test = new TestClass(firstname, lastname, age);
-
-            // érték visszaadása
-            return gson.toJson(test);
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
         });
-
-
-
-
-
-
-
-
 
 
     }
