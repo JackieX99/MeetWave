@@ -155,67 +155,52 @@ public final class MeetWave_REST extends JavaPlugin {
         });
 
         post("/login", (req, res) -> {
-                    Gson gson = new Gson();
+            Gson gson = new Gson();
 
-                    LoginClass request = gson.fromJson(req.body(), LoginClass.class);
-                    // bejövő adatok
-                    String emailIN = request.getEmail();
-                    String passwordIN = request.getPassword();
+            LoginClass request = gson.fromJson(req.body(), LoginClass.class);
+            // bejövő adatok
+            String emailIN = request.getEmail();
+            String passwordIN = request.getPassword();
 
-                    // db kapcsolat, létező account check
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-
-
-                    Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
 
-                    String storedProcedureCall = "{CALL loginUser(?, ?, ?)}";
-                    CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
 
-                    callableStatement.setString(1, emailIN);
-                    callableStatement.setString(2, passwordIN);
+            String storedProcedureCall = "{CALL loginUser(?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
 
 
-                    callableStatement.registerOutParameter(3, Types.VARCHAR);
+            callableStatement.setString(1, emailIN);
+            callableStatement.setString(2, passwordIN);
 
 
-                    callableStatement.execute();
-
-                    // Elérjük az "OUT" irányú paramétert
-                    String status = callableStatement.getString(3);
+            callableStatement.registerOutParameter(3, Types.VARCHAR);
 
 
-                    LoginResponse resp;
+            callableStatement.execute();
 
-                    switch (status) {
-                        case "success":
-                             resp = new LoginResponse("successful");
-                             break;
-                        case "failed":
-                             resp = new LoginResponse("failed");
-                            break;
-                        case "wrongpassword":
-                             resp = new LoginResponse("wrongpassword");
-                            break;
-                        case "emailnotfound":
-                             resp = new LoginResponse("emailnotfound");
-                            break;
-                        default:
-                            resp = new LoginResponse("unknownerror");
+            // Elérjük az "OUT" irányú paramétert
+            String status = callableStatement.getString(3);
 
-                        // még nincs user, mehet a reg
-                      //  default:
-                      //      String storedProcedureCall2 = "{CALL loginUser(?, ?, ?)}";
-                       //     CallableStatement callableStatement2 = connection.prepareCall(storedProcedureCall2);
-                       //     callableStatement2.setString(1, emailIN);
-                        //    callableStatement2.setString(2, passwordIN);
-                        //    callableStatement2.registerOutParameter(3, Types.VARCHAR);
-                        //    callableStatement2.execute();
+            LoginResponse resp;
 
-                    }
-
-
+            switch (status) {
+                case "successful":
+                     resp = new LoginResponse("successful");
+                     break;
+                case "wrongpassword":
+                     resp = new LoginResponse("wrongpassword");
+                    break;
+                case "emailnotfound":
+                     resp = new LoginResponse("emailnotfound");
+                    break;
+                default:
+                    resp = new LoginResponse("unknownerror");
+            }
+            
             callableStatement.close();
             connection.close();
             return gson.toJson(resp);
