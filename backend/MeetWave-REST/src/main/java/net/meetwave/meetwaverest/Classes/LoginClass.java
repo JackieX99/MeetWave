@@ -7,6 +7,11 @@ public class LoginClass {
     String password;
 
 
+    public LoginClass(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public LoginClass() {
 
     }

@@ -186,17 +186,23 @@ public final class MeetWave_REST extends JavaPlugin {
                     String status = callableStatement.getString(3);
 
 
-                    LoginResponse resp = new LoginResponse("unknownerror");
+                    LoginResponse resp;
 
                     switch (status) {
                         case "success":
                              resp = new LoginResponse("successful");
+                             break;
                         case "failed":
                              resp = new LoginResponse("failed");
+                            break;
                         case "wrongpassword":
                              resp = new LoginResponse("wrongpassword");
+                            break;
                         case "emailnotfound":
                              resp = new LoginResponse("emailnotfound");
+                            break;
+                        default:
+                            resp = new LoginResponse("unknownerror");
 
                         // még nincs user, mehet a reg
                       //  default:
