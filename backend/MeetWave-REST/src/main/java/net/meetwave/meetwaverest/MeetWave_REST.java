@@ -1,10 +1,7 @@
 package net.meetwave.meetwaverest;
 
 import com.google.gson.Gson;
-import net.meetwave.meetwaverest.Classes.RegisterClass;
-import net.meetwave.meetwaverest.Classes.RegisterResponse;
-import net.meetwave.meetwaverest.Classes.TestClass;
-import net.meetwave.meetwaverest.Classes.TestClassRequest;
+import net.meetwave.meetwaverest.Classes.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
 
@@ -53,7 +50,7 @@ public final class MeetWave_REST extends JavaPlugin {
             String lastname = request.getLastname();
             int age = request.getAge();
 
-            // adatbázis művetelet
+            // adatbázis művetelek
             try {
                 // Adatbázis kapcsolat létrehozása
                 Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
@@ -156,6 +153,69 @@ public final class MeetWave_REST extends JavaPlugin {
             connection.close();
             return gson.toJson(resp);
         });
+
+        post("/login", (req, res) -> {
+                    Gson gson = new Gson();
+
+                    LoginClass request = gson.fromJson(req.body(), LoginClass.class);
+                    // bejövő adatok
+                    String emailIN = request.getEmail();
+                    String passwordIN = request.getPassword();
+
+                    // db kapcsolat, létező account check
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+
+
+                    Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+
+                    String storedProcedureCall = "{CALL loginUser(?, ?, ?)}";
+                    CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+
+                    callableStatement.setString(1, emailIN);
+                    callableStatement.setString(2, passwordIN);
+
+
+                    callableStatement.registerOutParameter(3, Types.VARCHAR);
+
+
+                    callableStatement.execute();
+
+                    // Elérjük az "OUT" irányú paramétert
+                    String status = callableStatement.getString(3);
+
+
+                    LoginResponse resp = new LoginResponse("unknownerror");
+
+                    switch (status) {
+                        case "success":
+                             resp = new LoginResponse("successful");
+                        case "failed":
+                             resp = new LoginResponse("failed");
+                        case "wrongpassword":
+                             resp = new LoginResponse("wrongpassword");
+                        case "emailnotfound":
+                             resp = new LoginResponse("emailnotfound");
+
+                        // még nincs user, mehet a reg
+                      //  default:
+                      //      String storedProcedureCall2 = "{CALL loginUser(?, ?, ?)}";
+                       //     CallableStatement callableStatement2 = connection.prepareCall(storedProcedureCall2);
+                       //     callableStatement2.setString(1, emailIN);
+                        //    callableStatement2.setString(2, passwordIN);
+                        //    callableStatement2.registerOutParameter(3, Types.VARCHAR);
+                        //    callableStatement2.execute();
+
+                    }
+
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
 
 
     }
