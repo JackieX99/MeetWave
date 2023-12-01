@@ -10,15 +10,13 @@ public class updateUserClass {
 
     String newPhoneNumber;
 
-    String Result;
 
 
-    public updateUserClass(int userID, String newFullName, String newEmail, String newPhoneNumber, String result) {
+    public updateUserClass(int userID, String newFullName, String newEmail, String newPhoneNumber) {
         this.userID = userID;
         this.newFullName = newFullName;
         this.newEmail = newEmail;
         this.newPhoneNumber = newPhoneNumber;
-        Result = result;
     }
 
     public int getUserID() {
@@ -53,11 +51,4 @@ public class updateUserClass {
         this.newPhoneNumber = newPhoneNumber;
     }
 
-    public String getResult() {
-        return Result;
-    }
-
-    public void setResult(String result) {
-        Result = result;
-    }
 }

@@ -279,11 +279,11 @@ public final class MeetWave_REST extends JavaPlugin {
 
             callableStatement.execute();
 
-            boolean result = callableStatement.getBoolean(5);
+            String result = callableStatement.getString(5);
 
             LoginResponse resp;
 
-            if (result) {
+            if (result.equals("successful")) {
                 resp = new LoginResponse("success");
             } else {
                 resp = new LoginResponse("failed");
@@ -292,7 +292,6 @@ public final class MeetWave_REST extends JavaPlugin {
             callableStatement.close();
             connection.close();
             return gson.toJson(resp);
-
 
         });
 
