@@ -86,12 +86,12 @@ public final class MeetWave_REST extends JavaPlugin {
             return gson.toJson(test);
         });
 
-       //{
-       //     "username": "JackieX99",
-       //         "email": "foldvaria03@gmail.com",
-       //       "password": "Teszt123",
-       //         "phone": "06708845584"
-       // }
+        //{
+        //     "username": "JackieX99",
+        //         "email": "foldvaria03@gmail.com",
+        //       "password": "Teszt123",
+        //         "phone": "06708845584"
+        // }
 
 
         post("/register", (req, res) -> {
@@ -127,12 +127,13 @@ public final class MeetWave_REST extends JavaPlugin {
             boolean userExists = callableStatement.getBoolean(2);
 
             // már létező user
-            RegisterResponse resp = new RegisterResponse("unknownerror");;
-            if(userExists){
+            RegisterResponse resp = new RegisterResponse("unknownerror");
+            ;
+            if (userExists) {
                 resp = new RegisterResponse("emailinuse");
             }
             // még nincs user, mehet a reg
-            else{
+            else {
                 String storedProcedureCall2 = "{CALL registerUser(?, ?, ?, ?, ?)}";
                 CallableStatement callableStatement2 = connection.prepareCall(storedProcedureCall2);
                 callableStatement2.setString(1, fullnameIN);
@@ -144,7 +145,7 @@ public final class MeetWave_REST extends JavaPlugin {
 
                 int success = callableStatement2.getInt(5);
                 // ha sikeres regisztráció jött vissza, szóval adatok bementek DB-be
-                if(success == 1){
+                if (success == 1) {
                     resp = new RegisterResponse("success");
                 }
             }
@@ -189,27 +190,115 @@ public final class MeetWave_REST extends JavaPlugin {
 
             switch (status) {
                 case "successful":
-                     resp = new LoginResponse("successful");
-                     break;
+                    resp = new LoginResponse("success");
+                    break;
                 case "wrongpassword":
-                     resp = new LoginResponse("wrongpassword");
+                    resp = new LoginResponse("wrongpassword");
                     break;
                 case "emailnotfound":
-                     resp = new LoginResponse("emailnotfound");
+                    resp = new LoginResponse("emailnotfound");
                     break;
                 default:
                     resp = new LoginResponse("unknownerror");
             }
-            
+
             callableStatement.close();
             connection.close();
             return gson.toJson(resp);
         });
 
+        post("/changePassword", (req, res) -> {
+            Gson gson = new Gson();
 
+            changePasswordClass request = gson.fromJson(req.body(), changePasswordClass.class);
+            // bejövő adatok
+            int userID = Integer.parseInt(request.getUserID());
+            String newpassword = request.getNewpassword();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+
+            String storedProcedureCall = "{CALL changePassword(?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.setString(2, newpassword);
+            callableStatement.registerOutParameter(3, Types.BOOLEAN);
+
+            callableStatement.execute();
+
+            boolean status = callableStatement.getBoolean(3);
+
+            LoginResponse resp;
+
+            if (status) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+
+
+        });
+
+
+        post("/updateUser", (req, res) -> {
+            Gson gson = new Gson();
+
+            updateUserClass request = gson.fromJson(req.body(), updateUserClass.class);
+            // bejövő adatok
+            int userID = request.getUserID();
+            String newFullName = request.getNewFullName();
+            String newEmail = request.getNewEmail();
+            String newPhoneNumber = request.getNewPhoneNumber();
+
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+
+            String storedProcedureCall = "{CALL updateUser(?, ?, ?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.setString(2, newFullName);
+            callableStatement.setString(3, newEmail);
+            callableStatement.setString(4, newPhoneNumber);
+
+            callableStatement.registerOutParameter(5, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            boolean result = callableStatement.getBoolean(5);
+
+            LoginResponse resp;
+
+            if (result) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+
+
+        });
 
 
     }
+
 
 
     @Override
