@@ -1,6 +1,7 @@
 package net.meetwave.meetwaverest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.meetwave.meetwaverest.Classes.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
@@ -294,6 +295,92 @@ public final class MeetWave_REST extends JavaPlugin {
             return gson.toJson(resp);
 
         });
+
+        post("/createEvent", (req, res) -> {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+
+            createEventClass request = gson.fromJson(req.body(), createEventClass.class);
+
+            // bejövő adatok
+            String eventTitle = request.getEventTitle();
+            String description = request.getDescription();
+            java.util.Date dateOfTheEvent = request.getDateOfTheEvent(); // Most már java.util.Date
+            String place = request.getPlace();
+            String founder = request.getFounder();
+            Timestamp dateOfCreatingEvent = request.getDateOfCreatingEvent();
+            int maxParticipants = request.getMaxParticipants();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL createEvent(?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setString(1, eventTitle);
+            callableStatement.setString(2, description);
+            callableStatement.setTimestamp(3, new java.sql.Timestamp(dateOfTheEvent.getTime()));
+            callableStatement.setString(4, place);
+            callableStatement.setString(5, founder);
+            callableStatement.setTimestamp(6, dateOfCreatingEvent);
+            callableStatement.setInt(7, maxParticipants);
+
+            callableStatement.registerOutParameter(8, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(8);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/deleteEvent", (req, res) -> {
+            Gson gson = new Gson();
+
+            deleteEventClass request = gson.fromJson(req.body(), deleteEventClass.class);
+
+            // bejövő adatok
+            int eventID = request.getEventID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL deleteEvent(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, eventID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
 
 
     }

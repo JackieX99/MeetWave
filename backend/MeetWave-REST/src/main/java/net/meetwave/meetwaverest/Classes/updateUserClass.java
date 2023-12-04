@@ -12,7 +12,7 @@ public class updateUserClass {
 
 
 
-    public updateUserClass(int userID, String newFullName, String newEmail, String newPhoneNumber) {
+    public updateUserClass(int userID, String newFullName, String newEmail, String newPhoneNumber   ) {
         this.userID = userID;
         this.newFullName = newFullName;
         this.newEmail = newEmail;
