@@ -380,6 +380,224 @@ public final class MeetWave_REST extends JavaPlugin {
             return gson.toJson(resp);
         });
 
+        post("/postComment", (req, res) -> {
+            Gson gson = new Gson();
+
+            postCommentClass request = gson.fromJson(req.body(), postCommentClass.class);
+
+            // bejövő adatok
+            int eventID = request.getEventID();
+            int userID = request.getUserID();
+            String userCommentIN = request.getUserCommentIN();
+            java.util.Date dateOfCommentIN = request.getDateOfCommentIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL postComment(?, ?, ?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, eventID);
+            callableStatement.setInt(2, userID);
+            callableStatement.setString(3, userCommentIN);
+            callableStatement.setTimestamp(4, new java.sql.Timestamp(dateOfCommentIN.getTime()));
+
+            callableStatement.registerOutParameter(5, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(5);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/deleteComment", (req, res) -> {
+            Gson gson = new Gson();
+
+            deleteCommentClass request = gson.fromJson(req.body(), deleteCommentClass.class);
+
+            // bejövő adatok
+            int commentID = request.getCommentID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL deleteComment(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, commentID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
+        post("/banUser", (req, res) -> {
+            Gson gson = new Gson();
+
+            banUserClass request = gson.fromJson(req.body(), banUserClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL banUser(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
+        post("/unBanUser", (req, res) -> {
+            Gson gson = new Gson();
+
+            unBanUserClass request = gson.fromJson(req.body(), unBanUserClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL unBanUser(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/muteUser", (req, res) -> {
+            Gson gson = new Gson();
+
+            muteUserClass request = gson.fromJson(req.body(), muteUserClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL muteUser(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/unMuteUser", (req, res) -> {
+            Gson gson = new Gson();
+
+            muteUserClass request = gson.fromJson(req.body(), muteUserClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL unMuteUser(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
 
 
 
