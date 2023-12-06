@@ -7,6 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static spark.Spark.*;
 
@@ -598,6 +600,96 @@ public final class MeetWave_REST extends JavaPlugin {
             connection.close();
             return gson.toJson(resp);
         });
+
+        post("/changeUserPermission", (req, res) -> {
+            Gson gson = new Gson();
+
+            changeUserPermissionClass request = gson.fromJson(req.body(), changeUserPermissionClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+            boolean isAdminIN = request.isAdminIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL changeUserPermission(?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.setBoolean(2, isAdminIN);
+            callableStatement.registerOutParameter(3, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(3);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
+        post("/getUserData", (req, res) -> {
+            Gson gson = new Gson();
+
+            getUserDataClass request = gson.fromJson(req.body(), getUserDataClass.class);
+
+            // bejövő adatok
+            String emailIN = request.getEmailIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL getUserData(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setString(1, emailIN);
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            getUserDataClass resp = null;  // Null értékű resp objektum inicializálása
+
+            if (callableStatement.execute()) {
+                ResultSet resultSet = callableStatement.getResultSet();
+                String result = callableStatement.getString(2);
+
+                while (resultSet.next()) {
+                    int userID = resultSet.getInt("userID");
+                    String fullName = resultSet.getString("fullName");
+                    String email = resultSet.getString("email");
+                    String password = resultSet.getString("password");
+                    int subscriptionType = resultSet.getInt("subscriptionType");
+                    java.util.Date subscriptionEndOfDate = resultSet.getTimestamp("subscriptionEndOfDate");
+                    boolean isAdmin = resultSet.getBoolean("isAdmin");
+                    boolean isBanned = resultSet.getBoolean("isBanned");
+                    boolean isMuted = resultSet.getBoolean("isMuted");
+                    Blob profilePicture = resultSet.getBlob("profilePicture");
+                    String phoneNumber = resultSet.getString("phoneNumber");
+                    java.util.Date dateOfRegister = resultSet.getTimestamp("dateOfRegister");
+
+                    resp = new getUserDataClass(userID, fullName, email, password, subscriptionType, subscriptionEndOfDate, isAdmin, isBanned, isMuted, profilePicture, phoneNumber, dateOfRegister);
+                }
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
+
+
+
 
 
 
