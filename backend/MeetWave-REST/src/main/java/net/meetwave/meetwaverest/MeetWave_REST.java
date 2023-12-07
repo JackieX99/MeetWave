@@ -639,46 +639,83 @@ public final class MeetWave_REST extends JavaPlugin {
         });
 
 
-        post("/getUserData", (req, res) -> {
-            Gson gson = new Gson();
+     //   post("/getUserData", (req, res) -> {
+     //       Gson gson = new Gson();
 
-            getUserDataClass request = gson.fromJson(req.body(), getUserDataClass.class);
+    //        getUserDataClass request = gson.fromJson(req.body(), getUserDataClass.class);
 
             // bejövő adatok
-            String emailIN = request.getEmailIN();
+     //       String emailIN = request.getEmailIN();
+
+            // db kapcsolat, létező account check
+     //       Class.forName("com.mysql.cj.jdbc.Driver");
+     //       Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+     //       String storedProcedureCall = "{CALL getUserData(?, ?)}";
+     //       CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+     //       callableStatement.setString(1, emailIN);
+     //       callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+     //       getUserDataClass resp = null;  // Null értékű resp objektum inicializálása
+
+     //       if (callableStatement.execute()) {
+      //          ResultSet resultSet = callableStatement.getResultSet();
+      //          String result = callableStatement.getString(2);
+
+      //          while (resultSet.next()) {
+       //             int userID = resultSet.getInt("userID");
+        //            String fullName = resultSet.getString("fullName");
+        //            String email = resultSet.getString("email");
+        //            String password = resultSet.getString("password");
+        //            int subscriptionType = resultSet.getInt("subscriptionType");
+        //            java.util.Date subscriptionEndOfDate = resultSet.getTimestamp("subscriptionEndOfDate");
+        //            boolean isAdmin = resultSet.getBoolean("isAdmin");
+        //            boolean isBanned = resultSet.getBoolean("isBanned");
+        //            boolean isMuted = resultSet.getBoolean("isMuted");
+        //            Blob profilePicture = resultSet.getBlob("profilePicture");
+        //            String phoneNumber = resultSet.getString("phoneNumber");
+        //            java.util.Date dateOfRegister = resultSet.getTimestamp("dateOfRegister");
+
+       //             resp = new getUserDataClass(userID, fullName, email, password, subscriptionType, subscriptionEndOfDate, isAdmin, isBanned, isMuted, profilePicture, phoneNumber, dateOfRegister);
+        //        }
+        //    }
+
+       //     callableStatement.close();
+       //     connection.close();
+        //    return gson.toJson(resp);
+     //   });
+
+        post("/updateComment", (req, res) -> {
+            Gson gson = new Gson();
+
+            updateCommentClass request = gson.fromJson(req.body(), updateCommentClass.class);
+
+            // bejövő adatok
+            int userCommentID = request.getUserCommentID();
+            String userCommentIN = request.getUserCommentIN();
 
             // db kapcsolat, létező account check
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
-            String storedProcedureCall = "{CALL getUserData(?, ?)}";
+            String storedProcedureCall = "{CALL updateComment(?, ?, ?)}";
             CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
 
-            callableStatement.setString(1, emailIN);
-            callableStatement.registerOutParameter(2, Types.VARCHAR);
+            callableStatement.setInt(1, userCommentID);
+            callableStatement.setString(2, userCommentIN);
+            callableStatement.registerOutParameter(3, Types.VARCHAR);
 
-            getUserDataClass resp = null;  // Null értékű resp objektum inicializálása
+            callableStatement.execute();
 
-            if (callableStatement.execute()) {
-                ResultSet resultSet = callableStatement.getResultSet();
-                String result = callableStatement.getString(2);
+            String result = callableStatement.getString(3);
 
-                while (resultSet.next()) {
-                    int userID = resultSet.getInt("userID");
-                    String fullName = resultSet.getString("fullName");
-                    String email = resultSet.getString("email");
-                    String password = resultSet.getString("password");
-                    int subscriptionType = resultSet.getInt("subscriptionType");
-                    java.util.Date subscriptionEndOfDate = resultSet.getTimestamp("subscriptionEndOfDate");
-                    boolean isAdmin = resultSet.getBoolean("isAdmin");
-                    boolean isBanned = resultSet.getBoolean("isBanned");
-                    boolean isMuted = resultSet.getBoolean("isMuted");
-                    Blob profilePicture = resultSet.getBlob("profilePicture");
-                    String phoneNumber = resultSet.getString("phoneNumber");
-                    java.util.Date dateOfRegister = resultSet.getTimestamp("dateOfRegister");
+            LoginResponse resp;
 
-                    resp = new getUserDataClass(userID, fullName, email, password, subscriptionType, subscriptionEndOfDate, isAdmin, isBanned, isMuted, profilePicture, phoneNumber, dateOfRegister);
-                }
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
             }
 
             callableStatement.close();
@@ -686,8 +723,54 @@ public final class MeetWave_REST extends JavaPlugin {
             return gson.toJson(resp);
         });
 
+        post("/updateEvent", (req, res) -> {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
+            updateEventClass request = gson.fromJson(req.body(), updateEventClass.class);
 
+            // bejövő adatok
+            int eventID = request.getEventID();
+            String eventTitleIN = request.getEventTitleIN();
+            String descriptionIN = request.getDescriptionIN();
+            java.sql.Timestamp dateOfTheEventIN = request.getDateOfTheEventIN(); // Most már java.util.Date
+            String placeOfTheEventIN = request.getPlaceOfTheEventIN();
+            String founderOfTheEventIN = request.getFounderOfTheEventIN();
+            int maxParticipantsIN = request.getMaxParticipantsIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL updateEvent(?, ?, ?, ?, ?, ?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, eventID);
+            callableStatement.setString(2, eventTitleIN);
+            callableStatement.setString(3, descriptionIN);
+            callableStatement.setTimestamp(4, new java.sql.Timestamp(dateOfTheEventIN.getTime()));
+            callableStatement.setString(5, placeOfTheEventIN);
+            callableStatement.setString(6, founderOfTheEventIN);
+            callableStatement.setInt(7, maxParticipantsIN);
+
+            callableStatement.registerOutParameter(8, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(8);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
 
 
 
