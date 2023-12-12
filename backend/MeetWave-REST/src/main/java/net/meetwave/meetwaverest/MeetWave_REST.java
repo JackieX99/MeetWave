@@ -6,6 +6,10 @@ import net.meetwave.meetwaverest.Classes.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -771,6 +775,173 @@ public final class MeetWave_REST extends JavaPlugin {
             connection.close();
             return gson.toJson(resp);
         });
+
+        post("/setSubscription", (req, res) -> {
+            Gson gson = new Gson();
+
+            setSubscriptionClass request = gson.fromJson(req.body(), setSubscriptionClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+            int subscriptionTypeIN = request.getSubscriptionTypeIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL setSubscription(?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+            callableStatement.setInt(2, subscriptionTypeIN);
+
+            callableStatement.registerOutParameter(3, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(3);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/subscriptionExtendDate", (req, res) -> {
+            Gson gson = new Gson();
+
+            subscriptionExtendDateClass request = gson.fromJson(req.body(), subscriptionExtendDateClass.class);
+
+            // bejövő adatok
+            int userID = request.getUserID();
+
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL subscriptionExtendDate(?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, userID);
+
+            callableStatement.registerOutParameter(2, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(2);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+        post("/userParticipateOnEvent", (req, res) -> {
+            Gson gson = new Gson();
+
+            userParticipateOnEventClass request = gson.fromJson(req.body(), userParticipateOnEventClass.class);
+
+            // bejövő adatok
+            int eventIDIN = request.getEventIDIN();
+            int userIDIN = request.getUserIDIN();
+            int typeOfParticipationIN = request.getTypeOfParticipationIN();
+
+            // db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            String storedProcedureCall = "{CALL userParticipateOnEvent(?, ?, ?, ?)}";
+            CallableStatement callableStatement = connection.prepareCall(storedProcedureCall);
+
+            callableStatement.setInt(1, eventIDIN);
+            callableStatement.setInt(2, userIDIN);
+            callableStatement.setInt(3, typeOfParticipationIN);
+
+            callableStatement.registerOutParameter(4, Types.VARCHAR);
+
+            callableStatement.execute();
+
+            String result = callableStatement.getString(4);
+
+            LoginResponse resp;
+
+            if (result.equals("successful")) {
+                resp = new LoginResponse("success");
+            } else {
+                resp = new LoginResponse("failed");
+            }
+
+            callableStatement.close();
+            connection.close();
+            return gson.toJson(resp);
+        });
+
+
+        post("/profilePictureUpload", (req, res) -> {
+            Gson gson = new Gson();
+
+            profilePictureUploadClass request = gson.fromJson(req.body(), profilePictureUploadClass.class);
+
+            // Bejövő adatok
+            int userID = request.getUserID();
+            String path = request.getPath();
+
+            // Db kapcsolat, létező account check
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword)) {
+                // Olvassa be a képet a fájlból
+                byte[] imageData = Files.readAllBytes(Paths.get(path));
+
+                // Hozza létre a tároló objektumot a kép adatokkal
+                Blob blob = connection.createBlob();
+                try (OutputStream outputStream = blob.setBinaryStream(1)) {
+                    outputStream.write(imageData);
+                }
+
+                // Hívja meg az adatbázisban tárolt eljárást
+                String storedProcedureCall = "{CALL profilePictureUpload(?, ?)}";
+                try (CallableStatement callableStatement = connection.prepareCall(storedProcedureCall)) {
+                    callableStatement.setInt(1, userID);
+                    callableStatement.setBlob(2, blob);
+
+                    callableStatement.execute();
+
+                    // Kezelje az eljárás kimenetét
+                    String result = callableStatement.getString(3);
+
+                    LoginResponse resp;
+
+                    if ("successful".equals(result)) {
+                        resp = new LoginResponse("success");
+                    } else {
+                        resp = new LoginResponse("failed");
+                    }
+
+                    return gson.toJson(resp);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Kezelje a fájl olvasási hibát
+                return gson.toJson(new LoginResponse("failed"));
+            }
+        });
+
+
 
 
 
