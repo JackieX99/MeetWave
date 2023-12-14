@@ -1,9 +1,0 @@
-<!-- <app-navbar style="z-index: 2;" *ngIf="this.activeRouter !='PageNotFoundComponent'" class="navbarka"></app-navbar> -->
-<app-navbar [activeRoute]="activeRouter" style="z-index: 2;" *ngIf="this.activeRouter !='PageNotFoundComponent'" [ngStyle]="{'background-color': (activeRouter == 'MainPanelComponent') ? 'transparent' : '#343f3e', 'box-shadow': (activeRouter == 'MainPanelComponent') ? 'none' : '0px 1px 14px 1px #343F3E'}"></app-navbar>
-<!-- <app-navbar></app-navbar> -->
-<section>
-    <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
-</section>
-<app-footer class="mt-auto" *ngIf="this.activeRouter != 'PageNotFoundComponent'"></app-footer>
-
-
