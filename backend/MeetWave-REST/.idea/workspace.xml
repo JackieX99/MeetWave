@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="MeetWave-REST:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cea248a8-ef9f-4527-a66c-803e5e9d881a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/meetwave/meetwaverest/Classes/uploadInputClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MeetWave_REST_jar/MeetWave-REST.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MeetWave_REST_jar/MeetWave-REST.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/meetwave/meetwaverest/MeetWave_REST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/meetwave/meetwaverest/MeetWave_REST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/LoginClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/LoginClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/LoginResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/LoginResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/RegisterClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/RegisterClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/RegisterResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/RegisterResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/TestClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/TestClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/TestClassRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/TestClassRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/banUserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/banUserClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/changePasswordClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/changePasswordClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/changeUserPermissionClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/changeUserPermissionClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/createEventClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/createEventClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/deleteCommentClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/deleteCommentClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/deleteEventClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/deleteEventClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/muteUserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/muteUserClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/postCommentClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/postCommentClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/profilePictureUploadClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/profilePictureUploadClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/setSubscriptionClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/setSubscriptionClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/subscriptionExtendDateClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/subscriptionExtendDateClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/unBanUserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/unBanUserClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/unMuteUserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/unMuteUserClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateCommentClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateCommentClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateEventClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateEventClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateUserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/updateUserClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/userParticipateOnEventClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/Classes/userParticipateOnEventClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/MeetWave_REST.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/meetwave/meetwaverest/MeetWave_REST.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2ZWjl8JZgdNJMi0jRB8WL0uQQ5E" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cea248a8-ef9f-4527-a66c-803e5e9d881a" name="Changes" comment="" />
+      <created>1702544879932</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702544879932</updated>
+    </task>
+    <servers />
+  </component>
+</project>
