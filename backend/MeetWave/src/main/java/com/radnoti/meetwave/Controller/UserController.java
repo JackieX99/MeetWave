@@ -2,13 +2,11 @@ package com.radnoti.meetwave.Controller;
 
 import com.radnoti.meetwave.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +21,6 @@ public class UserController {
         this.userservice = userService;
     }
 
-
     @PostMapping("/getUser")
     public ResponseEntity<Map<String, Object>> getUser(@RequestBody Map<String, Integer> requestBody) {
         Integer userId = requestBody.get("userId");
@@ -31,6 +28,28 @@ public class UserController {
         Map<String, Object> result = userservice.getUserDataTest(userId);
         return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
     }
+
+    // 1. PostMapping vagy GetMapping
+    // 2. Megadod az endpoint elérését
+    // 3. Bemenő paraméterek beállítása
+        // 3.1 ha több az adat mint mondjuk string és int párok, akkor salát class
+        // 3.2 ha csak egy adott fajta bemenő, pl. string és hozzá egy int, akkor Map<String, Integer>
+    // 4. bemenő paraméterek kigyűjtése a requestBody változóból saját változókba
+    // 5. controllerhez tartozó service fájlban függvény létrehozása ami meghívja a tároltat
+    // 6. controllerből service változó meghívása, annak átadni az endpoint bemenő paramétereit
+    // 7. service függvényben beállítani hogy melyik tároltat hívja meg a függvény, és a bemenő paramétereit
+    // 8. service függvényben return a meghívott tároltat
+    // 9. controller függvény végén a result változóban tárolni a meghívott service függvény visszatérő értékét
+        // 9.1. controller függvényből visszaadni (return) a result tartalmát, ha pl sok adatot vár vissza a frontend
+        // 9.2. controller függvényből feltölteni a result változót a megfelelő adatokkal, és visszaadni, ha csak status-success, vagy status failed kell
+
+    // SORREND
+    // Controller függvény bejön az adat
+    // Controller függvény átadja az adatot a service függvénynek
+    // Service függvény meghívja a tároltat, átadja neki az adatokat
+    // Service függvény visszakapja a tárolt eredményét, amit egyből visszaad a controllernek
+    // Controller megkapja a választ, az alapján visszaadja a választ az endpointnak
+
 
     @PostMapping("/muteUser")
     public ResponseEntity<Map<String, Object>> muteUser(@RequestBody Map<String, Integer> requestBody) {
