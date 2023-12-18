@@ -1,5 +1,6 @@
 package com.radnoti.meetwave.Controller;
 
+import com.radnoti.meetwave.Model.updateUserClass;
 import com.radnoti.meetwave.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -68,6 +69,23 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/unMuteUser")
+    public ResponseEntity<Map<String, Object>> unMuteUser(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.unMuteUser(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/uploadProfile")
     public ResponseEntity<Map<String, Object>> uploadImage(
             @RequestParam("userId") int userId,
@@ -88,5 +106,76 @@ public class UserController {
         result.put("message", "A kép sikeresen feltöltve.");
         return ResponseEntity.ok(result);
 
+    }
+
+    @PostMapping("/banUser")
+    public ResponseEntity<Map<String, Object>> banUser(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.banUser(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/unBanUser")
+    public ResponseEntity<Map<String, Object>> unBanUser(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.unBanUser(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/deleteUser")
+    public ResponseEntity<Map<String, Object>> deleteUser(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.deleteUser(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/updateUser")
+    public ResponseEntity<Map<String, Object>> updateUser(@RequestBody updateUserClass requestBody) {
+        Integer userId = requestBody.getUserID();
+        String newFullName = requestBody.getNewFullName();
+        String newEmail = requestBody.getNewEmail();
+        String newPhoneNumber = requestBody.getNewPhoneNumber();
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.updateUser(userId, newFullName, newEmail, newPhoneNumber);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
     }
 }

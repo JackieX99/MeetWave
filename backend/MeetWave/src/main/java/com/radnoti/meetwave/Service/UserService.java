@@ -42,6 +42,16 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> unMuteUser(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("unMuteUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
     public Map<String, Object> uploadProfilePicture(int userId, MultipartFile imageFile) {
         try {
             SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("profilePictureUpload");
@@ -60,4 +70,48 @@ public class UserService {
             return errorResult;
         }
     }
+    public Map<String, Object> banUser(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("banUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> unBanUser(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("unBanUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> deleteUser(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("deleteUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> updateUser(int userId, String newFullName, String newEmail, String newPhoneNumber) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("updateUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        inParamMap.put("newFullName", newFullName);
+        inParamMap.put("newEmail", newEmail);
+        inParamMap.put("newPhoneNumber", newPhoneNumber);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+
 }
