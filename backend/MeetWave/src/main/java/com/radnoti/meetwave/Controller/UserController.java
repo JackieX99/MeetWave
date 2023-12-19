@@ -230,7 +230,7 @@ public class UserController {
         String fullNameIN = requestBody.getFullNameIN();
         String emailIN = requestBody.getEmailIN();
         String passwordIN = requestBody.getPasswordIN();
-        String phoneNumberIN = requestBody.getPasswordIN();
+        String phoneNumberIN = requestBody.getPhoneNumberIN();
         Map<String, Object> result = new HashMap<>();
 
 
