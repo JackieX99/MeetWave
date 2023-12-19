@@ -1,5 +1,7 @@
 package com.radnoti.meetwave.Controller;
 
+import com.radnoti.meetwave.Model.changeUserPermissionClass;
+import com.radnoti.meetwave.Model.registerUserClass;
 import com.radnoti.meetwave.Model.updateUserClass;
 import com.radnoti.meetwave.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +30,7 @@ public class UserController {
         Integer userId = requestBody.get("userId");
 
         Map<String, Object> result = userservice.getUserDataTest(userId);
+        System.out.println(result);
         return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
     }
 
@@ -169,6 +173,77 @@ public class UserController {
 
         try {
             userservice.updateUser(userId, newFullName, newEmail, newPhoneNumber);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/changeUserPermission")
+    public ResponseEntity<Map<String, Object>> changeUserPermission(@RequestBody changeUserPermissionClass requestBody) {
+        Integer userId = requestBody.getUserID();
+        Boolean isAdminIN = requestBody.getAdminIN();
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.changeUserPermission(userId, isAdminIN);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/getAllBannedUsers")
+    public ResponseEntity<Map<String, Object>> getAllBannedUsers() {
+
+        Map<String, Object> result = userservice.getAllBannedUsers();
+        System.out.println(result);
+        return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+    }
+
+    @GetMapping("/getAllMutedUsers")
+    public ResponseEntity<Map<String, Object>> getAllMutedUsers() {
+
+        Map<String, Object> result = userservice.getAllMutedUsers();
+        System.out.println(result);
+        return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+    }
+
+    @PostMapping("/getUserSubscription")
+    public ResponseEntity<Map<String, Object>> getUserSubscription(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+
+        Map<String, Object> result = userservice.getUserSubscription(userId);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/registerUser")
+    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody registerUserClass requestBody) {
+        String fullNameIN = requestBody.getFullNameIN();
+        String emailIN = requestBody.getEmailIN();
+        String passwordIN = requestBody.getPasswordIN();
+        String phoneNumberIN = requestBody.getPasswordIN();
+        Map<String, Object> result = new HashMap<>();
+
+
+        Map<String, Object> userExist = userservice.checkIfUserExists("foldvarialex@gmail.com");
+        List<Map<String, Object>> resultSetList = (List<Map<String, Object>>) userExist.get("#result-set-1");
+        int userCount = ((Number) resultSetList.get(0).get("user_count")).intValue();
+        if(userCount == 1){
+            System.out.println("Ez az email cím már foglalt.");
+        } else{
+            System.out.println("Nem foglalt, mehet a regisztráció.");
+        }
+        try {
+            userservice.registerUser(fullNameIN,emailIN,passwordIN,phoneNumberIN);
 
             result.put("status", "success");
         } catch (Exception e) {

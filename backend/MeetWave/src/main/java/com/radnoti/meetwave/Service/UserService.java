@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public Map<String, Object> getUserDataTest(int userId) {
-        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserDataTest");
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserData");
 
         Map<String, Object> inParamMap = new HashMap<>();
         inParamMap.put("p_userID", userId);
@@ -108,6 +108,66 @@ public class UserService {
         inParamMap.put("newFullName", newFullName);
         inParamMap.put("newEmail", newEmail);
         inParamMap.put("newPhoneNumber", newPhoneNumber);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> changeUserPermission(int userId, boolean isAdminIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("changeUserPermission");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        inParamMap.put("isAdminIN", isAdminIN);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> getAllBannedUsers() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getAllBannedUsers");
+
+        SqlParameterSource in = new MapSqlParameterSource();
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> getAllMutedUsers() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getAllMutedUsers");
+
+        SqlParameterSource in = new MapSqlParameterSource();
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> getUserSubscription(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserSubscription");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> registerUser(String fullNameIN, String emailIN, String passwordIN, String phoneNumberIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("registerUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("fullNameIN", fullNameIN);
+        inParamMap.put("emailIN", emailIN);
+        inParamMap.put("passwordIN", passwordIN);
+        inParamMap.put("phoneNumberIN", phoneNumberIN);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> checkIfUserExists(String p_email) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("checkIfUserExists");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("p_email", p_email);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
