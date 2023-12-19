@@ -1,8 +1,6 @@
 package com.radnoti.meetwave.Controller;
 
-import com.radnoti.meetwave.Model.changeUserPermissionClass;
-import com.radnoti.meetwave.Model.registerUserClass;
-import com.radnoti.meetwave.Model.updateUserClass;
+import com.radnoti.meetwave.Model.*;
 import com.radnoti.meetwave.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,16 +35,16 @@ public class UserController {
     // 1. PostMapping vagy GetMapping
     // 2. Megadod az endpoint elérését
     // 3. Bemenő paraméterek beállítása
-        // 3.1 ha több az adat mint mondjuk string és int párok, akkor salát class
-        // 3.2 ha csak egy adott fajta bemenő, pl. string és hozzá egy int, akkor Map<String, Integer>
+    // 3.1 ha több az adat mint mondjuk string és int párok, akkor salát class
+    // 3.2 ha csak egy adott fajta bemenő, pl. string és hozzá egy int, akkor Map<String, Integer>
     // 4. bemenő paraméterek kigyűjtése a requestBody változóból saját változókba
     // 5. controllerhez tartozó service fájlban függvény létrehozása ami meghívja a tároltat
     // 6. controllerből service változó meghívása, annak átadni az endpoint bemenő paramétereit
     // 7. service függvényben beállítani hogy melyik tároltat hívja meg a függvény, és a bemenő paramétereit
     // 8. service függvényben return a meghívott tároltat
     // 9. controller függvény végén a result változóban tárolni a meghívott service függvény visszatérő értékét
-        // 9.1. controller függvényből visszaadni (return) a result tartalmát, ha pl sok adatot vár vissza a frontend
-        // 9.2. controller függvényből feltölteni a result változót a megfelelő adatokkal, és visszaadni, ha csak status-success, vagy status failed kell
+    // 9.1. controller függvényből visszaadni (return) a result tartalmát, ha pl sok adatot vár vissza a frontend
+    // 9.2. controller függvényből feltölteni a result változót a megfelelő adatokkal, és visszaadni, ha csak status-success, vagy status failed kell
 
     // SORREND
     // Controller függvény bejön az adat
@@ -237,13 +235,13 @@ public class UserController {
         Map<String, Object> userExist = userservice.checkIfUserExists("foldvarialex@gmail.com");
         List<Map<String, Object>> resultSetList = (List<Map<String, Object>>) userExist.get("#result-set-1");
         int userCount = ((Number) resultSetList.get(0).get("user_count")).intValue();
-        if(userCount == 1){
+        if (userCount == 1) {
             System.out.println("Ez az email cím már foglalt.");
-        } else{
+        } else {
             System.out.println("Nem foglalt, mehet a regisztráció.");
         }
         try {
-            userservice.registerUser(fullNameIN,emailIN,passwordIN,phoneNumberIN);
+            userservice.registerUser(fullNameIN, emailIN, passwordIN, phoneNumberIN);
 
             result.put("status", "success");
         } catch (Exception e) {
@@ -253,4 +251,80 @@ public class UserController {
 
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<Map<String, Object>> changePassword(@RequestBody changePasswordClass requestBody) {
+        Integer userId = requestBody.getUserID();
+        String newPassword = requestBody.getNewPassword();
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.changePassword(userId, newPassword);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/profilePictureDelete")
+    public ResponseEntity<Map<String, Object>> profilePictureDelete(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.profilePictureDelete(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+
+
+    }
+
+    @PostMapping("/subscriptionExtendDate")
+    public ResponseEntity<Map<String, Object>> subscriptionExtendDate(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.subscriptionExtendDate(userId);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+
+
+    }
+
+    @PostMapping("/updateComment")
+    public ResponseEntity<Map<String, Object>> updateComment(@RequestBody updateCommentClass requestBody) {
+        Integer userCommentID = requestBody.getUserCommentID();
+        String userCommentIN = requestBody.getUserCommentIN();
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.updateComment(userCommentID, userCommentIN);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+
 }

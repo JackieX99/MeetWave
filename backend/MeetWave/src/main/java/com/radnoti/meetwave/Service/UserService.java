@@ -173,5 +173,47 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> changePassword(int userId, String newPassword) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("changePassword");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        inParamMap.put("newPassword", newPassword);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> profilePictureDelete(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("profilePictureDelete");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> subscriptionExtendDate(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("subscriptionExtendDate");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> updateComment(int userCommentID, String userCommentIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("updateComment");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userCommentID", userCommentID);
+        inParamMap.put("userCommentIN", userCommentIN);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
 
 }
