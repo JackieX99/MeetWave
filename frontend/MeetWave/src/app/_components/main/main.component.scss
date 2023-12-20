@@ -1,5 +1,21 @@
 .hero{
-    background-color: #1d2f4a;
-    color: white;
+    background-color: var(--mainColor);
+    color: var(--textColor);
     height: 60vh;
+    & h1{
+        padding-top: 10vh;
+        margin: 0;
+        text-align: center;
+        font-family: 'Libre Franklin', sans-serif;
+        font-weight: 600;
+        text-shadow: 2px 2px black;
+
+        & span{
+            color: var(--callToActionColor);
+            font-weight: 600;
+        }
+    }
+    & h5{
+        font-family: 'Libre Franklin', sans-serif;
+    }
 }
