@@ -1,15 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
-    --mainColor: #2A558F;
-    --secondaryColor: #A5ABBD;
-    --highlightColor: #717788;
-    --callToActionColor:  #8B3A4D;
-    --textColor: #C36C7E;
+    --mainColor: #d9d9d9;
+    --callToActionColor: #0c3720;
+    --textColor: #181818;
 }
 
 body, html {
     margin: 0;
     padding: 0;
+    background-color: var(--mainColor);
 }
