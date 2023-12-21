@@ -5,7 +5,13 @@
 :root {
     --mainColor: #d9d9d9;
     --callToActionColor: #0c3720;
+    --callToActionColorHover: #124f2f;
     --textColor: #181818;
+}
+
+@font-face {
+    font-family: Sofia;
+    src: url('./assets/fonts/sofiapro-light.otf');
 }
 
 body, html {
