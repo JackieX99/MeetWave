@@ -1,27 +1,6 @@
 package com.radnoti.meetwave.Model;
 
-
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-
-public class registerUserClass implements UserDetails {
-
-    int ID;
+public class registerUserClass {
 
     String fullNameIN;
 
@@ -31,43 +10,43 @@ public class registerUserClass implements UserDetails {
 
     String phoneNumberIN;
 
-    @Enumerated(EnumType.STRING)
-    Role role;
-
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+    public registerUserClass(String fullNameIN, String emailIN, String passwordIN, String phoneNumberIN) {
+        this.fullNameIN = fullNameIN;
+        this.emailIN = emailIN;
+        this.passwordIN = passwordIN;
+        this.phoneNumberIN = phoneNumberIN;
     }
 
-    @Override
-    public String getUsername() {
+    public String getFullNameIN() {
         return fullNameIN;
     }
 
-    @Override
-    public String getPassword() {
+    public void setFullNameIN(String fullNameIN) {
+        this.fullNameIN = fullNameIN;
+    }
+
+    public String getEmailIN() {
+        return emailIN;
+    }
+
+    public void setEmailIN(String emailIN) {
+        this.emailIN = emailIN;
+    }
+
+    public String getPasswordIN() {
         return passwordIN;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setPasswordIN(String passwordIN) {
+        this.passwordIN = passwordIN;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public String getPhoneNumberIN() {
+        return phoneNumberIN;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public void setPhoneNumberIN(String phoneNumberIN) {
+        this.phoneNumberIN = phoneNumberIN;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
