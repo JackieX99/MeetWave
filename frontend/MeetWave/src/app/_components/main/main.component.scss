@@ -4,6 +4,12 @@
     font-size: 16pt;
 }
 
+.gradient-text{
+    background: linear-gradient(60deg, #09323f, #37b3b3);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .hero{
     color: var(--textColor);
     height: 60vh;
@@ -55,6 +61,7 @@
     h2{
         text-align: center;
         font-size: 26pt;
+        padding-bottom: 5vh;
         & span{
             background: linear-gradient(60deg, #09323f, #37b3b3);
             background-clip: text;
@@ -94,5 +101,65 @@
         & span{
             font-style: italic;
         }
+    }
+}
+
+.divider-icon{
+    filter: invert(15%) sepia(16%) saturate(1938%) hue-rotate(95deg) brightness(98%) contrast(94%);
+    margin: 0 auto;
+    display: block;
+    width: 48px;
+    padding: 5vh 0 5vh 0;
+}
+
+.functions{
+    & h1{
+        padding-bottom: 0;
+        margin-bottom: 5vh;
+        text-align: center;
+    }
+    & h3{
+        margin: 0;
+        text-align: center;
+        font-style: italic;
+        font-size: 12pt;
+    }
+    & .functions-wrapper{
+        border: 1px solid red;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 15px;
+
+        & .function {
+            display: grid;
+            grid-template-columns: 50px 50px;
+            grid-template-areas:
+                ". number title title"
+                ". . . description";
+            // számozás
+            & h5 {
+                text-align: center;
+                font-size: 20pt;
+                border: 1px solid red;
+                padding: 10px;
+                grid-area: number;
+            }
+            // cím
+            & h4 {
+                padding-left: 2vw;
+                border: 1px solid red;
+                grid-area: title;
+                margin: auto 0;
+                font-size: 18pt;
+                padding-left: 3vw;
+            }
+            // leírás
+            & p {
+                border: 1px solid red;
+                grid-area: description;
+                margin: 0;
+            }
+        }
+        
     }
 }
