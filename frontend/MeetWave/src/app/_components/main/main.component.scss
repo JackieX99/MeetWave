@@ -265,3 +265,12 @@
         background-color: #cacaca;
     }
 }
+
+.faq{
+    padding-top: 10vh;
+    width: 90%;
+    margin: 0 auto;
+    mat-expansion-panel{
+        margin: 1vh 0;
+    }
+}
