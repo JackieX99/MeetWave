@@ -9,6 +9,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.gradient-text-lighter{
+    background: linear-gradient(60deg, #1d9dc4, #4cf7f7);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .hero{
     color: var(--textColor);
@@ -128,9 +133,16 @@
         width: 80%;
         margin: 0 auto;
         border-radius: 15px;
+        background-color: var(--mainColor);
+        box-shadow: 0px 0px 2px rgb(36, 36, 36);
+        color: var(--textColor);
+        border-radius: 15px;
+        padding: 15px 25px;
 
         & .function {
             display: flex;
+            justify-content: center;
+            
             // számozás
             & h5 {
                 text-align: right;
@@ -140,9 +152,8 @@
             }
             // cím
             & h4 {
-                padding-left: 2vw;
-                margin: auto 0;
-                font-size: 18pt;
+                margin: auto 0 auto 5vw;
+                font-size: 14pt;
                 padding: 3vh 0 3vh 3vw;
                 width: 80%;
                 position: relative;
@@ -150,10 +161,107 @@
                 &::before{
                     content: attr(counter);
                     position: absolute;
-                    left: -20px;
+                    font-size: 25pt;
+                    color: var(--callToActionColorHover);
+                    transform: translate(-1.2em);
+                    font-weight: 800;
                 }
             }
         }
         
+    }
+}
+
+.subscriptions{
+    padding-top: 5vh;
+    h1{
+        text-align: center;
+        font-weight: 600;
+        padding-bottom: 5vh;
+    }
+
+    & .subscription{
+        padding: 15px 25px;
+        width: 80%;
+        // border: 1px solid red;
+        margin: 3vh auto;
+        border-radius: 15px;
+        color: var(--textColor);
+
+
+        & .most-popular{
+            display: flex;
+            justify-content: center;
+            vertical-align: middle;
+            & img{
+                filter: invert(15%) sepia(16%) saturate(1938%) hue-rotate(95deg) brightness(98%) contrast(94%);
+                width: 20px;
+                height: 20px;
+            }
+            & h5{
+                margin: 0 0 2.5vh 1vw;
+                padding: 0;
+                font-size: 12pt;
+                color: var(--callToActionColor);
+            }
+        }
+
+        & h2{
+            text-align: center;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        & h3{
+            margin: 1vh 0 0 0;
+            padding: 0;
+            text-align: center;
+            font-size: 10pt;
+        }
+
+        & ul{
+            list-style-image: url('../../../assets/icons/check.svg');
+            & li{
+                font-size: 14pt;
+            }
+        }
+
+        & button{
+            outline: none;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        & .btn-faded{
+            color: var(--textColor);
+            background-color: #c7c7c7;
+            transition: all .2s ease-in-out;
+            &:hover{
+                background-color: #c1c0c0;
+                box-shadow: 0 0 2px black;
+            }
+        }
+        
+        & .btn-main{
+            color: var(--textWhiteColor);
+            background-color: var(--callToActionColor);
+            transition: all .2s ease-in-out;
+            &:hover{
+                background-color: #0a2f1b;
+            }
+        }
+    }
+
+    & .sub-faded{
+        background-color: var(--mainColor);
+    }
+
+    & .sub-main{
+        box-shadow: 0px 0px 2px rgb(36, 36, 36);
+        background-color: #cacaca;
     }
 }
