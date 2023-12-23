@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,15 +23,16 @@ public class UserService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Map<String, Object> getUserDataTest(int userId) {
+    public Map<String, Object> getUserDataTest(Integer userId) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserData");
 
         Map<String, Object> inParamMap = new HashMap<>();
-        inParamMap.put("p_userID", userId);
+        inParamMap.put("userID", userId);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
     }
+
 
     public Map<String, Object> muteUser(int userId) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("muteUser");

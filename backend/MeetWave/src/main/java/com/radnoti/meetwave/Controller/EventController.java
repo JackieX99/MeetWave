@@ -54,6 +54,13 @@ public class EventController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a commentID értéke érvényes
+            if (commentID == null || commentID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a commentID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             eventService.deleteComment(commentID);
 
             result.put("status", "success");
@@ -65,12 +72,20 @@ public class EventController {
         return ResponseEntity.ok(result);
     }
 
+
     @PostMapping("/deleteEvent")
     public ResponseEntity<Map<String, Object>> deleteEvent(@RequestBody Map<String, Integer> requestBody) {
         Integer eventID = requestBody.get("eventID");
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy az eventID értéke érvényes
+            if (eventID == null || eventID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív az eventID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             eventService.deleteEvent(eventID);
 
             result.put("status", "success");
@@ -81,6 +96,7 @@ public class EventController {
 
         return ResponseEntity.ok(result);
     }
+
 
     @GetMapping("/getAllEvent")
     public ResponseEntity<Map<String, Object>> getAllEvent() {
@@ -100,6 +116,20 @@ public class EventController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy az eventID értéke érvényes
+            if (eventID == null || eventID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív az eventID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            // Ellenőrizze, hogy a userID értéke érvényes
+            if (userID == null || userID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív az userID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             eventService.postComment(eventID, userID, userCommentIN, dateOfCommentIN);
 
             result.put("status", "success");
@@ -110,6 +140,7 @@ public class EventController {
 
         return ResponseEntity.ok(result);
     }
+
 
     @PostMapping("/updateEvent")
     public ResponseEntity<Map<String, Object>> updateEvent(@RequestBody updateEventClass requestBody) {
@@ -124,6 +155,13 @@ public class EventController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy az eventID értéke érvényes
+            if (eventID == null || eventID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Invalid eventID. Must be greater than 0.");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN);
 
             result.put("status", "success");
@@ -137,5 +175,6 @@ public class EventController {
 
 
 
-    }
+
+}
 

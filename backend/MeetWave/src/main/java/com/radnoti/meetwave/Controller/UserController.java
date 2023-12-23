@@ -27,10 +27,19 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> getUser(@RequestBody Map<String, Integer> requestBody) {
         Integer userId = requestBody.get("userId");
 
-        Map<String, Object> result = userservice.getUserDataTest(userId);
-        System.out.println(result);
-        return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+        if (userId != null && userId >= 1) {
+            Map<String, Object> result = userservice.getUserDataTest(userId);
+            System.out.println(result);
+            return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+        } else {
+            // Hibás kérés válasza, mert a userId nem lehet negatív
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("failed", "Nem lehet negatív a UserID");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
     }
+
+
 
     // 1. PostMapping vagy GetMapping
     // 2. Megadod az endpoint elérését
@@ -60,6 +69,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 1) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.muteUser(userId);
 
             result.put("status", "success");
@@ -77,6 +93,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 1) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.unMuteUser(userId);
 
             result.put("status", "success");
@@ -95,6 +118,13 @@ public class UserController {
 
         Map<String, Object> result = new HashMap<>();
 
+        // Ellenőrizzük, hogy a userId értéke érvényes
+        if (userId <= 0) {
+            result.put("status", "failed");
+            result.put("error", "Nem lehet negatív a UserID");
+            return ResponseEntity.badRequest().body(result);
+        }
+
         // Ellenőrizzük, hogy a fájl tényleg kép-e és a megfelelő formátumban van-e
         if (!imageFile.getContentType().equals(MediaType.IMAGE_PNG_VALUE) && !imageFile.getContentType().equals(MediaType.IMAGE_JPEG_VALUE)) {
             result.put("status", "failed");
@@ -107,7 +137,6 @@ public class UserController {
         result.put("status", "success");
         result.put("message", "A kép sikeresen feltöltve.");
         return ResponseEntity.ok(result);
-
     }
 
     @PostMapping("/banUser")
@@ -116,6 +145,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.banUser(userId);
 
             result.put("status", "success");
@@ -133,6 +169,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.unBanUser(userId);
 
             result.put("status", "success");
@@ -144,12 +187,20 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+
     @PostMapping("/deleteUser")
     public ResponseEntity<Map<String, Object>> deleteUser(@RequestBody Map<String, Integer> requestBody) {
         Integer userId = requestBody.get("userId");
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.deleteUser(userId);
 
             result.put("status", "success");
@@ -170,6 +221,27 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            // Ellenőrizze, hogy az új e-mail tartalmazza az '@' karaktert
+            if (newEmail == null || !newEmail.contains("@")) {
+                result.put("status", "failed");
+                result.put("error", "Tartalmaznia kell @ karaktert az emailnek");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            // Ellenőrizze, hogy az új telefonszám hossza nem haladja meg a 11 karaktert
+            if (newPhoneNumber != null && newPhoneNumber.length() > 11) {
+                result.put("status", "failed");
+                result.put("error", "Nem elég hosszú a telefonszám");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.updateUser(userId, newFullName, newEmail, newPhoneNumber);
 
             result.put("status", "success");
@@ -188,6 +260,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.changeUserPermission(userId, isAdminIN);
 
             result.put("status", "success");
@@ -218,8 +297,22 @@ public class UserController {
     @PostMapping("/getUserSubscription")
     public ResponseEntity<Map<String, Object>> getUserSubscription(@RequestBody Map<String, Integer> requestBody) {
         Integer userId = requestBody.get("userId");
+        Map<String, Object> result = new HashMap<>();
 
-        Map<String, Object> result = userservice.getUserSubscription(userId);
+        try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            result = userservice.getUserSubscription(userId);
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
         return ResponseEntity.ok(result);
     }
 
@@ -259,6 +352,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Invalid userId. Must be greater than 0.");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.changePassword(userId, newPassword);
 
             result.put("status", "success");
@@ -276,6 +376,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.profilePictureDelete(userId);
 
             result.put("status", "success");
@@ -285,8 +392,6 @@ public class UserController {
         }
 
         return ResponseEntity.ok(result);
-
-
     }
 
     @PostMapping("/subscriptionExtendDate")
@@ -295,6 +400,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.subscriptionExtendDate(userId);
 
             result.put("status", "success");
@@ -304,8 +416,6 @@ public class UserController {
         }
 
         return ResponseEntity.ok(result);
-
-
     }
 
     @PostMapping("/updateComment")
@@ -315,6 +425,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
         try {
+            // Ellenőrizze, hogy a userCommentID értéke érvényes
+            if (userCommentID == null || userCommentID <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív a UserID");
+                return ResponseEntity.badRequest().body(result);
+            }
+
             userservice.updateComment(userCommentID, userCommentIN);
 
             result.put("status", "success");
@@ -325,6 +442,7 @@ public class UserController {
 
         return ResponseEntity.ok(result);
     }
+
 
 
 }
