@@ -1,0 +1,51 @@
+.not-found{
+    width: 100vw;
+    // height: 100vh;
+    height: 100svh;  
+    max-height: -webkit-fill-available;
+    background-image: url('../../../assets/images/404.jpg');
+    background-size: cover;
+    background-position: 45%;
+
+    & img{
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        padding: 15px;
+        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.5));
+    }
+
+    & h2{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: var(--textWhiteColor);
+        font-weight: 800;
+        font-size: 28pt;
+        padding-top: 20vh;
+        text-shadow: 0 0 3px black;
+    }
+
+    & p{
+        color: var(--textWhiteColor);
+        text-align: center;
+        text-shadow: 0 0 3px black;
+    }
+
+    & button{
+        margin: 0 auto;
+        display: block;
+        outline: none;
+        border: none;
+        background-color: var(--callToActionColor);
+        color: var(--textWhiteColor);
+        padding: 12px 24px;
+        border-radius: 15px;
+        transition: all .2s ease-in-out;
+
+        &:hover{
+            background-color: var(--callToActionColorHover);
+            cursor: pointer;
+        }
+    }
+}
