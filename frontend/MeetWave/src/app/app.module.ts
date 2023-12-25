@@ -16,6 +16,7 @@ import { HttpClientModule } from  '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { LocalStorageService } from './_services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BrowserAnimationsModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [MainComponent, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

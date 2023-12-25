@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/_services/local-storage.service';
 import { MainComponent } from '../main/main.component';
@@ -16,7 +16,7 @@ export class FooterComponent {
     private router: Router,
     private localStorage: LocalStorageService,
     private route: ActivatedRoute,
-    private mainComponent: MainComponent
+    @Inject(forwardRef(() => MainComponent)) public mainComponent: MainComponent
   ) { }
 
   navigateToTarget(target: String, page: String) {
@@ -28,8 +28,17 @@ export class FooterComponent {
     // A felhasználó már az adott oldalon tartózkodik, scroll eventet kell hívni
     if(this.activeRouteName == page){
       if(this.activeRouteName == "welcome"){
-        this.mainComponent.navigateToTarget("gyik");
-      }
+        switch(target){
+          case "gyik":
+            this.mainComponent.navigateToTarget("gyik");
+            break;
+            case "services":
+              this.mainComponent.navigateToTarget("services");
+              break;
+            default:
+              // do nothing              
+        }
+      } 
     } else{
       this.localStorage.setItem("routeTo", target);
       this.router.navigate(['/' + page]);
