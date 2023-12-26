@@ -1,1 +1,62 @@
-<p>register works!</p>
+<div class="register">
+  <div class="form">
+    <img
+      src="./assets/images/logo_black.png"
+      class="logo"
+      routerLink="/welcome"
+    />
+    <div class="title">
+      <img src="./assets/icons/person-lock.svg" />
+      <h2>Regisztráció</h2>
+    </div>
+    <form [formGroup]="profileForm">
+      <input
+        id="fullname"
+        type="text"
+        formControlName="fullName"
+        placeholder="Teljes név *"
+        (click)="formClicked()"
+      />
+
+      <input
+        id="email"
+        type="text"
+        formControlName="email"
+        placeholder="Email cím *"
+        (click)="formClicked()"
+      />
+
+      <input
+        id="password"
+        type="text"
+        formControlName="password"
+        placeholder="Jelszó *"
+        (click)="formClicked()"
+      />
+
+      <input
+        id="password-again"
+        type="text"
+        formControlName="passwordRe"
+        placeholder="Jelszó újra *"
+        (click)="formClicked()"
+      />
+      <div class="phonenumber">
+            <div class="prefix">+36</div>
+          <input
+            id="phonenumber"
+            type="text"
+            formControlName="phone"
+            placeholder="Telefonszám *"
+            (click)="formClicked()"
+          />
+      </div>
+
+      <button>Regisztráció</button>
+      <p>
+        Már regisztrálva vagy? <span routerLink="/login">Bejelentkezés</span>
+      </p>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>
