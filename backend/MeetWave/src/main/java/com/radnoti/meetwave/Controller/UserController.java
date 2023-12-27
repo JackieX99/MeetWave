@@ -23,12 +23,13 @@ public class UserController {
         this.userservice = userService;
     }
 
+    /*
     @PostMapping("/getUser")
     public ResponseEntity<Map<String, Object>> getUser(@RequestBody Map<String, Integer> requestBody) {
         Integer userId = requestBody.get("userId");
 
         if (userId != null && userId >= 1) {
-            Map<String, Object> result = userservice.getUserDataTest(userId);
+            Map<String, Object> result = userservice.getUserData(userId);
             System.out.println(result);
             return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
         } else {
@@ -38,6 +39,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(errorResponse);
         }
     }
+     */
 
 
 
@@ -316,7 +318,7 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/registerUser")
+    @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> registerUser(@RequestBody registerUserClass requestBody) {
         String fullNameIN = requestBody.getFullNameIN();
         String emailIN = requestBody.getEmailIN();
@@ -325,22 +327,44 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
 
 
-        Map<String, Object> userExist = userservice.checkIfUserExists("foldvarialex@gmail.com");
+        Map<String, Object> userExist = userservice.checkIfUserExists(emailIN);
         List<Map<String, Object>> resultSetList = (List<Map<String, Object>>) userExist.get("#result-set-1");
         int userCount = ((Number) resultSetList.get(0).get("user_count")).intValue();
         if (userCount == 1) {
-            System.out.println("Ez az email cím már foglalt.");
-        } else {
-            System.out.println("Nem foglalt, mehet a regisztráció.");
-        }
-        try {
-            userservice.registerUser(fullNameIN, emailIN, passwordIN, phoneNumberIN);
-
-            result.put("status", "success");
-        } catch (Exception e) {
             result.put("status", "failed");
-            result.put("error", e.getMessage());
+            result.put("error", "Email already in use.");
+        } else {
+            try {
+                userservice.registerUser(fullNameIN, emailIN, passwordIN, phoneNumberIN);
+
+                result.put("status", "success");
+            } catch (Exception e) {
+                result.put("status", "failed");
+                result.put("error", e.getMessage());
+            }
         }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody loginUserClass requestBody) {
+        String emailIN = requestBody.getEmail();
+        String passwordIN = requestBody.getPassword();
+
+        Map<String, Object> result = new HashMap<>();
+
+        Map<String, Object> loginResponse = userservice.loginUser(emailIN, passwordIN);
+        // ha sikeres a bejelentkezés, szóval jó az email és jelszó páros
+        if(loginResponse.get("result").equals("successful")){
+            Map<String, Object> userData = userservice.getUserData(emailIN);
+            result.put("status", "success");
+            result.put("userdata", userData.get("#result-set-1"));
+        } else{
+            result.put("status", "failed");
+            result.put("error", loginResponse.get("result"));
+        }
+
 
         return ResponseEntity.ok(result);
     }
@@ -362,6 +386,33 @@ public class UserController {
             userservice.changePassword(userId, newPassword);
 
             result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/setSub")
+    public ResponseEntity<Map<String, Object>> setSubscription(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
+        Integer subscription = requestBody.get("subscription");
+
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            // Ellenőrizze, hogy a userId értéke érvényes
+            if (userId == null || userId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Invalid userId. Must be greater than 0.");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            Map<String, Object> storedResult = userservice.setSubscription(userId, subscription);
+            System.out.println(storedResult);
+
+            result.put("status", storedResult.get("result"));
         } catch (Exception e) {
             result.put("status", "failed");
             result.put("error", e.getMessage());

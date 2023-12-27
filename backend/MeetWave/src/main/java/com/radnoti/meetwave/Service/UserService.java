@@ -23,11 +23,11 @@ public class UserService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Map<String, Object> getUserDataTest(Integer userId) {
+    public Map<String, Object> getUserData(String email) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserData");
 
         Map<String, Object> inParamMap = new HashMap<>();
-        inParamMap.put("userID", userId);
+        inParamMap.put("email", email);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
@@ -165,6 +165,17 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> loginUser(String emailIN, String passwordIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("loginUser");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("emailIN", emailIN);
+        inParamMap.put("passwordIN", passwordIN);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
     public Map<String, Object> checkIfUserExists(String p_email) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("checkIfUserExists");
 
@@ -212,6 +223,17 @@ public class UserService {
         Map<String, Object> inParamMap = new HashMap<>();
         inParamMap.put("userCommentID", userCommentID);
         inParamMap.put("userCommentIN", userCommentIN);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> setSubscription(int userId, int subscription) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("setSubscription");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userID", userId);
+        inParamMap.put("subscriptionTypeIN", subscription);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);

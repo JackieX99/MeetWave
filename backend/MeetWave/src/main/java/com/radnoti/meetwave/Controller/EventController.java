@@ -72,6 +72,31 @@ public class EventController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/getComments")
+    public ResponseEntity<Map<String, Object>> getAllComment(@RequestBody Map<String, Integer> requestBody) {
+        Integer eventId = requestBody.get("eventId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            // Ellenőrizze, hogy a eventId értéke érvényes
+            if (eventId == null || eventId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív az eventId");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            Map<String, Object> comments = eventService.getAllComment(eventId);
+
+            result.put("status", "success");
+            result.put("comments", comments.get("#result-set-1"));
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
 
     @PostMapping("/deleteEvent")
     public ResponseEntity<Map<String, Object>> deleteEvent(@RequestBody Map<String, Integer> requestBody) {
@@ -87,6 +112,26 @@ public class EventController {
             }
 
             eventService.deleteEvent(eventID);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/userParticipate")
+    public ResponseEntity<Map<String, Object>> userParticipateOnEvent(@RequestBody Map<String, Integer> requestBody) {
+        Integer eventId = requestBody.get("eventId");
+        Integer userId = requestBody.get("userId");
+        Integer choice = requestBody.get("choice");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+
+            eventService.userParticipateOnEvent(eventId, userId, choice);
 
             result.put("status", "success");
         } catch (Exception e) {
