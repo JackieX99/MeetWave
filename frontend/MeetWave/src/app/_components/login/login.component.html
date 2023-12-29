@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="register">
+    <div class="form">
+      <img
+        src="./assets/images/logo_black.png"
+        class="logo"
+        routerLink="/welcome"
+      />
+      <div class="title">
+        <img src="./assets/icons/door-open.svg" />
+        <h2>Bejelentkezés</h2>
+      </div>
+      <form [formGroup]="profileForm">
+        <input
+          id="email"
+          type="text"
+          formControlName="email"
+          placeholder="Email cím *"
+          (click)="formClicked()"
+        />
+  
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Jelszó *"
+          (click)="formClicked()"
+        />
+  
+        <button>Bejelentkezés</button>
+        <p>
+          Még nem regisztráltál? <span routerLink="/register">Regisztrálj itt</span>
+        </p>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+  
