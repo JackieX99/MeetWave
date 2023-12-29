@@ -1,0 +1,114 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+    & .form {
+      margin: 25svh auto 0 auto;
+      padding: 3vh 0;
+      width: 90%;
+      border-radius: 10px;
+      transition: background-color .3s ease-in-out;
+      & .logo {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 10svh;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      & .title {
+        display: flex;
+        vertical-align: middle;
+        justify-content: center;
+        margin-bottom: 5vh;
+        img {
+          margin: auto 0;
+          width: 32px;
+          height: 32px;
+        }
+        h2 {
+          padding-left: 2vw;
+          font-size: 16pt;
+        }
+      }
+      & form {
+        width: 80%;
+        margin: 0 auto;
+  
+        & .phonenumber{
+          position: relative;
+  
+          & .prefix{
+              position: absolute;
+              background-color: var(--callToActionColor);
+              color: var(--textWhiteColor);
+              padding: 12px;
+              border-radius: 10px 0 0 10px;
+              font-size: 12pt;
+          }
+          & input{
+              text-indent: 30px;
+          }
+        }
+  
+        & input {
+          display: block;
+          width: 85%;
+          padding: 12px 24px;
+          border: none;
+          outline: none;
+          margin: 1.5vh auto;
+          border-radius: 10px;
+          font-size: 12pt;
+  
+          &::placeholder{
+              justify-content: center;
+              vertical-align: middle;
+          }
+        }
+  
+        & button {
+          background-color: var(--callToActionColor);
+          color: var(--textWhiteColor);
+          outline: none;
+          border: none;
+          padding: 12px 24px;
+          width: 100%;
+          border-radius: 10px;
+          text-transform: uppercase;
+        }
+  
+        & p {
+          text-align: center;
+          color: var(--textColor);
+  
+          & span {
+            color: var(--callToActionColor);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  
+  .moveLogo {
+    animation: logoMove 2s forwards;
+  }
+  
+  .formBackground{
+      background-color: rgba($color: #c1c0c0, $alpha: 0.6);
+  }
+  
+  @keyframes logoMove {
+    from {
+      left: 50%;
+      transform: translate(-50%, 0);
+  }
+    to {
+      left: 15%;
+      top: 2vh;
+      width: 72px;
+      height: 72px;
+    }
+  }
+  
