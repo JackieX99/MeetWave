@@ -22,7 +22,7 @@ public class EventService {
     }
 
 
-    public Map<String, Object> createEvent(String eventTitle, String description, java.util.Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants) {
+    public Map<String, Object> createEvent(String eventTitle, String description, java.util.Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String tickets, java.util.Date endOfEvent) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("createEvent");
 
         Map<String, Object> inParamMap = new HashMap<>();
@@ -33,6 +33,8 @@ public class EventService {
         inParamMap.put("founder", founder);
         inParamMap.put("dateOfCreatingEvent", dateOfCreatingEvent);
         inParamMap.put("maxParticipants", maxParticipants);
+        inParamMap.put("tickets", tickets);
+        inParamMap.put("endOfEvent", endOfEvent);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
@@ -101,7 +103,7 @@ public class EventService {
         return simpleJdbcCall.execute(in);
     }
 
-    public Map<String, Object> updateEvent(int eventID, String eventTitleIN, String descriptionIN ,java.util.Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN) {
+    public Map<String, Object> updateEvent(int eventID, String eventTitleIN, String descriptionIN ,java.util.Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String ticketsIN, java.util.Date endOfEventIN) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("updateEvent");
 
         Map<String, Object> inParamMap = new HashMap<>();
@@ -112,6 +114,8 @@ public class EventService {
         inParamMap.put("placeOfTheEventIN", placeOfTheEventIN);
         inParamMap.put("founderOfTheEventIN", founderOfTheEventIN);
         inParamMap.put("maxParticipantsIN", maxParticipantsIN);
+        inParamMap.put("ticketsIN", ticketsIN);
+        inParamMap.put("endOfEventIN", endOfEventIN);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);

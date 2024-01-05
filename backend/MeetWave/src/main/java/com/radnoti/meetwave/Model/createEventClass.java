@@ -19,7 +19,11 @@ public class createEventClass {
 
     int maxParticipants;
 
-    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants) {
+    String tickets;
+
+    java.util.Date endOfEvent;
+
+    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String tickets, Date endOfEvent) {
         this.eventTitle = eventTitle;
         this.description = description;
         this.dateOfTheEvent = dateOfTheEvent;
@@ -27,6 +31,8 @@ public class createEventClass {
         this.founder = founder;
         this.dateOfCreatingEvent = dateOfCreatingEvent;
         this.maxParticipants = maxParticipants;
+        this.tickets = tickets;
+        this.endOfEvent = endOfEvent;
     }
 
     public String getEventTitle() {
@@ -83,5 +89,21 @@ public class createEventClass {
 
     public void setMaxParticipants(int maxParticipants) {
         this.maxParticipants = maxParticipants;
+    }
+
+    public String getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(String tickets) {
+        this.tickets = tickets;
+    }
+
+    public Date getEndOfEvent() {
+        return endOfEvent;
+    }
+
+    public void setEndOfEvent(Date endOfEvent) {
+        this.endOfEvent = endOfEvent;
     }
 }

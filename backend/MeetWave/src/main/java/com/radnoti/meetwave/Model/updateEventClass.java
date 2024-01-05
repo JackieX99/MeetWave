@@ -18,7 +18,11 @@ public class updateEventClass {
 
     int maxParticipantsIN;
 
-    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN) {
+    String tickets;
+
+    java.util.Date endOfEvent;
+
+    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String tickets, Date endOfEvent) {
         this.eventID = eventID;
         this.eventTitleIN = eventTitleIN;
         this.descriptionIN = descriptionIN;
@@ -26,6 +30,8 @@ public class updateEventClass {
         this.placeOfTheEventIN = placeOfTheEventIN;
         this.founderOfTheEventIN = founderOfTheEventIN;
         this.maxParticipantsIN = maxParticipantsIN;
+        this.tickets = tickets;
+        this.endOfEvent = endOfEvent;
     }
 
     public int getEventID() {
@@ -82,5 +88,21 @@ public class updateEventClass {
 
     public void setMaxParticipantsIN(int maxParticipantsIN) {
         this.maxParticipantsIN = maxParticipantsIN;
+    }
+
+    public String getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(String tickets) {
+        this.tickets = tickets;
+    }
+
+    public Date getEndOfEvent() {
+        return endOfEvent;
+    }
+
+    public void setEndOfEvent(Date endOfEvent) {
+        this.endOfEvent = endOfEvent;
     }
 }

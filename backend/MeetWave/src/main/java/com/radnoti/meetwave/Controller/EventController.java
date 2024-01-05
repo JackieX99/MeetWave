@@ -33,11 +33,13 @@ public class EventController {
         String founder = requestBody.getFounder();
         Timestamp dateOfCreatingEvent = requestBody.getDateOfCreatingEvent();
         Integer maxParticipants = requestBody.getMaxParticipants();
+        String tickets = requestBody.getTickets();
+        java.util.Date endOfEvent = requestBody.getEndOfEvent();
 
         Map<String, Object> result = new HashMap<>();
 
         try {
-            eventService.createEvent(eventTitle, description, dateOfTheEvent, place, founder, dateOfCreatingEvent, maxParticipants);
+            eventService.createEvent(eventTitle, description, dateOfTheEvent, place, founder, dateOfCreatingEvent, maxParticipants, tickets , endOfEvent);
 
             result.put("status", "success");
         } catch (Exception e) {
@@ -196,6 +198,8 @@ public class EventController {
         String placeOfTheEventIN = requestBody.getPlaceOfTheEventIN();
         String founderOfTheEventIN = requestBody.getFounderOfTheEventIN();
         Integer maxParticipantsIN = requestBody.getMaxParticipantsIN();
+        String ticketsIN = requestBody.getTickets();
+        java.util.Date endOfEventIN = requestBody.getEndOfEvent();
 
         Map<String, Object> result = new HashMap<>();
 
@@ -207,7 +211,7 @@ public class EventController {
                 return ResponseEntity.badRequest().body(result);
             }
 
-            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN);
+            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN, ticketsIN, endOfEventIN);
 
             result.put("status", "success");
         } catch (Exception e) {
