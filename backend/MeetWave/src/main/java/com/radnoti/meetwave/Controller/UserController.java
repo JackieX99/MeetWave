@@ -494,6 +494,20 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/getUserParticipate")
+    public ResponseEntity<Map<String, Object>> getUserParticipate(@RequestBody Map<String, Integer> requestBody) {
+        Integer userId = requestBody.get("userId");
 
+        if (userId != null && userId >= 1) {
+            Map<String, Object> result = userservice.getUserParticipate(userId);
+            System.out.println(result);
+            return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+        } else {
+            // Hibás kérés válasza, mert a userId nem lehet negatív
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("failed", "Nem lehet negatív a UserID");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
 
 }

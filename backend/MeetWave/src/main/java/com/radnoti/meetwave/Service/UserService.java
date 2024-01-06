@@ -239,6 +239,16 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> getUserParticipate(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserParticipate");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userId", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
 
 
 
