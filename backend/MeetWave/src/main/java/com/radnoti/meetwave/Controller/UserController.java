@@ -1,16 +1,10 @@
 package com.radnoti.meetwave.Controller;
 
 import com.radnoti.meetwave.Model.*;
-import com.radnoti.meetwave.Service.MyUserDetailsService;
 import com.radnoti.meetwave.Service.UserService;
-import com.radnoti.meetwave.Util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -353,15 +347,6 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private MyUserDetailsService userDetailsService;
-
-    @Autowired
-    private JwtUtil jwtTokenUtil;
-
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody loginUserClass requestBody) {
         String emailIN = requestBody.getEmail();
@@ -382,22 +367,6 @@ public class UserController {
 
 
         return ResponseEntity.ok(result);
-    }
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-    try{
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-        );
-    } catch (BadCredentialsException e){
-            throw  new Exception("Nem jo he", e);
-        }
-    final UserDetails userDetails = userDetailsService
-            .loadUserByUsername(authenticationRequest.getUsername());
-    final String jwt =jwtTokenUtil.generateToken(userDetails);
-
-    return  ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
     @PostMapping("/changePassword")
