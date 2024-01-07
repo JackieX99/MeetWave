@@ -1,1 +1,40 @@
-events oldal
+<div class="events">
+  <div class="nav-wrapper">
+    <h1>Események</h1>
+    <div class="icons">
+      <!-- új event létrehozása -->
+      <img src="./assets/icons/plus-circle.svg" />
+      <!-- összes esemény megjelenítése -->
+      <img src="./assets/icons/calendar.svg" />
+      <!-- kereső -->
+      <img src="./assets/icons/search.svg" />
+    </div>
+  </div>
+  (ide majd kell egy sort lehetőség - neked ajánlott, helyi, ezen a héten, etc.)
+  <div class="divider"></div>
+  <div class="event-wrapper">
+    <div class="event-card" *ngFor="let event of events">
+      <img [src]="event.imageSrc" />
+      <p>{{event.date}}</p>
+      <h3>
+        {{event.title}}
+      </h3>
+      <!-- hely neve - város -->
+      <h5>{{event.place}}</h5>
+      <p>{{event.interested}} érdeklődő - {{event.going}} ember ott lesz</p>
+      <div class="btn-wrapper">
+        <div class="button">
+          <img src="./assets/icons/star-fill.svg" />
+          <span>Érdekel</span>
+          <img src="./assets/icons/caret-down.svg" class="caret" />
+          <!-- <img src="./assets/icons/check-fill.svg">
+                  Ott leszek -->
+        </div>
+        <div class="button share">
+          <img src="./assets/icons/share-fill.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="lds-dual-ring" *ngIf="showLoadingMore"></div>
+  </div>
+</div>
