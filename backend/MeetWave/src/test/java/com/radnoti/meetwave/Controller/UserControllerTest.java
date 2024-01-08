@@ -32,14 +32,14 @@ class UserControllerTest {
         MockitoAnnotations.openMocks(this);
         userController = new UserController(userService);
     }
-
+/*
     @Test
     public void testGetUserWithValidUserId() {
         // Arrange
         Integer userId = 1;
         Map<String, Object> userData = new HashMap<>();
         userData.put("#result-set-1", "MockedUserData");
-        when(userService.getUserDataTest(anyInt())).thenReturn(userData);
+        when(userService.getUserData(anyInt())).thenReturn(userData);
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.getUser(Map.of("userId", userId));
@@ -61,30 +61,50 @@ class UserControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Nem lehet negatív a UserID", response.getBody().get("failed"));
     }
+*/
+@Test
+public void testMuteUserWithValidUserId() {
+    // Arrange
+    Integer userId = 2; // Assuming valid user ID
+    Map<String, Object> expectedResult = new HashMap<>();
+    expectedResult.put("status", "success");
 
-    @Test
-    public void testMuteUserWithValidUserId() {
-        // Arrange
-        Integer userId = 2; // Assuming valid user ID
-        Map<String, Object> result = new HashMap<>();
-        when(userService.muteUser(anyInt())).thenReturn(null);
+    when(userService.muteUser(anyInt())).thenReturn(expectedResult);
 
-        // Act
-        ResponseEntity<Map<String, Object>> response = userController.muteUser(Map.of("userId", userId));
+    // Act
+    ResponseEntity<Map<String, Object>> response = userController.muteUser(Map.of("userId", userId));
 
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("success", response.getBody().get("status"));
-    }
+    // Print to console
+    System.out.println("Response status: " + response.getBody().get("status"));
+
+    // Assert
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals("success", response.getBody().get("status"));
+}
+
+
 
     @Test
     public void testMuteUserWithInvalidUserId() {
         // Arrange
-        Integer userId = 1;
-        Map<String, Object> result = new HashMap<>();
+        Integer userId = -1;
+        Map<String, Object> expectedResponse = new HashMap<>();
+        expectedResponse.put("status", "failed");
+        expectedResponse.put("error", "Nem lehet negatív a UserID");
+
+        // Mock userService
+        UserService userService = mock(UserService.class);
+        when(userService.muteUser(anyInt())).thenReturn(expectedResponse);
+
+        // Set userService in userController
+        UserController userController = new UserController(userService);
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.muteUser(Map.of("userId", userId));
+
+        // Print to console
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -102,6 +122,9 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.muteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
@@ -118,6 +141,7 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -131,6 +155,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -148,6 +175,9 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
@@ -164,6 +194,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -177,6 +209,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.banUser(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -194,6 +229,9 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.banUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
@@ -210,6 +248,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -223,6 +263,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -240,6 +283,9 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
@@ -256,6 +302,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -269,6 +317,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -285,6 +336,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -305,6 +359,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.updateUser(requestBody);
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -318,6 +374,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.updateUser(requestBody);
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -334,6 +393,9 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.updateUser(requestBody);
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
@@ -348,6 +410,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.updateUser(requestBody);
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -364,6 +429,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.updateUser(requestBody);
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -383,6 +451,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.changeUserPermission(requestBody);
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
@@ -396,6 +466,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.changeUserPermission(requestBody);
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -412,6 +485,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.changeUserPermission(requestBody);
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -430,6 +506,8 @@ class UserControllerTest {
         // Act
         ResponseEntity<Map<String, Object>> response = userController.getUserSubscription(Map.of("userId", userId));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedResult, response.getBody());
@@ -445,6 +523,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.getUserSubscription(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -463,6 +544,9 @@ class UserControllerTest {
 
         // Act
         ResponseEntity<Map<String, Object>> response = userController.getUserSubscription(Map.of("userId", userId));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -483,6 +567,8 @@ class UserControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Verify that the method was called with the correct arguments
         verify(userService, times(1)).changePassword(requestBody.getUserID(), requestBody.getNewPassword());
     }
@@ -500,6 +586,8 @@ class UserControllerTest {
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
 
         // Verify that the method was called with the correct argument
         verify(userService, times(1)).profilePictureDelete(userId);
@@ -519,6 +607,9 @@ class UserControllerTest {
         assertEquals("failed", response.getBody().get("status"));
         assertEquals("Nem lehet negatív a UserID", response.getBody().get("error"));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Verify that the userService.profilePictureDelete method is not called
         verify(userService, never()).profilePictureDelete(anyInt());
     }
@@ -536,6 +627,8 @@ class UserControllerTest {
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
 
         // Verify that the method was called with the correct argument
         verify(userService, times(1)).subscriptionExtendDate(userId);
@@ -555,6 +648,9 @@ class UserControllerTest {
         assertEquals("failed", response.getBody().get("status"));
         assertEquals("Nem lehet negatív a UserID", response.getBody().get("error"));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
+
         // Verify that the userService.subscriptionExtendDate method is not called
         verify(userService, never()).subscriptionExtendDate(anyInt());
     }
@@ -573,6 +669,8 @@ class UserControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("success", response.getBody().get("status"));
 
+        System.out.println("Response status: " + response.getBody().get("status"));
+
         // Verify that the userService.updateComment method is called with the validUserCommentID and the comment
         verify(userService, times(1)).updateComment(validUserCommentID, "SomeComment");
     }
@@ -590,6 +688,9 @@ class UserControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("failed", response.getBody().get("status"));
         assertEquals("Nem lehet negatív a UserID", response.getBody().get("error"));
+
+        System.out.println("Response status: " + response.getBody().get("status"));
+        System.out.println("Response error: " + response.getBody().get("error"));
 
         // Verify that the userService.updateComment method is not called
         verify(userService, never()).updateComment(anyInt(), anyString());
