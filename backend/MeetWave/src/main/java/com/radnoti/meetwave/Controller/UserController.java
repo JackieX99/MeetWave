@@ -23,6 +23,12 @@ public class UserController {
         this.userservice = userService;
     }
 
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public String hello(){
+        return "hello world";
+    }
+
     /*
     @PostMapping("/getUser")
     public ResponseEntity<Map<String, Object>> getUser(@RequestBody Map<String, Integer> requestBody) {
