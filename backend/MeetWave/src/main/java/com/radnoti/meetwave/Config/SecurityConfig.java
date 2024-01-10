@@ -31,7 +31,7 @@ public class SecurityConfig  {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/rest/auth/**").permitAll()
+                .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

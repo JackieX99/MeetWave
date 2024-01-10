@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class JwtUtil {
 
 
-    private final String secret_key = "mysecretkey";
+    private final String secret_key = "sQbbIB7hvAIv68uHz4W8agwXZzZqozpQ";
     private long accessTokenValidity = 60*60*1000;
 
     private final JwtParser jwtParser;
@@ -87,7 +87,7 @@ public class JwtUtil {
     }
 
     public Claims decodeJwt(String token) {
-        return Jwts.parser().setSigningKey("mysecretkey").parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey("sQbbIB7hvAIv68uHz4W8agwXZzZqozpQ").parseClaimsJws(token).getBody();
     }
 
 

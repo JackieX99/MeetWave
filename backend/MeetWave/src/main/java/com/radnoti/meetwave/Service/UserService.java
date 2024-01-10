@@ -27,7 +27,7 @@ public class UserService {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserData");
 
         Map<String, Object> inParamMap = new HashMap<>();
-        inParamMap.put("email", email);
+        inParamMap.put("emailIN", email);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
@@ -180,7 +180,7 @@ public class UserService {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("checkIfUserExists");
 
         Map<String, Object> inParamMap = new HashMap<>();
-        inParamMap.put("p_email", p_email);
+        inParamMap.put("email", p_email);
         SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
