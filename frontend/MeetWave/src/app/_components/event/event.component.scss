@@ -1,0 +1,54 @@
+.event{
+    & .banner{}
+    & .date{}
+    & .title{}
+    & .button-container{
+        & .interested{}
+        & .wbthere{}
+        & .else{}
+    }
+    & .main-section{
+        & .creator{
+            & img{}
+            & h5{}
+        }
+        & .place{
+            & img{}
+            & h5{}
+            & p{}
+        }
+        & .members{
+            & img{}
+            & h5{}
+        }
+        & .tickets{
+            & img{}
+            & h5{}
+            & p{}
+        }
+        & .section-selector{
+            & .description{}
+            & .talking{}
+        }
+    }
+
+    & .description-page{
+        & .title{}
+        & .description-next{}
+        & .creators-section{
+            & h3{}
+            & .event-creator-card{
+                & img{}
+                & h4{}
+                & p{}
+            }
+        }
+        & .latest-comments{
+            & .title{
+                & h3{}
+                & span{}
+            }
+        }
+    }
+
+}
