@@ -192,7 +192,7 @@ public void testMuteUserWithValidUserId() {
         when(userService.unMuteUser(anyInt())).thenReturn(null);
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.banUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
 
@@ -246,7 +246,7 @@ public void testMuteUserWithValidUserId() {
         when(userService.unMuteUser(anyInt())).thenReturn(null);
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.unBanUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
 
@@ -262,7 +262,7 @@ public void testMuteUserWithValidUserId() {
         Map<String, Object> result = new HashMap<>();
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.unBanUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
         System.out.println("Response error: " + response.getBody().get("error"));
@@ -278,10 +278,10 @@ public void testMuteUserWithValidUserId() {
         // Arrange
         Integer userId = 2; // Assuming valid user ID
         Map<String, Object> result = new HashMap<>();
-        doThrow(new RuntimeException("Some error")).when(userService).unMuteUser(anyInt());
+        doThrow(new RuntimeException("Some error")).when(userService).unBanUser(anyInt());
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.unBanUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
         System.out.println("Response error: " + response.getBody().get("error"));
@@ -300,7 +300,7 @@ public void testMuteUserWithValidUserId() {
         when(userService.unMuteUser(anyInt())).thenReturn(null);
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.deleteUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
 
@@ -316,7 +316,7 @@ public void testMuteUserWithValidUserId() {
         Map<String, Object> result = new HashMap<>();
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.deleteUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
         System.out.println("Response error: " + response.getBody().get("error"));
@@ -332,10 +332,10 @@ public void testMuteUserWithValidUserId() {
         // Arrange
         Integer userId = 2; // Assuming valid user ID
         Map<String, Object> result = new HashMap<>();
-        doThrow(new RuntimeException("Some error")).when(userService).unMuteUser(anyInt());
+        doThrow(new RuntimeException("Some error")).when(userService).deleteUser(anyInt());
 
         // Act
-        ResponseEntity<Map<String, Object>> response = userController.unMuteUser(Map.of("userId", userId));
+        ResponseEntity<Map<String, Object>> response = userController.deleteUser(Map.of("userId", userId));
 
         System.out.println("Response status: " + response.getBody().get("status"));
         System.out.println("Response error: " + response.getBody().get("error"));
