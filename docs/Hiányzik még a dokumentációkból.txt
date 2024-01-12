@@ -1,0 +1,12 @@
+Vizsgaremek: 
+- képek
+- tartalomjegyzék (cím1-cím2 felépítés)
+
+Bug report:
+- Jira bug taskok felvétele az excel táblázatba
+
+Manuál report:
+- Táblázat befejezése
+
+
+Telepítési útmutatónk nem lesz, mert mindent egy saját fizikai szervergépre fogunk elhelyezni.
