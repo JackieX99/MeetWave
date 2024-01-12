@@ -1,6 +1,5 @@
 Vizsgaremek: 
 - képek
-- tartalomjegyzék (cím1-cím2 felépítés)
 
 Bug report:
 - Jira bug taskok felvétele az excel táblázatba
