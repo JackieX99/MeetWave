@@ -21,6 +21,11 @@
     height: 60vh;
     font-family: Sofia;
     // font-family: 'Poppins', sans-serif;
+    & .welcome-banner{
+        width: 60%;
+        display: block;
+        margin: 7svh auto 0 auto;
+    }
     & h1{
         margin: 0;
         text-align: center;

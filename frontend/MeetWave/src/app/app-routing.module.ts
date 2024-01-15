@@ -9,14 +9,14 @@ import { RegisterComponent } from './_components/register/register.component';
 import { MainComponent } from './_components/main/main.component';
 
 const routes: Routes = [
-  { path: 'welcome', component: MainComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'event', component: EventComponent },
-  { path: 'events', component: EventsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'welcome', component: MainComponent, title: 'MeetWave ~ Üdvözlünk' },
+  { path: 'dashboard', component: DashboardComponent, title: 'MeetWave ~ Saját profil' },
+  { path: 'event', component: EventComponent, title: 'MeetWave ~ Esemény' },
+  { path: 'events', component: EventsComponent, title: 'MeetWave ~ Események' },
+  { path: 'login', component: LoginComponent, title: 'MeetWave ~ Bejelentkezés' },
+  { path: 'register', component: RegisterComponent, title: 'MeetWave ~ Regisztráció' },
   { path: '',   redirectTo: '/welcome', pathMatch: 'full' },
-  { path: '**', component: NotfoundComponent }
+  { path: '**', component: NotfoundComponent, title: 'MeetWave ~ Eltévedtél?' }
 ];
 
 @NgModule({
