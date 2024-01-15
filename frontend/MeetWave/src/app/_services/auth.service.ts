@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService } from './environment.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(
     private _env: EnvironmentService,
     private http: HttpClient,
-    ) { }
+    private localStorage: LocalStorageService,
+    private router: Router
+  ) {}
 
-  private url = this._env.getVtmUrl()
+  logout(){
+    this.localStorage.clear();
+    this.router.navigate(["/login"]);
+  }
 
-  private _RegisterUserLink = this.url + "/CustomDashboardLink/addCustomDashboardLink";
+  private url = this._env.getVtmUrl();
+
+  private _RegisterUserLink = this.url + '/auth/register';
+  private _LoginUserLink = this.url + '/auth/login';
+  private _getUserDataByTokenLink = this.url + '/auth/getUserData';
 
   registerUser(body: any) {
     return this.http.post<any>(this._RegisterUserLink, body);
   }
 
+  loginUser(body: any) {
+    return this.http.post<any>(this._LoginUserLink, body);
+  }
 
+  getUserData(token: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.get<any>(this._getUserDataByTokenLink, {
+      headers: headers,
+    });
+  }
 }

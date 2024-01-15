@@ -1,6 +1,17 @@
 .dashboard {
   padding: 0 10px;
   & .navigator {
+    .welcomer {
+      display: inline-block;
+    }
+    .logout-icon {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      float: right;
+      padding: 15px;
+      cursor: pointer;
+    }
     & .nav-wrapper {
       display: flex;
       & h1 {
@@ -274,6 +285,29 @@
     }
     .footer {
       margin: 10vh 0 3vh 0;
+    }
+  }
+}
+
+// @media screen and (min-width: 576px) {
+//   .event-card {
+//     width: 300px !important;
+//   }
+// }
+
+@media screen and (min-width: 976px) {
+  .event-card {
+    width: 300px !important;
+    margin: 1vh 1vw !important;
+    border-radius: 15px;
+    padding-bottom: 1vh;
+  }
+  .interested-card {
+    margin: 2vh auto;
+    width: 90%;
+    .event-card {
+      width: 250px;
+      display: inline-block;
     }
   }
 }
