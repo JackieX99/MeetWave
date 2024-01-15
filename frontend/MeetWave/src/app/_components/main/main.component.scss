@@ -286,3 +286,9 @@
     width: 90%;
     margin: 0 auto;
 }
+
+@media screen and (min-width: 976px) {
+    .welcome-banner{
+        width: 20% !important;
+    }
+  }
