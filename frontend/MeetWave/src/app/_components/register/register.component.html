@@ -15,7 +15,6 @@
         type="text"
         formControlName="fullName"
         placeholder="Teljes név *"
-        (click)="formClicked()"
       />
 
       <input
@@ -23,7 +22,6 @@
         type="text"
         formControlName="email"
         placeholder="Email cím *"
-        (click)="formClicked()"
       />
 
       <input
@@ -31,15 +29,13 @@
         type="password"
         formControlName="password"
         placeholder="Jelszó *"
-        (click)="formClicked()"
       />
 
       <input
         id="password-again"
-        type="text"
+        type="password"
         formControlName="passwordRe"
         placeholder="Jelszó újra *"
-        (click)="formClicked()"
       />
       <div class="phonenumber">
             <div class="prefix">+36</div>
@@ -48,11 +44,10 @@
             type="text"
             formControlName="phone"
             placeholder="Telefonszám *"
-            (click)="formClicked()"
           />
       </div>
 
-      <button>Regisztráció</button>
+      <button (click)="regUser()">Regisztráció</button>
       <p>
         Már regisztrálva vagy? <span routerLink="/login">Bejelentkezés</span>
       </p>
