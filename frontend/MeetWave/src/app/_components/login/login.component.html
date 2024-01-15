@@ -15,7 +15,6 @@
           type="text"
           formControlName="email"
           placeholder="Email cím *"
-          (click)="formClicked()"
         />
   
         <input
@@ -23,10 +22,9 @@
           type="password"
           formControlName="password"
           placeholder="Jelszó *"
-          (click)="formClicked()"
         />
   
-        <button>Bejelentkezés</button>
+        <button (click)="logUser()">Bejelentkezés</button>
         <p>
           Még nem regisztráltál? <span routerLink="/register">Regisztrálj itt</span>
         </p>

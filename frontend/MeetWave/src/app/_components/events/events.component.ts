@@ -36,7 +36,98 @@ export class EventsComponent {
       "place": "EXPOCenter PÉCS - Pécs",
       "interested": 759,
       "going": 126
-    }
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    {
+      "eventid": 1,
+      "date": "Szo, Febr. 3., 22:00-kor",
+      "title": "❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS - EXPO",
+      "imageSrc": "./assets/images/template-event-bg.jpg",
+      "place": "EXPOCenter PÉCS - Pécs",
+      "interested": 759,
+      "going": 126
+    },
+    
   ];
 
   @HostListener('window:scroll', [])

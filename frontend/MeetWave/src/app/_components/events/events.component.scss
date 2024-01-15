@@ -139,3 +139,11 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (min-width: 976px) {
+  .event-card {
+    margin: 2vh 1vw !important;
+    display: inline-block;
+    width: 250px !important;
+  }
+}

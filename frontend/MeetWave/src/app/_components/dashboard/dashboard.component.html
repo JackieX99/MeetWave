@@ -11,6 +11,8 @@
     (ide majd kell egy sort lehetőség - neked ajánlott, helyi, ezen a héten,
     etc.)
     <div class="divider"></div> -->
+    <h3 class="welcomer" *ngIf="user">Üdv újra, {{user.fullName}}!</h3>
+    <img src="./assets/icons/door-closed.svg" class="logout-icon" (click)="logout()">
     <div class="your-events-navigators">
       <h2>Az eseményeid</h2>
       <span>Összes megjelenítése</span>
@@ -89,6 +91,167 @@
       <h2>Neked javasolt események</h2>
       <span routerLink="/events">Összes esemény megtekintése</span>
       <div class="interested-card">
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <img src="./assets/images/template-event-bg.jpg" />
+          <p>Szo, Febr. 3., 22:00-kor</p>
+          <h3>
+            ❄️ WINTER COLOR SHOW ❄️ //UV EDITION // [2024.02.03.] ❯❯❯ PÉCS -
+            EXPO
+          </h3>
+          <!-- hely neve - város -->
+          <h5>EXPOCenter PÉCS - Pécs</h5>
+          <p>759 érdeklődő - 126 ember ott lesz</p>
+          <div class="btn-wrapper">
+            <div class="button">
+              <img src="./assets/icons/star-fill.svg" />
+              <span>Érdekel</span>
+              <img src="./assets/icons/caret-down.svg" class="caret" />
+              <!-- <img src="./assets/icons/check-fill.svg">
+                    Ott leszek -->
+            </div>
+            <div class="button share">
+              <img src="./assets/icons/share-fill.svg" />
+            </div>
+          </div>
+        </div>
         <div class="event-card">
           <img src="./assets/images/template-event-bg.jpg" />
           <p>Szo, Febr. 3., 22:00-kor</p>

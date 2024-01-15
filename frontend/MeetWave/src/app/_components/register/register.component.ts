@@ -1,13 +1,13 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable, Subscription, map } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { SnackbarService } from '../_shared/snackbar/snackbar.service';
+import { LocalStorageService } from 'src/app/_services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +15,6 @@ import { SnackbarService } from '../_shared/snackbar/snackbar.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  private show = false;
-  private message: string = 'This is a snackbar';
-  private type: string = 'success';
 
   profileForm = new FormGroup({
     fullName: new FormControl('', Validators.required),
@@ -28,14 +25,13 @@ export class RegisterComponent {
   });
 
   constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
     private auth: AuthService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   regUser() {
-    console.log('katt');
     if (this.profileForm.valid) {
       if (
         this.profileForm.value.password == this.profileForm.value.passwordRe
@@ -47,7 +43,15 @@ export class RegisterComponent {
             passwordIN: this.profileForm.value.password,
             phoneNumberIN: this.profileForm.value.phone,
           }).subscribe((res: any) => {
-            console.log(res)
+            if(res.status == "success"){
+              this.localStorageService.setItem("token", res.token);
+              this.snackbarService.show('Sikeres bejelentkezés.');
+              setTimeout(() => {
+                this.router.navigate(["/dashboard"]);
+              }, 2000);
+            } else{
+              this.snackbarService.show(res.error, 'danger');
+            }
           });
         }
       } else {
@@ -56,12 +60,5 @@ export class RegisterComponent {
     } else {
       this.snackbarService.show('mindent ki kéne tölteni', 'danger');
     }
-  }
-
-  formClicked() {
-    // const logoElement = this.el.nativeElement.querySelector('.logo');
-    // const formElement = this.el.nativeElement.querySelector('.form');
-    // this.renderer.addClass(logoElement, 'moveLogo');
-    // this.renderer.addClass(formElement, 'formBackground');
   }
 }
