@@ -7,7 +7,7 @@ export class EnvironmentService {
 
   constructor() { }
 
-  url = "https://api.meetwave.hu";
+  url = "https://api.cherrylands.hu";
 
   getVtmUrl(): String {
     return this.url;
