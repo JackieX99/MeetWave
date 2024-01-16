@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eb4edcd1-555d-4f0c-9b97-921c3939e307" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Zj91ll7b3JTsrC1DX30z6Zaa8X" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;back&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Projektek/Java_1205&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;a2f4446ec9e84f4823bffc0cea3084d2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.radnoti.meetwave.Service" />
+      <recent name="com.radnoti.meetwave.Config" />
+      <recent name="com.radnoti.meetwave.Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.radnoti.meetwave.Controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.UserControllerTest">
+    <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.radnoti.meetwave.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.radnoti.meetwave.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.radnoti.meetwave.Controller.UserControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testGetUserSubscriptionWithInvalidUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.radnoti.meetwave.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.radnoti.meetwave.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.radnoti.meetwave.Controller.UserControllerTest" />
+      <option name="METHOD_NAME" value="testGetUserSubscriptionWithInvalidUserId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUnMuteUserWithInvalidUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.radnoti.meetwave.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.radnoti.meetwave.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.radnoti.meetwave.Controller.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUnMuteUserWithInvalidUserId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUpdateUserWithInvalidPhoneNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.radnoti.meetwave.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.radnoti.meetwave.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.radnoti.meetwave.Controller.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUpdateUserWithInvalidPhoneNumber" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUpdateUserWithValidData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.radnoti.meetwave.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.radnoti.meetwave.Controller" />
+      <option name="MAIN_CLASS_NAME" value="com.radnoti.meetwave.Controller.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUpdateUserWithValidData" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MeetWaveApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="MeetWave" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.radnoti.meetwave.MeetWaveApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserControllerTest" />
+        <item itemvalue="JUnit.UserControllerTest.testGetUserSubscriptionWithInvalidUserId" />
+        <item itemvalue="JUnit.UserControllerTest.testUpdateUserWithInvalidPhoneNumber" />
+        <item itemvalue="JUnit.UserControllerTest.testUpdateUserWithValidData" />
+        <item itemvalue="JUnit.UserControllerTest.testUnMuteUserWithInvalidUserId" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eb4edcd1-555d-4f0c-9b97-921c3939e307" name="Changes" comment="" />
+      <created>1702924410538</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702924410538</updated>
+      <workItem from="1702924411819" duration="2589000" />
+      <workItem from="1702983153663" duration="12691000" />
+      <workItem from="1703009442252" duration="746000" />
+      <workItem from="1703015174534" duration="7711000" />
+      <workItem from="1703257634259" duration="1826000" />
+      <workItem from="1703270624121" duration="1050000" />
+      <workItem from="1703271682313" duration="597000" />
+      <workItem from="1703272286410" duration="322000" />
+      <workItem from="1703272613930" duration="8541000" />
+      <workItem from="1703282508039" duration="41000" />
+      <workItem from="1703331105569" duration="27000" />
+      <workItem from="1703334566343" duration="4941000" />
+      <workItem from="1703358388642" duration="10933000" />
+      <workItem from="1703422110415" duration="4821000" />
+      <workItem from="1703589261864" duration="5132000" />
+      <workItem from="1703674060899" duration="953000" />
+      <workItem from="1703675456938" duration="4797000" />
+      <workItem from="1703696151750" duration="721000" />
+      <workItem from="1704296193823" duration="25000" />
+      <workItem from="1704296240867" duration="79000" />
+      <workItem from="1704468633846" duration="2980000" />
+      <workItem from="1704580203788" duration="837000" />
+      <workItem from="1704581047764" duration="90000" />
+      <workItem from="1704581148295" duration="2727000" />
+      <workItem from="1704654358892" duration="870000" />
+      <workItem from="1704655236131" duration="6417000" />
+      <workItem from="1704737794265" duration="16000" />
+      <workItem from="1704737835980" duration="4927000" />
+      <workItem from="1704746426800" duration="27000" />
+      <workItem from="1704746584061" duration="2000" />
+      <workItem from="1704909241869" duration="1842000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
