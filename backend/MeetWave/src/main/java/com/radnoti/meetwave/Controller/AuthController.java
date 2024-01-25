@@ -105,7 +105,7 @@ public class AuthController {
 
         // ellenőrzés, hogy foglalt-e már az adott email cím
         Map<String, Object> userExist = userService.checkIfUserExists(emailIn);
-        Boolean emailExists = (Boolean) userExist.get("userexists");
+        Boolean emailExists = (Boolean) userExist.get("userExists");
 
         // ha foglalt visszadobjuk hogy foglalt
         if (emailExists) {
