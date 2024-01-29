@@ -2,6 +2,7 @@ package com.radnoti.meetwave.Controller;
 
 import com.radnoti.meetwave.Model.*;
 import com.radnoti.meetwave.Service.CustomUserDetailsService;
+import com.radnoti.meetwave.Service.EmailService;
 import com.radnoti.meetwave.Service.UserService;
 import com.radnoti.meetwave.Util.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -29,13 +30,15 @@ public class AuthController {
     private CustomUserDetailsService cuds;
     private UserService userService;
 
+    private EmailService emailService;
+
 
     private JwtUtil jwtUtil;
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService us) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService us, EmailService es) {
         this.authenticationManager = authenticationManager;
         this.userService = us;
         this.jwtUtil = jwtUtil;
-
+        this.emailService = es;
     }
 
     @GetMapping("/getUserData")
@@ -51,6 +54,23 @@ public class AuthController {
         Map<String, Object> userData = userService.getUserData(email);
         result.put("status", "success");
         result.put("userdata", userData.get("#result-set-1"));
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/sendEmail")
+    public ResponseEntity<Map<String, Object>> sendEmail(@RequestBody Map<String, String> requestBody) {
+        Map<String, Object> result = new HashMap<>();
+
+        String email = requestBody.get("targetEmail");
+
+        System.out.println(email);
+
+        Map<String, Object> emailResult = emailService.sendEmail(email);
+
+        System.out.println(emailResult);
+
+        result.put("status", "success");
 
         return ResponseEntity.ok(result);
     }
