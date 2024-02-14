@@ -18,11 +18,19 @@ public class updateEventClass {
 
     int maxParticipantsIN;
 
-    String tickets;
+    String ticketsLinkIN;
 
-    java.util.Date endOfEvent;
+    java.util.Date endOfEventIN;
 
-    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String tickets, Date endOfEvent) {
+    String addressIN;
+
+    String typeOfEventIN;
+
+    int countInterestedIN;
+
+    int countWillBeThereIN;
+
+    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String ticketsLinkIN, Date endOfEventIN, String addressIN, String typeOfEventIN, int countInterestedIN, int countWillBeThereIN) {
         this.eventID = eventID;
         this.eventTitleIN = eventTitleIN;
         this.descriptionIN = descriptionIN;
@@ -30,8 +38,12 @@ public class updateEventClass {
         this.placeOfTheEventIN = placeOfTheEventIN;
         this.founderOfTheEventIN = founderOfTheEventIN;
         this.maxParticipantsIN = maxParticipantsIN;
-        this.tickets = tickets;
-        this.endOfEvent = endOfEvent;
+        this.ticketsLinkIN = ticketsLinkIN;
+        this.endOfEventIN = endOfEventIN;
+        this.addressIN = addressIN;
+        this.typeOfEventIN = typeOfEventIN;
+        this.countInterestedIN = countInterestedIN;
+        this.countWillBeThereIN = countWillBeThereIN;
     }
 
     public int getEventID() {
@@ -90,19 +102,51 @@ public class updateEventClass {
         this.maxParticipantsIN = maxParticipantsIN;
     }
 
-    public String getTickets() {
-        return tickets;
+    public String getTicketsLinkIN() {
+        return ticketsLinkIN;
     }
 
-    public void setTickets(String tickets) {
-        this.tickets = tickets;
+    public void setTicketsLinkIN(String ticketsLinkIN) {
+        this.ticketsLinkIN = ticketsLinkIN;
     }
 
-    public Date getEndOfEvent() {
-        return endOfEvent;
+    public Date getEndOfEventIN() {
+        return endOfEventIN;
     }
 
-    public void setEndOfEvent(Date endOfEvent) {
-        this.endOfEvent = endOfEvent;
+    public void setEndOfEventIN(Date endOfEventIN) {
+        this.endOfEventIN = endOfEventIN;
+    }
+
+    public String getAddressIN() {
+        return addressIN;
+    }
+
+    public void setAddressIN(String addressIN) {
+        this.addressIN = addressIN;
+    }
+
+    public String getTypeOfEventIN() {
+        return typeOfEventIN;
+    }
+
+    public void setTypeOfEventIN(String typeOfEventIN) {
+        this.typeOfEventIN = typeOfEventIN;
+    }
+
+    public int getCountInterestedIN() {
+        return countInterestedIN;
+    }
+
+    public void setCountInterestedIN(int countInterestedIN) {
+        this.countInterestedIN = countInterestedIN;
+    }
+
+    public int getCountWillBeThereIN() {
+        return countWillBeThereIN;
+    }
+
+    public void setCountWillBeThereIN(int countWillBeThereIN) {
+        this.countWillBeThereIN = countWillBeThereIN;
     }
 }

@@ -33,13 +33,17 @@ public class EventController {
         String founder = requestBody.getFounder();
         Timestamp dateOfCreatingEvent = requestBody.getDateOfCreatingEvent();
         Integer maxParticipants = requestBody.getMaxParticipants();
-        String tickets = requestBody.getTickets();
+        String ticketLink = requestBody.getTicketLink();
         java.util.Date endOfEvent = requestBody.getEndOfEvent();
+        String address = requestBody.getAddress();
+        String typeOfEvent = requestBody.getTypeOfEvent();
+        Integer countInterested = requestBody.getCountInterested();
+        Integer countWillBeThere = requestBody.getCountWillBeThere();
 
         Map<String, Object> result = new HashMap<>();
 
         try {
-            eventService.createEvent(eventTitle, description, dateOfTheEvent, place, founder, dateOfCreatingEvent, maxParticipants, tickets , endOfEvent);
+            eventService.createEvent(eventTitle, description, dateOfTheEvent, place, founder, dateOfCreatingEvent, maxParticipants, ticketLink , endOfEvent, address, typeOfEvent ,countInterested, countWillBeThere);
 
             result.put("status", "success");
         } catch (Exception e) {
@@ -198,8 +202,12 @@ public class EventController {
         String placeOfTheEventIN = requestBody.getPlaceOfTheEventIN();
         String founderOfTheEventIN = requestBody.getFounderOfTheEventIN();
         Integer maxParticipantsIN = requestBody.getMaxParticipantsIN();
-        String ticketsIN = requestBody.getTickets();
-        java.util.Date endOfEventIN = requestBody.getEndOfEvent();
+        String ticketsLinkIN = requestBody.getTicketsLinkIN();
+        java.util.Date endOfEventIN = requestBody.getEndOfEventIN();
+        String addressIN = requestBody.getAddressIN();
+        String typeOfEventIn = requestBody.getTypeOfEventIN();
+        Integer countInterestedIN = requestBody.getCountInterestedIN();
+        Integer countWillBeThereIN = requestBody.getCountWillBeThereIN();
 
         Map<String, Object> result = new HashMap<>();
 
@@ -211,7 +219,7 @@ public class EventController {
                 return ResponseEntity.badRequest().body(result);
             }
 
-            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN, ticketsIN, endOfEventIN);
+            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN, ticketsLinkIN, endOfEventIN, addressIN, typeOfEventIn, countInterestedIN, countWillBeThereIN);
 
             result.put("status", "success");
         } catch (Exception e) {

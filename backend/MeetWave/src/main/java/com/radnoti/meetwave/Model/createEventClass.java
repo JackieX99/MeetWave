@@ -19,11 +19,19 @@ public class createEventClass {
 
     int maxParticipants;
 
-    String tickets;
+    String ticketLink;
 
     java.util.Date endOfEvent;
 
-    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String tickets, Date endOfEvent) {
+   String address;
+
+   String typeOfEvent;
+
+   int countInterested;
+
+   int countWillBeThere;
+
+    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String ticketLink, Date endOfEvent, String address, String typeOfEvent, int countInterested, int countWillBeThere) {
         this.eventTitle = eventTitle;
         this.description = description;
         this.dateOfTheEvent = dateOfTheEvent;
@@ -31,8 +39,12 @@ public class createEventClass {
         this.founder = founder;
         this.dateOfCreatingEvent = dateOfCreatingEvent;
         this.maxParticipants = maxParticipants;
-        this.tickets = tickets;
+        this.ticketLink = ticketLink;
         this.endOfEvent = endOfEvent;
+        this.address = address;
+        this.typeOfEvent = typeOfEvent;
+        this.countInterested = countInterested;
+        this.countWillBeThere = countWillBeThere;
     }
 
     public String getEventTitle() {
@@ -91,12 +103,12 @@ public class createEventClass {
         this.maxParticipants = maxParticipants;
     }
 
-    public String getTickets() {
-        return tickets;
+    public String getTicketLink() {
+        return ticketLink;
     }
 
-    public void setTickets(String tickets) {
-        this.tickets = tickets;
+    public void setTicketLink(String ticketLink) {
+        this.ticketLink = ticketLink;
     }
 
     public Date getEndOfEvent() {
@@ -105,5 +117,37 @@ public class createEventClass {
 
     public void setEndOfEvent(Date endOfEvent) {
         this.endOfEvent = endOfEvent;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTypeOfEvent() {
+        return typeOfEvent;
+    }
+
+    public void setTypeOfEvent(String typeOfEvent) {
+        this.typeOfEvent = typeOfEvent;
+    }
+
+    public int getCountInterested() {
+        return countInterested;
+    }
+
+    public void setCountInterested(int countInterested) {
+        this.countInterested = countInterested;
+    }
+
+    public int getCountWillBeThere() {
+        return countWillBeThere;
+    }
+
+    public void setCountWillBeThere(int countWillBeThere) {
+        this.countWillBeThere = countWillBeThere;
     }
 }
