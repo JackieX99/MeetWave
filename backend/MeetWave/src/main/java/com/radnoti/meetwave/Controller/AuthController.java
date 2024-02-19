@@ -95,7 +95,7 @@ public class AuthController {
 
         // login ellenőrzése
         Map<String, Object> userExist = userService.loginUser(email, passw);
-        String successLogin = (String) userExist.get("resultstatus");
+        String successLogin = (String) userExist.get("resultStatus");
 
         // ha jók a bejelentkezés adatok, visszaadjuk a tokent és hogy success
         if(successLogin.equals("successful")){
