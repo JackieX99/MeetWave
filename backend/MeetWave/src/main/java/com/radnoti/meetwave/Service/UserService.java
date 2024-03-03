@@ -1,5 +1,7 @@
 package com.radnoti.meetwave.Service;
 
+import com.radnoti.meetwave.Util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,10 +19,12 @@ import java.util.Map;
 public class UserService {
 
     private final JdbcTemplate jdbcTemplate;
+    private JwtUtil jwtUtil;
 
     @Autowired
-    public UserService(JdbcTemplate jdbcTemplate) {
+    public UserService(JdbcTemplate jdbcTemplate, JwtUtil jwtUtil) {
         this.jdbcTemplate = jdbcTemplate;
+        this.jwtUtil = jwtUtil;
     }
 
     public Map<String, Object> getUserData(String email) {
@@ -32,6 +36,34 @@ public class UserService {
 
         return simpleJdbcCall.execute(in);
     }
+
+    // email cím alapján visszaadja, hogy az adott user adminisztrátor-e
+    public Map<String, Object> isUserAdmin(String email) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserRole");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("email", email);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    // headerből kiszedett token alapján visszaadja, hogy mi az adott user email címe
+    public String getUserEmailFromToken(String token) {
+        Claims decodedToken = jwtUtil.decodeJwt(token);
+
+        String email = jwtUtil.getEmail(decodedToken);
+
+        return email;
+    }
+
+    private String extractTokenFromAuthorizationHeader(String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7); // "Bearer " hossza
+        }
+        return null;
+    }
+
 
 
     public Map<String, Object> muteUser(int userId) {
