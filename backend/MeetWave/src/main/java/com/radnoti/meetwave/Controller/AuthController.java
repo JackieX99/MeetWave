@@ -18,6 +18,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,16 +88,18 @@ public class AuthController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody LoginReq loginReq)  {
+    public ResponseEntity login(@RequestBody LoginReq loginReq) throws NoSuchAlgorithmException {
         // endpointra bejövő adatok szétszedése
         String email = loginReq.getEmail();
         String passw = loginReq.getPassword();
+
+        String hashedPassword = hashPasswordSHA256(passw);
 
         // válasz változó előre létrehozása több válasz lehetőség miatt
         Map<String, Object> result = new HashMap<>();
 
         // login ellenőrzése
-        Map<String, Object> userExist = userService.loginUser(email, passw);
+        Map<String, Object> userExist = userService.loginUser(email, hashedPassword);
         String successLogin = (String) userExist.get("resultStatus");
 
         // ha jók a bejelentkezés adatok, visszaadjuk a tokent és hogy success
@@ -115,10 +120,10 @@ public class AuthController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity register(@RequestBody RegistrationRequest registrationRequest) {
         // endpointra bejövő adatok szétszedése
-        String name =  registrationRequest.getFullNameIN();
+        String name = registrationRequest.getFullNameIN();
         String emailIn = registrationRequest.getEmailIN();
         String passw = registrationRequest.getPasswordIN();
-        String phone =  registrationRequest.getPhoneNumberIN();
+        String phone = registrationRequest.getPhoneNumberIN();
 
         // válasz változó előre létrehozása több válasz lehetőség miatt
         Map<String, Object> result = new HashMap<>();
@@ -132,12 +137,14 @@ public class AuthController {
             result.put("status", "failed");
             result.put("error", "Email already in use.");
         }
-
         // ha nem foglalt, akkor regisztráció
         else {
             try {
-                userService.registerUser(name, emailIn, passw, phone);
-                User user = new User(emailIn, passw);
+                // SHA-256 titkosítás
+                String hashedPassword = hashPasswordSHA256(passw);
+
+                userService.registerUser(name, emailIn, hashedPassword, phone);
+                User user = new User(emailIn, hashedPassword);
                 String token = jwtUtil.createToken(user);
                 result.put("token", token);
                 result.put("status", "success");
@@ -150,5 +157,21 @@ public class AuthController {
 
         return ResponseEntity.ok(result);
     }
+
+    private String hashPasswordSHA256(String password) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hashBytes = digest.digest(password.getBytes());
+
+        // Convert the byte array to a hexadecimal string
+        StringBuilder hexString = new StringBuilder();
+        for (byte hashByte : hashBytes) {
+            String hex = Integer.toHexString(0xff & hashByte);
+            if (hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
+    }
+
 
 }
