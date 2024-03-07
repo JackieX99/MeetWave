@@ -249,6 +249,12 @@ public class UserController {
         Integer userId = requestBody.get("userId");
         Map<String, Object> result = new HashMap<>();
 
+        // ez az email cím hívta meg az endpointot
+        Map<String, Object> calledBy = userservice.getUserEmailById(userId);
+        List<Map<String, Object>> calledByResult = (List<Map<String, Object>>) calledBy.get("#result-set-1");
+        // ez tárolja a kiszedett email címet userId alapján lekérve
+        String calledByEmail = ((String) calledByResult.get(0).get("email"));
+
         // headerből token kiszedés, eleje levágása
         String token = authorizationHeader.replace("Bearer ", "");
         // tokenből megkeressük az adott user email címét
@@ -257,6 +263,16 @@ public class UserController {
         Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
         List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
         boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
+
+        // ha nem egyezik a két email (aki meghívja, és akit editelni akar)
+        if(!calledByEmail.equals(emailFromToken)){
+            // ha nincs admin joga
+            if(!isAdmin){
+                result.put("status", "failed");
+                result.put("error", "no perm");
+                return ResponseEntity.badRequest().body(result);
+            }
+        }
 
         try {
             // Ellenőrizze, hogy a userId értéke érvényes
@@ -284,7 +300,7 @@ public class UserController {
         String newEmail = requestBody.getNewEmail();
         String newPhoneNumber = requestBody.getNewPhoneNumber();
         Map<String, Object> result = new HashMap<>();
-        
+
         // ez az email cím hívta meg az endpointot
         Map<String, Object> calledBy = userservice.getUserEmailById(userId);
         List<Map<String, Object>> calledByResult = (List<Map<String, Object>>) calledBy.get("#result-set-1");
