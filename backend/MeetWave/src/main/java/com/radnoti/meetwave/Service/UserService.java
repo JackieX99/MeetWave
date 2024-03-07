@@ -184,6 +184,16 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> getUserEmailById(int userId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getUserEmailById");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("id", userId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
     public Map<String, Object> registerUser(String fullNameIN, String emailIN, String passwordIN, String phoneNumberIN) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("registerUser");
 
