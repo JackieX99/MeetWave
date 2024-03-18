@@ -142,25 +142,7 @@
           margin: 0 12px 0 auto;
           display: block;
         }
-  
-        & p {
-          text-align: center;
-          color: var(--textColor);
-  
-          & span {
-            color: var(--callToActionColor);
-            font-weight: 600;
-          }
-        }
       }
     }
-  }
-  
-  .moveLogo {
-    animation: logoMove 2s forwards;
-  }
-  
-  .formBackground{
-      background-color: rgba($color: #c1c0c0, $alpha: 0.6);
   }
 }
