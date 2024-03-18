@@ -111,3 +111,56 @@
     height: 72px;
   }
 }
+
+@media screen and (min-width: 976px) {
+  .register {
+    & .form {
+      & .logo {
+        width: 130px;
+        height: 130px;
+      }
+      & .title {
+        img {
+          width: 40px;
+          height: 40px;
+        }
+        h2 {
+          font-size: 18pt;
+        }
+      }
+      & form {
+        width: 30%;  
+        & .phonenumber{  
+          & .prefix{
+            margin-left: 12px;
+          }
+        }
+  
+        & button {
+          padding: 12px 24px;
+          width: 40%;
+          margin: 0 12px 0 auto;
+          display: block;
+        }
+  
+        & p {
+          text-align: center;
+          color: var(--textColor);
+  
+          & span {
+            color: var(--callToActionColor);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  
+  .moveLogo {
+    animation: logoMove 2s forwards;
+  }
+  
+  .formBackground{
+      background-color: rgba($color: #c1c0c0, $alpha: 0.6);
+  }
+}
