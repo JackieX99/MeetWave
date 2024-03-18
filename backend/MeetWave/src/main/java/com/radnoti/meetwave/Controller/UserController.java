@@ -584,10 +584,25 @@ public class UserController {
     }
 
     @PostMapping("/updateComment")
-    public ResponseEntity<Map<String, Object>> updateComment(@RequestBody updateCommentClass requestBody) {
+    public ResponseEntity<Map<String, Object>> updateComment(@RequestBody updateCommentClass requestBody, @RequestHeader(name = "Authorization") String authorizationHeader) {
         Integer userCommentID = requestBody.getUserCommentID();
         String userCommentIN = requestBody.getUserCommentIN();
         Map<String, Object> result = new HashMap<>();
+
+        // headerből token kiszedés, eleje levágása
+        String token = authorizationHeader.replace("Bearer ", "");
+        // tokenből megkeressük az adott user email címét
+        String emailFromToken = userservice.getUserEmailFromToken(token);
+        // email alapján check, hogy admin-e
+        Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
+        List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
+        boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
+
+        if(!isAdmin){
+            result.put("status", "failed");
+            result.put("error", "Admin jogosultság szükséges");
+            return ResponseEntity.badRequest().body(result);
+        }
 
         try {
             // Ellenőrizze, hogy a userCommentID értéke érvényes

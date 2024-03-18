@@ -1,16 +1,17 @@
 package com.radnoti.meetwave.Controller;
 
-import com.radnoti.meetwave.Model.changePasswordClass;
 import com.radnoti.meetwave.Model.createEventClass;
 import com.radnoti.meetwave.Model.postCommentClass;
 import com.radnoti.meetwave.Model.updateEventClass;
 import com.radnoti.meetwave.Service.EventService;
+import com.radnoti.meetwave.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,10 +19,12 @@ import java.util.Map;
 public class EventController {
 
     private final EventService eventService;
+    private final UserService userservice;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userservice) {
         this.eventService = eventService;
+        this.userservice = userservice;
     }
 
     @PostMapping("/createEvent")
@@ -55,9 +58,24 @@ public class EventController {
     }
 
     @PostMapping("/deleteComment")
-    public ResponseEntity<Map<String, Object>> deleteComment(@RequestBody Map<String, Integer> requestBody) {
+    public ResponseEntity<Map<String, Object>> deleteComment(@RequestBody Map<String, Integer> requestBody, @RequestHeader(name = "Authorization") String authorizationHeader) {
         Integer commentID = requestBody.get("commentID");
         Map<String, Object> result = new HashMap<>();
+
+        // headerből token kiszedés, eleje levágása
+        String token = authorizationHeader.replace("Bearer ", "");
+        // tokenből megkeressük az adott user email címét
+        String emailFromToken = userservice.getUserEmailFromToken(token);
+        // email alapján check, hogy admin-e
+        Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
+        List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
+        boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
+
+        if(!isAdmin){
+            result.put("status", "failed");
+            result.put("error", "Admin jogosultság szükséges");
+            return ResponseEntity.badRequest().body(result);
+        }
 
         try {
             // Ellenőrizze, hogy a commentID értéke érvényes
@@ -105,9 +123,24 @@ public class EventController {
 
 
     @PostMapping("/deleteEvent")
-    public ResponseEntity<Map<String, Object>> deleteEvent(@RequestBody Map<String, Integer> requestBody) {
+    public ResponseEntity<Map<String, Object>> deleteEvent(@RequestBody Map<String, Integer> requestBody, @RequestHeader(name = "Authorization") String authorizationHeader) {
         Integer eventID = requestBody.get("eventID");
         Map<String, Object> result = new HashMap<>();
+
+        // headerből token kiszedés, eleje levágása
+        String token = authorizationHeader.replace("Bearer ", "");
+        // tokenből megkeressük az adott user email címét
+        String emailFromToken = userservice.getUserEmailFromToken(token);
+        // email alapján check, hogy admin-e
+        Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
+        List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
+        boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
+
+        if(!isAdmin){
+            result.put("status", "failed");
+            result.put("error", "Admin jogosultság szükséges");
+            return ResponseEntity.badRequest().body(result);
+        }
 
         try {
             // Ellenőrizze, hogy az eventID értéke érvényes
@@ -194,7 +227,7 @@ public class EventController {
 
 
     @PostMapping("/updateEvent")
-    public ResponseEntity<Map<String, Object>> updateEvent(@RequestBody updateEventClass requestBody) {
+    public ResponseEntity<Map<String, Object>> updateEvent(@RequestBody updateEventClass requestBody, @RequestHeader(name = "Authorization") String authorizationHeader) {
         Integer eventID = requestBody.getEventID();
         String eventTitleIN = requestBody.getEventTitleIN();
         String descriptionIN = requestBody.getDescriptionIN();
@@ -210,6 +243,21 @@ public class EventController {
         Integer countWillBeThereIN = requestBody.getCountWillBeThereIN();
 
         Map<String, Object> result = new HashMap<>();
+
+        // headerből token kiszedés, eleje levágása
+        String token = authorizationHeader.replace("Bearer ", "");
+        // tokenből megkeressük az adott user email címét
+        String emailFromToken = userservice.getUserEmailFromToken(token);
+        // email alapján check, hogy admin-e
+        Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
+        List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
+        boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
+
+        if(!isAdmin){
+            result.put("status", "failed");
+            result.put("error", "Admin jogosultság szükséges");
+            return ResponseEntity.badRequest().body(result);
+        }
 
         try {
             // Ellenőrizze, hogy az eventID értéke érvényes
