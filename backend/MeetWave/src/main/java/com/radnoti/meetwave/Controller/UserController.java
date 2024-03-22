@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -639,4 +640,58 @@ public class UserController {
         }
     }
 
+    @PostMapping("/ForgottenPassword")
+    public ResponseEntity<Map<String, Object>> ForgottenPassword(@RequestBody ForgottenPasswordClass requestBody) {
+        String emailIN = requestBody.getEmailIN();
+        String randomString = generateRandomString(32);
+
+
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.ForgottenPassword(emailIN, randomString);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    public static String generateRandomString(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random rand = new Random();
+
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int randomIndex = rand.nextInt(characters.length());
+            sb.append(characters.charAt(randomIndex));
+        }
+
+        return sb.toString();
+    }
+
+    @PostMapping("/ForgottenPasswordUpdateDelete")
+    public ResponseEntity<Map<String, Object>> ForgottenPasswordUpdateDelete(@RequestBody ForgottenPasswordUpdateDeleteClass requestBody) {
+        String emailIN = requestBody.getEmailIN();
+        String tokenIN = requestBody.getToken();
+        String newPassword = requestBody.getNewPassword();
+
+        Map<String, Object> result = new HashMap<>();
+
+
+
+        try {
+            userservice.ForgottenPasswordUpdateDelete(emailIN, tokenIN, newPassword);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
 }

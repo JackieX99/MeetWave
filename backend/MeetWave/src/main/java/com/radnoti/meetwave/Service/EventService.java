@@ -129,5 +129,38 @@ public class EventService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> AddUpdateReaction(int commentIDIN, int eventIDIN, int userIDIN, int reactionTypeIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("AddUpdateReaction");
 
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("commentIDIN", commentIDIN);
+        inParamMap.put("eventIDIN", eventIDIN);
+        inParamMap.put("userIDIN", userIDIN);
+        inParamMap.put("reactionTypeIN", reactionTypeIN);
+
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> getAllReactionsByComment(int CommentID) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getAllReactionsByComment");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("CommentID", CommentID);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+
+    public Map<String, Object> getEventInformations(int eventId) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("getEventInformations");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("eventID", eventId);
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
     }

@@ -1,5 +1,6 @@
 package com.radnoti.meetwave.Controller;
 
+import com.radnoti.meetwave.Model.AddUpdateReactionClass;
 import com.radnoti.meetwave.Model.createEventClass;
 import com.radnoti.meetwave.Model.postCommentClass;
 import com.radnoti.meetwave.Model.updateEventClass;
@@ -226,48 +227,24 @@ public class EventController {
     }
 
 
-    @PostMapping("/updateEvent")
-    public ResponseEntity<Map<String, Object>> updateEvent(@RequestBody updateEventClass requestBody, @RequestHeader(name = "Authorization") String authorizationHeader) {
-        Integer eventID = requestBody.getEventID();
-        String eventTitleIN = requestBody.getEventTitleIN();
-        String descriptionIN = requestBody.getDescriptionIN();
-        java.util.Date dateOfTheEventIN = requestBody.getDateOfTheEventIN();
-        String placeOfTheEventIN = requestBody.getPlaceOfTheEventIN();
-        String founderOfTheEventIN = requestBody.getFounderOfTheEventIN();
-        Integer maxParticipantsIN = requestBody.getMaxParticipantsIN();
-        String ticketsLinkIN = requestBody.getTicketsLinkIN();
-        java.util.Date endOfEventIN = requestBody.getEndOfEventIN();
-        String addressIN = requestBody.getAddressIN();
-        String typeOfEventIn = requestBody.getTypeOfEventIN();
-        Integer countInterestedIN = requestBody.getCountInterestedIN();
-        Integer countWillBeThereIN = requestBody.getCountWillBeThereIN();
+    @PostMapping("/AddUpdateReaction")
+    public ResponseEntity<Map<String, Object>> AddUpdateReaction(@RequestBody AddUpdateReactionClass requestBody) {
+        Integer commentIDIN = requestBody.getCommentIDIN();
+        Integer eventIDIN = requestBody.getEventIDIN();
+        Integer userIDIN = requestBody.getUserIDIN();
+        Integer reactionTypeIN = requestBody.getReactionTypeIN();
 
         Map<String, Object> result = new HashMap<>();
 
-        // headerből token kiszedés, eleje levágása
-        String token = authorizationHeader.replace("Bearer ", "");
-        // tokenből megkeressük az adott user email címét
-        String emailFromToken = userservice.getUserEmailFromToken(token);
-        // email alapján check, hogy admin-e
-        Map<String, Object> isUserAdmin = userservice.isUserAdmin(emailFromToken);
-        List<Map<String, Object>> isUserAdminResult = (List<Map<String, Object>>) isUserAdmin.get("#result-set-1");
-        boolean isAdmin = ((Boolean) isUserAdminResult.get(0).get("isAdmin")).booleanValue();
-
-        if(!isAdmin){
-            result.put("status", "failed");
-            result.put("error", "Admin jogosultság szükséges");
-            return ResponseEntity.badRequest().body(result);
-        }
-
         try {
             // Ellenőrizze, hogy az eventID értéke érvényes
-            if (eventID == null || eventID <= 0) {
+            if (eventIDIN == null || eventIDIN <= 0) {
                 result.put("status", "failed");
                 result.put("error", "Invalid eventID. Must be greater than 0.");
                 return ResponseEntity.badRequest().body(result);
             }
 
-            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN, ticketsLinkIN, endOfEventIN, addressIN, typeOfEventIn, countInterestedIN, countWillBeThereIN);
+            eventService.AddUpdateReaction(commentIDIN, eventIDIN, userIDIN,reactionTypeIN);
 
             result.put("status", "success");
         } catch (Exception e) {
@@ -277,6 +254,48 @@ public class EventController {
 
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping("/getAllReactionsByComment")
+    public ResponseEntity<Map<String, Object>> getAllReactionsByComment(@RequestBody Map<String, Integer> requestBody) {
+        Integer CommentID = requestBody.get("CommentID");
+
+        if (CommentID != null && CommentID >= 1) {
+            Map<String, Object> result = eventService.getAllReactionsByComment(CommentID);
+            System.out.println(result);
+            return ResponseEntity.ok(Map.of("userData", result.get("#result-set-1")));
+        } else {
+            // Hibás kérés válasza, mert a userId nem lehet negatív
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("failed", "Nem lehet negatív a CommentID");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+
+    @PostMapping("/getEventInformations")
+    public ResponseEntity<Map<String, Object>> getEventInformations(@RequestBody Map<String, Integer> requestBody) {
+        Integer eventId = requestBody.get("eventId");
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            // Ellenőrizze, hogy a eventId értéke érvényes
+            if (eventId == null || eventId <= 0) {
+                result.put("status", "failed");
+                result.put("error", "Nem lehet negatív az eventId");
+                return ResponseEntity.badRequest().body(result);
+            }
+
+            Map<String, Object> comments = eventService.getEventInformations(eventId);
+
+            result.put("status", "success");
+            result.put("comments", comments.get("#result-set-1"));
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
 
 
 

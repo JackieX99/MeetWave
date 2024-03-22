@@ -291,6 +291,30 @@ public class UserService {
         return simpleJdbcCall.execute(in);
     }
 
+    public Map<String, Object> ForgottenPassword(String emailIN, String tokenIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ForgottenPassword");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("emailIN", emailIN);
+        inParamMap.put("tokenIN", tokenIN);
+
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> ForgottenPasswordUpdateDelete(String emailIN, String token, String newPassword) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ForgottenPasswordUpdateDelete");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("emailIN", emailIN);
+        inParamMap.put("token", token);
+        inParamMap.put("newPassword", newPassword);
+
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
 
 
 
