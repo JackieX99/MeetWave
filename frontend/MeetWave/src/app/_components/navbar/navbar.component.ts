@@ -9,6 +9,7 @@ import { filter } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   activeRoute: string | undefined;
+  showDropdown: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
