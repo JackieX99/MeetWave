@@ -27,6 +27,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {AsyncPipe} from '@angular/common';
 import { SnackbarComponent } from './_components/_shared/snackbar/snackbar.component';
+import { NavbarComponent } from './_components/navbar/navbar.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SnackbarComponent } from './_components/_shared/snackbar/snackbar.compo
     EventComponent,
     FooterComponent,
     MainComponent,
-    SnackbarComponent  
+    SnackbarComponent,
+    NavbarComponent  
   ],
   imports: [
     BrowserModule,

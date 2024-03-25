@@ -1,0 +1,14 @@
+<div class="navbar">
+  <img src="./assets/images/logo.png" alt="meetwave logo" />
+  <div class="navigations">
+    <div class="navigation" [ngClass]="activeRoute == '/welcome' ? 'active' : ''" routerLink="/welcome">
+      <img src="./assets/icons/house-door.svg" data-title="Kezdőlap" />
+    </div>
+    <div class="navigation" [ngClass]="activeRoute == '/events' ? 'active' : ''" routerLink="/events">
+      <img src="./assets/icons/calendar-heart.svg" data-title="Események"  />
+    </div>
+    <div class="navigation" [ngClass]="activeRoute == '/friends' ? 'active' : ''" routerLink="/friends">
+      <img src="./assets/icons/people-fill.svg" data-title="Ismerősök" />
+    </div>
+  </div>
+</div>
