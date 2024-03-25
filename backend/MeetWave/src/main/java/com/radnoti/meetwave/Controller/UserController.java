@@ -694,4 +694,25 @@ public class UserController {
 
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping("/userInterest")
+    public ResponseEntity<Map<String, Object>> userInterest(@RequestBody userInterestClass requestBody) {
+        Integer userIDIN = requestBody.getUserIDIN();
+        String interestIN = requestBody.getInterestIN();
+
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            userservice.userInterest(userIDIN, interestIN);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+
 }

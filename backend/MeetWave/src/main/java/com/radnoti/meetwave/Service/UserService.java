@@ -317,5 +317,17 @@ public class UserService {
     }
 
 
+    public Map<String, Object> userInterest(Integer userIDIN, String interestIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("userInterest");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userIDIN", userIDIN);
+        inParamMap.put("interestIN", interestIN);
+
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+
+        return simpleJdbcCall.execute(in);
+    }
+
 
 }

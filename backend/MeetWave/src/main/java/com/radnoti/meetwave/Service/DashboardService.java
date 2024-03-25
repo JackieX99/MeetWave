@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -56,6 +57,19 @@ public class DashboardService {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("countUserSubscriptions");
 
         SqlParameterSource in = new MapSqlParameterSource();
+
+        return simpleJdbcCall.execute(in);
+    }
+
+    public Map<String, Object> subscriptionLog(Integer userIDIN, Boolean statusIN, Integer typeOfSubscriptionIN) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("subscriptionLog");
+
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("userIDIN", userIDIN);
+        inParamMap.put("statusIN", statusIN);
+        inParamMap.put("typeOfSubscriptionIN", typeOfSubscriptionIN);
+
+        SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
         return simpleJdbcCall.execute(in);
     }
