@@ -24,13 +24,13 @@ public class updateEventClass {
 
     String addressIN;
 
-    String typeOfEventIN;
+    Boolean typeOfEventIN;
 
     int countInterestedIN;
 
     int countWillBeThereIN;
 
-    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String ticketsLinkIN, Date endOfEventIN, String addressIN, String typeOfEventIN, int countInterestedIN, int countWillBeThereIN) {
+    public updateEventClass(int eventID, String eventTitleIN, String descriptionIN, Date dateOfTheEventIN, String placeOfTheEventIN, String founderOfTheEventIN, int maxParticipantsIN, String ticketsLinkIN, Date endOfEventIN, String addressIN, Boolean typeOfEventIN, int countInterestedIN, int countWillBeThereIN) {
         this.eventID = eventID;
         this.eventTitleIN = eventTitleIN;
         this.descriptionIN = descriptionIN;
@@ -126,11 +126,11 @@ public class updateEventClass {
         this.addressIN = addressIN;
     }
 
-    public String getTypeOfEventIN() {
+    public Boolean getTypeOfEventIN() {
         return typeOfEventIN;
     }
 
-    public void setTypeOfEventIN(String typeOfEventIN) {
+    public void setTypeOfEventIN(Boolean typeOfEventIN) {
         this.typeOfEventIN = typeOfEventIN;
     }
 

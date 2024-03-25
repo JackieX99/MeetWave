@@ -25,13 +25,13 @@ public class createEventClass {
 
    String address;
 
-   String typeOfEvent;
+   Boolean typeOfEvent;
 
    int countInterested;
 
    int countWillBeThere;
 
-    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String ticketLink, Date endOfEvent, String address, String typeOfEvent, int countInterested, int countWillBeThere) {
+    public createEventClass(String eventTitle, String description, Date dateOfTheEvent, String place, String founder, Timestamp dateOfCreatingEvent, int maxParticipants, String ticketLink, Date endOfEvent, String address, Boolean typeOfEvent, int countInterested, int countWillBeThere) {
         this.eventTitle = eventTitle;
         this.description = description;
         this.dateOfTheEvent = dateOfTheEvent;
@@ -127,11 +127,11 @@ public class createEventClass {
         this.address = address;
     }
 
-    public String getTypeOfEvent() {
+    public Boolean getTypeOfEvent() {
         return typeOfEvent;
     }
 
-    public void setTypeOfEvent(String typeOfEvent) {
+    public void setTypeOfEvent(Boolean typeOfEvent) {
         this.typeOfEvent = typeOfEvent;
     }
 

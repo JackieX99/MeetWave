@@ -40,7 +40,7 @@ public class EventController {
         String ticketLink = requestBody.getTicketLink();
         java.util.Date endOfEvent = requestBody.getEndOfEvent();
         String address = requestBody.getAddress();
-        String typeOfEvent = requestBody.getTypeOfEvent();
+        Boolean typeOfEvent = requestBody.getTypeOfEvent();
         Integer countInterested = requestBody.getCountInterested();
         Integer countWillBeThere = requestBody.getCountWillBeThere();
 
@@ -48,6 +48,37 @@ public class EventController {
 
         try {
             eventService.createEvent(eventTitle, description, dateOfTheEvent, place, founder, dateOfCreatingEvent, maxParticipants, ticketLink , endOfEvent, address, typeOfEvent ,countInterested, countWillBeThere);
+
+            result.put("status", "success");
+        } catch (Exception e) {
+            result.put("status", "failed");
+            result.put("error", e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+
+    @PostMapping("/updateEvent")
+    public ResponseEntity<Map<String, Object>> updateEvent(@RequestBody updateEventClass requestBody) {
+        Integer eventID = requestBody.getEventID();
+        String eventTitleIN = requestBody.getEventTitleIN();
+        String descriptionIN = requestBody.getDescriptionIN();
+        java.util.Date dateOfTheEventIN = requestBody.getDateOfTheEventIN();
+        String placeOfTheEventIN = requestBody.getPlaceOfTheEventIN();
+        String founderOfTheEventIN = requestBody.getFounderOfTheEventIN();
+        Integer maxParticipantsIN = requestBody.getMaxParticipantsIN();
+        String ticketsLinkIN = requestBody.getTicketsLinkIN();
+        java.util.Date endOfEventIN = requestBody.getEndOfEventIN();
+        String addressIN = requestBody.getAddressIN();
+        Boolean typeOfEventIN = requestBody.getTypeOfEventIN();
+        Integer countInterestedIN = requestBody.getCountInterestedIN();
+        Integer countWillBeThereIN = requestBody.getCountWillBeThereIN();
+
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            eventService.updateEvent(eventID, eventTitleIN, descriptionIN, dateOfTheEventIN, placeOfTheEventIN, founderOfTheEventIN, maxParticipantsIN, ticketsLinkIN, endOfEventIN, addressIN, typeOfEventIN, countInterestedIN, countWillBeThereIN);
 
             result.put("status", "success");
         } catch (Exception e) {
