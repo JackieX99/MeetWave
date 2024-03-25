@@ -1,0 +1,40 @@
+// --mainColor: #d9d9d9;
+// --callToActionColor: #0c3720;
+// --callToActionColorHover: #1f8852;
+// --textColor: #181818;
+// --textWhiteColor: #f0f8ff;
+
+.navbar {
+  background-color: var(--callToActionColor);
+  color: var(--textWhiteColor);
+  height: 8dvh;
+  display: flex;
+  img {
+    height: 100%;
+    padding: 0 0 0 1vw;
+  }
+  .navigations {
+    margin: 0 auto;
+    .navigation {
+        margin: auto 0;
+        height: 90%;
+        display: inline-block;
+        img {
+            width: 20px;
+            padding: 0 2.5vw;
+            transition: background-color 0.1s ease-in-out;
+            position: relative;
+            border-radius: 15px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: var(--callToActionColorHover);
+            }
+        }
+    }
+  }
+}
+
+.active{
+    border-bottom: 3px solid #fff;
+}
