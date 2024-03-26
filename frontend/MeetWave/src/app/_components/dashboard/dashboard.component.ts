@@ -28,12 +28,7 @@ export class DashboardComponent implements OnInit {
     const userData = await this.authService.getUserData(token).toPromise();
     this.user = userData.userdata[0];
     console.log(this.user)
-  }
-  
-  
-
-  logout(){
-    this.authService.logout();
+    this.userService.setUser(this.user);
   }
 
 }
