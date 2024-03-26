@@ -31,20 +31,36 @@
   <div class="dropdown" *ngIf="showDropdown">
     <div class="profile">
       <img src="./assets/icons/person-circle.svg" />
-      <h3>Földvári Alex</h3>
+      <h3 *ngIf="user">{{user.fullName}}</h3>
+      <h3 *ngIf="!user">Vendég</h3>
     </div>
     <div class="divider"></div>
-    <div class="settings">
-      <div class="icon gear"></div>
-      <h3>Beállítások</h3>
+    <div class="guest" *ngIf="!user">
+      <div class="feedback">
+        <div class="icon message"></div>
+        <h3>Visszajelzés küldése</h3>
+      </div>
+      <div class="logout" routerLink="/login" (click)="showDropdown = false">
+        <div class="icon logout-icon"></div>
+        <h3>Bejelentkezés</h3>
+      </div>
     </div>
-    <div class="feedback">
-      <div class="icon message"></div>
-      <h3>Visszajelzés küldése</h3>
+    <div class="loggedin" *ngIf="user">
+      <div class="settings">
+        <div class="icon gear"></div>
+        <h3>Beállítások</h3>
+      </div>
+      <div class="feedback">
+        <div class="icon message"></div>
+        <h3>Visszajelzés küldése</h3>
+      </div>
+      <div class="logout" *ngIf="user" (click)="logout()">
+        <div class="icon logout-icon"></div>
+        <h3>Kijelentkezés</h3>
+      </div>
     </div>
-    <div class="logout">
-      <div class="icon logout-icon"></div>
-      <h3>Kijelentkezés</h3>
-    </div>
+    
+    
+    
   </div>
 </div>
