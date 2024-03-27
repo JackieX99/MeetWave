@@ -1,5 +1,5 @@
 <div class="navbar">
-  <img src="./assets/images/logo.png" alt="meetwave logo" />
+  <img src="./assets/images/logo.png" alt="meetwave logo" routerLink="/welcome" />
   <div class="navigations">
     <div
       class="navigation"
@@ -9,6 +9,7 @@
       <img src="./assets/icons/house-door.svg" data-title="Kezdőlap" />
     </div>
     <div
+    *ngIf="user"
       class="navigation"
       [ngClass]="activeRoute == '/events' ? 'active' : ''"
       routerLink="/events"
@@ -16,6 +17,7 @@
       <img src="./assets/icons/calendar-heart.svg" data-title="Események" />
     </div>
     <div
+    *ngIf="user"
       class="navigation"
       [ngClass]="activeRoute == '/friends' ? 'active' : ''"
       routerLink="/friends"
@@ -29,10 +31,14 @@
     <!-- <img src="./assets/icons/arrow-down-short.svg" class="arrow"> -->
   </div>
   <div class="dropdown" *ngIf="showDropdown">
-    <div class="profile">
+    <div class="profile" *ngIf="user" routerLink="/dashboard" (click)="showDropdown = false">
       <img src="./assets/icons/person-circle.svg" />
-      <h3 *ngIf="user">{{user.fullName}}</h3>
+      <h3 >{{user.fullName}}</h3>
       <h3 *ngIf="!user">Vendég</h3>
+    </div>
+    <div class="profile" *ngIf="!user" routerLink="/login" (click)="showDropdown = false">
+      <img src="./assets/icons/person-circle.svg" />
+      <h3>Vendég</h3>
     </div>
     <div class="divider"></div>
     <div class="guest" *ngIf="!user">
